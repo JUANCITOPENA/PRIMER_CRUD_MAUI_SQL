@@ -1,0 +1,1476 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link type="text/css" rel="stylesheet" href="style.css"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MANUAL TÉCNICO // .NET MAUI + SQL SERVER</title>
+  
+  <!-- Prism.js Tema Brutalista Oscuro -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+
+  <style>
+    /* =========================================================
+       ESTILO BRUTALIST CSS PURO
+       ========================================================= */
+    :root {
+      --bg: #f5f0eb;
+      --card-bg: #ffffff;
+      --black: #000000;
+      --yellow: #ffde59;
+      --cyan: #00f0ff;
+      --green: #00e676;
+      --pink: #ff5252;
+      --blue: #2979ff;
+      --border: 3.5px solid #000000;
+      --shadow: 6px 6px 0px #000000;
+      --shadow-sm: 4px 4px 0px #000000;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      font-family: 'Courier New', Courier, monospace, system-ui, sans-serif;
+      color: var(--black);
+      padding: 24px;
+      line-height: 1.5;
+    }
+
+    /* CONTENEDOR LINEAL EN CASCADA (SIN SPLIT SCREEN) */
+    .cascade-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    /* ENCABEZADO */
+    header {
+      background: var(--yellow);
+      border: var(--border);
+      box-shadow: var(--shadow);
+      padding: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    header h1 {
+      font-size: 1.8rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: -1px;
+    }
+
+    .badge-status {
+      background: var(--cyan);
+      border: var(--border);
+      box-shadow: var(--shadow-sm);
+      padding: 8px 16px;
+      font-size: 0.9rem;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    /* TARJETAS BRUTALISTAS */
+    .brutalist-card {
+      background: var(--card-bg);
+      border: var(--border);
+      box-shadow: var(--shadow);
+      padding: 28px;
+    }
+
+    .section-title {
+      font-size: 1.3rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      background: var(--black);
+      color: #fff;
+      display: inline-block;
+      padding: 6px 14px;
+      margin-bottom: 18px;
+    }
+
+    .step-list {
+      list-style-type: square;
+      padding-left: 24px;
+      font-weight: bold;
+      font-size: 1rem;
+      margin-bottom: 16px;
+    }
+
+    .step-list li {
+      margin-bottom: 10px;
+    }
+
+    .tag-cmd {
+      background: #eee;
+      border: 2px solid var(--black);
+      padding: 2px 8px;
+      display: inline-block;
+      font-size: 0.9rem;
+    }
+
+    .intro-text {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+      background: #fff8e1;
+      border-left: 6px solid var(--black);
+      padding: 12px 16px;
+    }
+
+    /* =========================================================
+       REGLA ESTRICTA: SIN SCROLL EN LOS CÓDIGOS (COMPLETO)
+       ========================================================= */
+    .code-container {
+      position: relative;
+      margin-top: 14px;
+      border: var(--border);
+      box-shadow: var(--shadow-sm);
+      background: #1e1e1e;
+      overflow: visible !important; /* Desactiva scrollbar */
+      height: auto !important;
+    }
+
+    .code-header {
+      background: #111;
+      color: #fff;
+      padding: 8px 16px;
+      font-size: 0.85rem;
+      font-weight: 900;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 3px solid #000;
+      text-transform: uppercase;
+    }
+
+    .copy-btn {
+      background: var(--yellow);
+      border: 2px solid #000;
+      font-family: inherit;
+      font-weight: 900;
+      font-size: 0.8rem;
+      padding: 4px 12px;
+      cursor: pointer;
+      box-shadow: 2px 2px 0px #000;
+      transition: transform 0.05s ease;
+    }
+
+    .copy-btn:active {
+      transform: translate(2px, 2px);
+      box-shadow: none;
+    }
+
+    /* Código Prism sin cortes ni límites de altura */
+    pre[class*="language-"] {
+      margin: 0 !important;
+      padding: 16px !important;
+      font-size: 0.85rem !important;
+      border-radius: 0 !important;
+      background: transparent !important;
+      max-height: none !important; /* CERO LÍMITE DE ALTURA */
+      height: auto !important;
+      overflow: visible !important; /* CERO SCROLL */
+      white-space: pre-wrap !important; /* Ajuste limpio si excede pantalla */
+      word-break: break-all !important;
+    }
+
+    code[class*="language-"] {
+      white-space: pre-wrap !important;
+      word-break: break-all !important;
+      max-height: none !important;
+      overflow: visible !important;
+    }
+
+    /* =========================================================
+       SIMULADOR MAUI ANDROID / DESKTOP (AL FINAL EN CASCADA)
+       ========================================================= */
+    .sim-phone {
+      background: #0f172a;
+      border: var(--border);
+      box-shadow: 10px 10px 0px var(--black);
+      padding: 24px;
+      color: #f8fafc;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      margin-top: 10px;
+    }
+
+    .sim-header {
+      background: #1e293b;
+      padding: 14px;
+      border-radius: 10px;
+      margin-bottom: 16px;
+      border: 1px solid #334155;
+    }
+
+    .sim-header h3 {
+      font-size: 16px;
+      color: #38bdf8;
+      text-align: center;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      font-weight: 900;
+    }
+
+    .sim-row {
+      display: flex;
+      gap: 10px;
+    }
+
+    .sim-input {
+      background: #0f172a;
+      border: 1px solid #334155;
+      color: #fff;
+      padding: 10px 14px;
+      border-radius: 6px;
+      font-size: 13px;
+      width: 100%;
+      outline: none;
+    }
+
+    .sim-btn-cyan {
+      background: #0284c7;
+      color: #fff;
+      font-weight: bold;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+
+    .sim-card {
+      background: #1e293b;
+      padding: 18px;
+      border-radius: 10px;
+      margin-bottom: 16px;
+      border: 1px solid #334155;
+    }
+
+    .sim-form-title {
+      font-size: 13px;
+      color: #94a3b8;
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+
+    .sim-grid-inputs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .sim-select {
+      background: #0f172a;
+      border: 1px solid #334155;
+      color: #fff;
+      padding: 10px 12px;
+      border-radius: 6px;
+      font-size: 13px;
+      width: 100%;
+      grid-column: span 2;
+      outline: none;
+    }
+
+    .sim-btn-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .sim-btn-green {
+      background: #10b981;
+      color: #fff;
+      font-weight: bold;
+      border: none;
+      padding: 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+
+    .sim-btn-slate {
+      background: #475569;
+      color: #fff;
+      font-weight: bold;
+      border: none;
+      padding: 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+
+    .sim-search-box {
+      background: #1e293b;
+      padding: 14px;
+      border-radius: 10px;
+      margin-bottom: 16px;
+      border: 1px solid #334155;
+    }
+
+    .sim-list-container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .sim-item {
+      background: #1e293b;
+      border: 1px solid #334155;
+      padding: 14px;
+      border-radius: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .sim-item-info strong {
+      display: block;
+      color: #f8fafc;
+      font-size: 14px;
+    }
+
+    .sim-item-info span {
+      display: block;
+      color: #94a3b8;
+      font-size: 12px;
+    }
+
+    .sim-item-price {
+      color: #34d399;
+      font-weight: bold;
+      font-size: 13px;
+      margin-top: 4px;
+    }
+
+    .sim-item-stock {
+      color: #38bdf8;
+      font-size: 13px;
+      margin-left: 12px;
+    }
+
+    .sim-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .sim-act-btn {
+      border: none;
+      width: 38px;
+      height: 38px;
+      border-radius: 6px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+    }
+
+    .sim-act-edit { background: #334155; color: #fff; }
+    .sim-act-del { background: #ef4444; color: #fff; }
+
+    /* TOAST DE ALERTA */
+    #sim-alert {
+      display: none;
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--yellow);
+      border: var(--border);
+      box-shadow: var(--shadow);
+      padding: 14px 20px;
+      font-size: 0.95rem;
+      font-weight: 900;
+      z-index: 9999;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cascade-container">
+
+    <!-- HEADER -->
+    <header>
+      <div>
+        <h1>⚡ GUÍA TÉCNICA MAUI + SQL SERVER</h1>
+        <p>Documentación integral, arquitectura en 2 archivos, CRUD reactivo y ejecución en cascada.</p>
+      </div>
+      <div class="badge-status">ESTADO: 100% PRODUCCIÓN</div>
+    </header>
+
+    <!-- 01. INICIALIZACIÓN DEL PROYECTO -->
+    <section class="brutalist-card">
+      <span class="section-title">01. INICIALIZACIÓN DEL PROYECTO</span>
+      <p class="intro-text">
+        El proyecto debe inicializarse utilizando la plantilla oficial de <strong>.NET MAUI</strong> en Visual Studio 2026 o a través de la interfaz de comandos CLI de .NET. Esta plantilla configura los destinos multiplataforma (Android, Windows, iOS, MacCatalyst) bajo un único proyecto unificado.
+      </p>
+      <ul class="step-list">
+        <li><strong>Nombre Oficial del Proyecto:</strong> <span class="tag-cmd">InventarioMauiApp1</span></li>
+        <li><strong>Target Framework Requerido:</strong> <code>net8.0</code> o <code>net9.0</code></li>
+        <li><strong>Comando CLI de Creación:</strong></li>
+      </ul>
+      <div class="code-container">
+        <div class="code-header">
+          <span>Terminal / PowerShell</span>
+          <button class="copy-btn" onclick="copiarCodigo('cmd-create')">Copiar</button>
+        </div>
+        <pre><code id="cmd-create" class="language-bash">dotnet new maui -n InventarioMauiApp1
+cd InventarioMauiApp1</code></pre>
+      </div>
+    </section>
+
+    <!-- 02. INSTALACIÓN DE LIBRERÍAS Y PERMISOS -->
+    <section class="brutalist-card">
+      <span class="section-title">02. INSTALACIÓN DE LIBRERÍAS Y PERMISOS</span>
+      <p class="intro-text">
+        Para comunicar la aplicación cliente directamente con el motor Microsoft SQL Server en el puerto 1433 se requiere el paquete oficial <code>Microsoft.Data.SqlClient</code>. Además, en plataformas como Android, el sistema operativo bloquea por defecto las conexiones de red salientes y el tráfico sin cifrado TLS estricto si no se definen explícitamente en el manifiesto.
+      </p>
+      <p>Instalación del controlador NuGet:</p>
+      <div class="code-container">
+        <div class="code-header">
+          <span>Package Manager Console / Terminal</span>
+          <button class="copy-btn" onclick="copiarCodigo('cmd-nuget')">Copiar</button>
+        </div>
+        <pre><code id="cmd-nuget" class="language-bash">dotnet add package Microsoft.Data.SqlClient</code></pre>
+      </div>
+
+      <p style="margin-top: 18px;">Permisos de red en <code>Platforms/Android/AndroidManifest.xml</code>:</p>
+      <div class="code-container">
+        <div class="code-header">
+          <span>AndroidManifest.xml</span>
+          <button class="copy-btn" onclick="copiarCodigo('xml-manifest')">Copiar</button>
+        </div>
+        <pre><code id="xml-manifest" class="language-xml">&lt;uses-permission android:name="android.permission.INTERNET" /&gt;
+&lt;application android:usesCleartextTraffic="true" ...&gt;</code></pre>
+      </div>
+    </section>
+
+    <!-- 03. SCRIPT SQL SERVER -->
+    <section class="brutalist-card">
+      <span class="section-title">03. SCRIPT SQL SERVER (BASE DE DATOS Y TABLAS)</span>
+      <p class="intro-text">
+        <strong>¿Qué hace este script?</strong><br>
+        1. Crea la base de datos <code>InventarioDB1</code> y se posiciona en ella.<br>
+        2. Define la tabla padre <code>Categorias</code> con clave primaria <code>IDENTITY(1,1)</code>.<br>
+        3. Define la tabla relacionada <code>Productos</code> vinculada mediante la clave foránea <code>FK_Productos_Categorias</code> con eliminación en cascada (<code>ON DELETE CASCADE</code>) y una restricción única <code>UNIQUE</code> en <code>CodigoBarras</code>.<br>
+        4. Puebla datos maestros de categorías y productos iniciales.<br>
+        5. Crea la vista analítica <code>vw_ReporteInventario</code> con cálculo en línea del valor total del stock y un semáforo condicional de existencias.
+      </p>
+      <div class="code-container">
+        <div class="code-header">
+          <span>SQL Server Management Studio (T-SQL)</span>
+          <button class="copy-btn" onclick="copiarCodigo('code-sql')">Copiar</button>
+        </div>
+        <pre><code id="code-sql" class="language-sql">IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = N'InventarioDB1')
+BEGIN
+    CREATE DATABASE InventarioDB1;
+END
+GO
+
+USE InventarioDB1;
+GO
+
+-- 1. Tabla Principal
+CREATE TABLE Categorias (
+    CategoriaID INT IDENTITY(1,1) PRIMARY KEY,
+    Nombre NVARCHAR(100) NOT NULL,
+    Descripcion NVARCHAR(250) NULL
+);
+GO
+
+-- 2. Tabla Relacionada (CRUD objetivo)
+CREATE TABLE Productos (
+    ProductoID INT IDENTITY(1,1) PRIMARY KEY,
+    CategoriaID INT NOT NULL,
+    CodigoBarras NVARCHAR(50) NOT NULL UNIQUE,
+    Nombre NVARCHAR(120) NOT NULL,
+    Precio DECIMAL(18,2) NOT NULL DEFAULT 0.00,
+    Stock INT NOT NULL DEFAULT 0,
+    CONSTRAINT FK_Productos_Categorias FOREIGN KEY (CategoriaID)
+        REFERENCES Categorias(CategoriaID) ON DELETE CASCADE
+);
+GO
+
+-- Datos iniciales de prueba
+INSERT INTO Categorias (Nombre, Descripcion) VALUES
+('Bebidas', 'Refrescos, maltas y cervezas'),
+('Snacks', 'Papas, galletas y frituras'),
+('Lácteos', 'Quesos y leches');
+
+INSERT INTO Productos (CategoriaID, CodigoBarras, Nombre, Precio, Stock) VALUES
+(1, '746001001', 'Cerveza Extra 355ml', 150.00, 48),
+(1, '746001002', 'Malta 200ml', 45.00, 100),
+(2, '746002001', 'Platanitos Salados', 35.00, 60);
+GO
+
+-- NUEVAS CATEGORÍAS
+INSERT INTO Categorias (Nombre, Descripcion)
+VALUES
+('Limpieza', 'Productos para higiene y limpieza del hogar'),
+('Panadería', 'Panes, bizcochos y repostería'),
+('Enlatados', 'Productos conservados en latas');
+GO
+
+-- NUEVOS PRODUCTOS
+INSERT INTO Productos (CategoriaID, CodigoBarras, Nombre, Precio, Stock)
+VALUES
+-- Limpieza (CategoriaID = 4)
+(4, '746004001', 'Detergente Líquido 1L', 185.00, 40),
+(4, '746004002', 'Cloro Galón', 120.00, 30),
+
+-- Panadería (CategoriaID = 5)
+(5, '746005001', 'Pan Integral', 75.00, 25),
+(5, '746005002', 'Bizcocho Vainilla', 250.00, 12),
+
+-- Enlatados (CategoriaID = 6)
+(6, '746006001', 'Maíz Dulce Enlatado', 95.00, 50),
+(6, '746006002', 'Habichuelas Rojas Enlatadas', 85.00, 45);
+GO
+
+-- VISTA DE REPORTE DE INVENTARIO
+CREATE VIEW vw_ReporteInventario
+AS
+SELECT
+    P.ProductoID,
+    P.CodigoBarras,
+    P.Nombre AS Producto,
+    C.CategoriaID,
+    C.Nombre AS Categoria,
+    P.Precio,
+    P.Stock,
+    (P.Precio * P.Stock) AS ValorInventario,
+    CASE
+        WHEN P.Stock = 0 THEN 'Agotado'
+        WHEN P.Stock &lt;= 20 THEN 'Stock Bajo'
+        WHEN P.Stock &lt;= 50 THEN 'Stock Medio'
+        ELSE 'Stock Disponible'
+    END AS EstadoStock,
+    C.Descripcion AS DescripcionCategoria
+FROM Productos P
+INNER JOIN Categorias C
+    ON P.CategoriaID = C.CategoriaID;
+GO
+
+SELECT * FROM vw_ReporteInventario;
+GO</code></pre>
+      </div>
+    </section>
+
+    <!-- 04. MAINPAGE.XAML -->
+    <section class="brutalist-card">
+      <span class="section-title">04. MAINPAGE.XAML (INTERFAZ DE USUARIO)</span>
+      <p class="intro-text">
+        <strong>¿Qué hace este código XAML?</strong><br>
+        1. Configura una estética oscura (Dark Mode) con paleta Slate/Cyan/Emerald de alto contraste.<br>
+        2. Proporciona un panel superior para ingresar y cambiar dinámicamente la dirección IP del servidor SQL.<br>
+        3. Integra un formulario completo con un <code>Picker</code> enlazado a la entidad padre para seleccionar la categoría sin obligar al usuario a digitar IDs numéricos.<br>
+        4. Corrige el contenedor de métricas utilizando <code>HorizontalStackLayout</code> (eliminando el error de compilación de la propiedad <code>Orientation</code>).<br>
+        5. Presenta una <strong>caja de búsqueda única y centralizada</strong> (<code>TxtBuscarGlobal</code>) que dispara el filtrado reactivo de la lista en tiempo real.<br>
+        6. Utiliza una <code>CollectionView</code> con tarjetas personalizadas y botones de acceso rápido para edición y borrado.
+      </p>
+      <div class="code-container">
+        <div class="code-header">
+          <span>MainPage.xaml</span>
+          <button class="copy-btn" onclick="copiarCodigo('code-xaml')">Copiar</button>
+        </div>
+        <pre><code id="code-xaml" class="language-xml">&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+&lt;ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="InventarioMauiApp1.MainPage"
+             BackgroundColor="#0F172A"&gt;
+
+    &lt;Grid RowDefinitions="Auto, *"&gt;
+        &lt;!-- Encabezado y configuración de IP --&gt;
+        &lt;Border Grid.Row="0" BackgroundColor="#1E293B" StrokeThickness="0" Margin="12,10,12,6" Padding="14"&gt;
+            &lt;Border.StrokeShape&gt;
+                &lt;RoundRectangle CornerRadius="12" /&gt;
+            &lt;/Border.StrokeShape&gt;
+            &lt;VerticalStackLayout Spacing="8"&gt;
+                &lt;Label Text="GESTIÓN DE PRODUCTOS" 
+                       TextColor="#38BDF8" 
+                       FontSize="18" 
+                       FontAttributes="Bold" 
+                       HorizontalOptions="Center" /&gt;
+
+                &lt;Grid ColumnDefinitions="*, Auto" ColumnSpacing="8"&gt;
+                    &lt;Border BackgroundColor="#0F172A" Stroke="#334155" StrokeThickness="1" Padding="8,0"&gt;
+                        &lt;Border.StrokeShape&gt;
+                            &lt;RoundRectangle CornerRadius="8" /&gt;
+                        &lt;/Border.StrokeShape&gt;
+                        &lt;Entry x:Name="TxtServerIp" 
+                               Placeholder="IP del servidor (ej. 10.0.0.15)" 
+                               PlaceholderColor="#64748B" 
+                               TextColor="#F8FAFC" 
+                               Text="10.0.0.15"
+                               Keyboard="Url"
+                               FontSize="13" /&gt;
+                    &lt;/Border&gt;
+                    &lt;Button Grid.Column="1" 
+                            Text="Conectar" 
+                            Clicked="OnProbarConexionClicked" 
+                            BackgroundColor="#0284C7" 
+                            TextColor="White" 
+                            FontAttributes="Bold" 
+                            CornerRadius="8" 
+                            HeightRequest="42" /&gt;
+                &lt;/Grid&gt;
+            &lt;/VerticalStackLayout&gt;
+        &lt;/Border&gt;
+
+        &lt;!-- Contenido principal: Formulario CRUD + Búsqueda Unificada + Lista --&gt;
+        &lt;ScrollView Grid.Row="1" Padding="12,0,12,12"&gt;
+            &lt;VerticalStackLayout Spacing="12"&gt;
+                
+                &lt;!-- Tarjeta Formulario --&gt;
+                &lt;Border BackgroundColor="#1E293B" StrokeThickness="0" Padding="14"&gt;
+                    &lt;Border.StrokeShape&gt;
+                        &lt;RoundRectangle CornerRadius="12" /&gt;
+                    &lt;/Border.StrokeShape&gt;
+                    &lt;VerticalStackLayout Spacing="10"&gt;
+                        &lt;Label x:Name="LblModoFormulario" 
+                               Text="Nuevo Producto" 
+                               TextColor="#94A3B8" 
+                               FontSize="14" 
+                               FontAttributes="Bold" /&gt;
+
+                        &lt;Grid ColumnDefinitions="*, *" ColumnSpacing="8" RowDefinitions="Auto, Auto, Auto" RowSpacing="8"&gt;
+                            &lt;!-- Categoría (Picker) --&gt;
+                            &lt;Border Grid.Row="0" Grid.ColumnSpan="2" BackgroundColor="#0F172A" Stroke="#334155" StrokeThickness="1"&gt;
+                                &lt;Border.StrokeShape&gt;
+                                    &lt;RoundRectangle CornerRadius="8" /&gt;
+                                &lt;/Border.StrokeShape&gt;
+                                &lt;Picker x:Name="PickerCategorias" 
+                                        Title="Seleccione Categoría" 
+                                        TitleColor="#64748B" 
+                                        TextColor="#F8FAFC" 
+                                        ItemDisplayBinding="{Binding Nombre}" /&gt;
+                            &lt;/Border&gt;
+
+                            &lt;!-- Código de Barras --&gt;
+                            &lt;Border Grid.Row="1" Grid.Column="0" BackgroundColor="#0F172A" Stroke="#334155" StrokeThickness="1" Padding="8,0"&gt;
+                                &lt;Border.StrokeShape&gt;
+                                    &lt;RoundRectangle CornerRadius="8" /&gt;
+                                &lt;/Border.StrokeShape&gt;
+                                &lt;Entry x:Name="TxtCodigoBarras" 
+                                       Placeholder="Cód. Barras" 
+                                       PlaceholderColor="#64748B" 
+                                       TextColor="#F8FAFC" /&gt;
+                            &lt;/Border&gt;
+
+                            &lt;!-- Nombre Producto --&gt;
+                            &lt;Border Grid.Row="1" Grid.Column="1" BackgroundColor="#0F172A" Stroke="#334155" StrokeThickness="1" Padding="8,0"&gt;
+                                &lt;Border.StrokeShape&gt;
+                                    &lt;RoundRectangle CornerRadius="8" /&gt;
+                                &lt;/Border.StrokeShape&gt;
+                                &lt;Entry x:Name="TxtNombre" 
+                                       Placeholder="Nombre" 
+                                       PlaceholderColor="#64748B" 
+                                       TextColor="#F8FAFC" /&gt;
+                            &lt;/Border&gt;
+
+                            &lt;!-- Precio --&gt;
+                            &lt;Border Grid.Row="2" Grid.Column="0" BackgroundColor="#0F172A" Stroke="#334155" StrokeThickness="1" Padding="8,0"&gt;
+                                &lt;Border.StrokeShape&gt;
+                                    &lt;RoundRectangle CornerRadius="8" /&gt;
+                                &lt;/Border.StrokeShape&gt;
+                                &lt;Entry x:Name="TxtPrecio" 
+                                       Placeholder="Precio (0.00)" 
+                                       PlaceholderColor="#64748B" 
+                                       TextColor="#F8FAFC" 
+                                       Keyboard="Numeric" /&gt;
+                            &lt;/Border&gt;
+
+                            &lt;!-- Stock --&gt;
+                            &lt;Border Grid.Row="2" Grid.Column="1" BackgroundColor="#0F172A" Stroke="#334155" StrokeThickness="1" Padding="8,0"&gt;
+                                &lt;Border.StrokeShape&gt;
+                                    &lt;RoundRectangle CornerRadius="8" /&gt;
+                                &lt;/Border.StrokeShape&gt;
+                                &lt;Entry x:Name="TxtStock" 
+                                       Placeholder="Stock" 
+                                       PlaceholderColor="#64748B" 
+                                       TextColor="#F8FAFC" 
+                                       Keyboard="Numeric" /&gt;
+                            &lt;/Border&gt;
+                        &lt;/Grid&gt;
+
+                        &lt;!-- Botones de Acción --&gt;
+                        &lt;Grid ColumnDefinitions="*, *" ColumnSpacing="8" Margin="0,4,0,0"&gt;
+                            &lt;Button x:Name="BtnGuardar" 
+                                    Grid.Column="0" 
+                                    Text="Guardar" 
+                                    Clicked="OnGuardarClicked" 
+                                    BackgroundColor="#10B981" 
+                                    TextColor="White" 
+                                    FontAttributes="Bold" 
+                                    CornerRadius="8" /&gt;
+                            &lt;Button x:Name="BtnLimpiar" 
+                                    Grid.Column="1" 
+                                    Text="Limpiar / Cancelar" 
+                                    Clicked="OnLimpiarClicked" 
+                                    BackgroundColor="#475569" 
+                                    TextColor="White" 
+                                    CornerRadius="8" /&gt;
+                        &lt;/Grid&gt;
+                    &lt;/VerticalStackLayout&gt;
+                &lt;/Border&gt;
+
+                &lt;!-- CAJA DE BÚSQUEDA DINÁMICA MULTI-PARÁMETRO --&gt;
+                &lt;Border BackgroundColor="#1E293B" StrokeThickness="0" Padding="12"&gt;
+                    &lt;Border.StrokeShape&gt;
+                        &lt;RoundRectangle CornerRadius="12" /&gt;
+                    &lt;/Border.StrokeShape&gt;
+                    &lt;VerticalStackLayout Spacing="6"&gt;
+                        &lt;Label Text="🔍 BÚSQUEDA DINÁMICA" 
+                               TextColor="#38BDF8" 
+                               FontSize="12" 
+                               FontAttributes="Bold" /&gt;
+                        &lt;Border BackgroundColor="#0F172A" Stroke="#334155" StrokeThickness="1" Padding="10,0"&gt;
+                            &lt;Border.StrokeShape&gt;
+                                &lt;RoundRectangle CornerRadius="8" /&gt;
+                            &lt;/Border.StrokeShape&gt;
+                            &lt;Entry x:Name="TxtBuscarGlobal" 
+                                   Placeholder="Buscar por producto, código, categoría o ID..." 
+                                   PlaceholderColor="#64748B" 
+                                   TextColor="#F8FAFC" 
+                                   TextChanged="OnBuscarGlobalTextChanged" 
+                                   ClearButtonVisibility="WhileEditing"
+                                   FontSize="13" /&gt;
+                        &lt;/Border&gt;
+                    &lt;/VerticalStackLayout&gt;
+                &lt;/Border&gt;
+
+                &lt;!-- Listado de Productos --&gt;
+                &lt;Label Text="PRODUCTOS REGISTRADOS" 
+                       TextColor="#38BDF8" 
+                       FontSize="14" 
+                       FontAttributes="Bold" 
+                       Margin="4,6,0,2" /&gt;
+
+                &lt;CollectionView x:Name="CvProductos" SelectionMode="None"&gt;
+                    &lt;CollectionView.EmptyView&gt;
+                        &lt;Label Text="No se encontraron productos coincidentes." 
+                               TextColor="#64748B" 
+                               HorizontalOptions="Center" 
+                               Margin="0,20" /&gt;
+                    &lt;/CollectionView.EmptyView&gt;
+                    &lt;CollectionView.ItemTemplate&gt;
+                        &lt;DataTemplate&gt;
+                            &lt;Border BackgroundColor="#1E293B" Stroke="#334155" StrokeThickness="1" Margin="0,4" Padding="12"&gt;
+                                &lt;Border.StrokeShape&gt;
+                                    &lt;RoundRectangle CornerRadius="10" /&gt;
+                                &lt;/Border.StrokeShape&gt;
+                                &lt;Grid ColumnDefinitions="*, Auto" RowDefinitions="Auto, Auto"&gt;
+                                    &lt;VerticalStackLayout Grid.Column="0" Grid.Row="0" Spacing="2"&gt;
+                                        &lt;Label Text="{Binding Nombre}" 
+                                               TextColor="#F8FAFC" 
+                                               FontSize="15" 
+                                               FontAttributes="Bold" /&gt;
+                                        &lt;Label Text="{Binding CategoriaDetalle}" 
+                                               TextColor="#94A3B8" 
+                                               FontSize="12" /&gt;
+                                        &lt;Label Text="{Binding CodigoBarras, StringFormat='Código: {0}'}" 
+                                               TextColor="#64748B" 
+                                               FontSize="11" /&gt;
+                                    &lt;/VerticalStackLayout&gt;
+
+                                    &lt;HorizontalStackLayout Grid.Column="0" Grid.Row="1" Spacing="14" Margin="0,4,0,0"&gt;
+                                        &lt;Label Text="{Binding Precio, StringFormat='RD$ {0:F2}'}" 
+                                               TextColor="#34D399" 
+                                               FontAttributes="Bold" 
+                                               FontSize="13" /&gt;
+                                        &lt;Label Text="{Binding Stock, StringFormat='Stock: {0}'}" 
+                                               TextColor="#38BDF8" 
+                                               FontSize="13" /&gt;
+                                    &lt;/HorizontalStackLayout&gt;
+
+                                    &lt;!-- Acciones Editar y Eliminar --&gt;
+                                    &lt;HorizontalStackLayout Grid.Column="1" Grid.RowSpan="2" Spacing="6" VerticalOptions="Center"&gt;
+                                        &lt;Button Text="✏️" 
+                                                Clicked="OnEditarClicked" 
+                                                CommandParameter="{Binding .}" 
+                                                BackgroundColor="#334155" 
+                                                TextColor="White" 
+                                                CornerRadius="8" 
+                                                WidthRequest="42" 
+                                                HeightRequest="42" 
+                                                Padding="0" /&gt;
+                                        &lt;Button Text="🗑️" 
+                                                Clicked="OnEliminarClicked" 
+                                                CommandParameter="{Binding ProductoID}" 
+                                                BackgroundColor="#EF4444" 
+                                                TextColor="White" 
+                                                CornerRadius="8" 
+                                                WidthRequest="42" 
+                                                HeightRequest="42" 
+                                                Padding="0" /&gt;
+                                    &lt;/HorizontalStackLayout&gt;
+                                &lt;/Grid&gt;
+                            &lt;/Border&gt;
+                        &lt;/DataTemplate&gt;
+                    &lt;/CollectionView.ItemTemplate&gt;
+                &lt;/CollectionView&gt;
+            &lt;/VerticalStackLayout&gt;
+        &lt;/ScrollView&gt;
+    &lt;/Grid&gt;
+
+&lt;/ContentPage&gt;</code></pre>
+      </div>
+    </section>
+
+    <!-- 05. MAINPAGE.XAML.CS -->
+    <section class="brutalist-card">
+      <span class="section-title">05. MAINPAGE.XAML.CS (LÓGICA C# Y ADO.NET)</span>
+      <p class="intro-text">
+        <strong>¿Qué hace este código C#?</strong><br>
+        1. Utiliza el método nativo <strong><code>DisplayAlertAsync</code></strong> requerido por las versiones recientes de MAUI para suprimir los avisos de obsolescencia <code>CS0618</code>.<br>
+        2. Incluye firmas con nulabilidad explícita (<code>object? sender</code>) suprimiendo los avisos del compilador <code>CS8622</code>.<br>
+        3. <strong>Previene colisiones de clave única:</strong> ejecuta el método auxiliar <code>ExisteCodigoBarrasAsync</code> antes de guardar, informando al usuario de forma amigable si el código de barras ya existe en otro registro sin lanzar excepciones SQL no controladas.<br>
+        4. <strong>Filtro unificado en memoria:</strong> el método <code>FiltrarCatalogo</code> evalúa si el texto ingresado coincide con el nombre del producto, el código de barras, el nombre de la categoría o el identificador numérico de la categoría.<br>
+        5. Maneja la alternancia entre inserción (<code>INSERT</code>) y actualización (<code>UPDATE</code>) según el valor de <code>_productoEnEdicionId</code>.
+      </p>
+      <div class="code-container">
+        <div class="code-header">
+          <span>MainPage.xaml.cs</span>
+          <button class="copy-btn" onclick="copiarCodigo('code-cs')">Copiar</button>
+        </div>
+        <pre><code id="code-cs" class="language-csharp">using Microsoft.Data.SqlClient;
+using System.Collections.ObjectModel;
+using System.Data;
+
+namespace InventarioMauiApp1;
+
+public partial class MainPage : ContentPage
+{
+    private const string SqlUser = "JUANCITO";
+    private const string SqlPass = "123456";
+    private const string SqlDb = "InventarioDB1";
+    private const int SqlPort = 1433;
+
+    public ObservableCollection<CategoriaModel> Categorias { get; set; } = new();
+    
+    // Lista completa en memoria
+    private readonly List<ProductoModel> _todosLosProductos = new();
+    
+    // Lista enlazada a la vista
+    public ObservableCollection<ProductoModel> ProductosFiltrados { get; set; } = new();
+
+    private int _productoEnEdicionId = 0;
+
+    public MainPage()
+    {
+        InitializeComponent();
+        PickerCategorias.ItemsSource = Categorias;
+        CvProductos.ItemsSource = ProductosFiltrados;
+    }
+
+    private string ObtenerCadenaConexion()
+    {
+        string ip = TxtServerIp.Text?.Trim() ?? "10.0.0.15";
+        return $"Server={ip},{SqlPort};Database={SqlDb};User Id={SqlUser};Password={SqlPass};TrustServerCertificate=True;Encrypt=False;Connect Timeout=5;";
+    }
+
+    private async void OnProbarConexionClicked(object? sender, EventArgs e)
+    {
+        await CargarDatosIniciales();
+    }
+
+    private async Task CargarDatosIniciales()
+    {
+        try
+        {
+            await CargarCategorias();
+            await CargarProductos();
+            await DisplayAlertAsync("✅ Conexión Exitosa", "Base de datos conectada correctamente.", "Aceptar");
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlertAsync("❌ Error de Conexión", $"No se pudo conectar al servidor:\n{ex.Message}", "OK");
+        }
+    }
+
+    // READ: Categorías
+    private async Task CargarCategorias()
+    {
+        Categorias.Clear();
+
+        using SqlConnection conn = new(ObtenerCadenaConexion());
+        await conn.OpenAsync();
+
+        string query = "SELECT CategoriaID, Nombre, Descripcion FROM Categorias ORDER BY Nombre ASC";
+        using SqlCommand cmd = new(query, conn);
+        using SqlDataReader reader = await cmd.ExecuteReaderAsync();
+
+        while (await reader.ReadAsync())
+        {
+            Categorias.Add(new CategoriaModel
+            {
+                CategoriaID = reader.GetInt32(0),
+                Nombre = reader.GetString(1),
+                Descripcion = reader.IsDBNull(2) ? "" : reader.GetString(2)
+            });
+        }
+    }
+
+    // READ: Productos (INNER JOIN)
+    private async Task CargarProductos()
+    {
+        _todosLosProductos.Clear();
+        using SqlConnection conn = new(ObtenerCadenaConexion());
+        await conn.OpenAsync();
+
+        string query = @"
+            SELECT p.ProductoID, p.CategoriaID, p.CodigoBarras, p.Nombre, p.Precio, p.Stock, c.Nombre AS CategoriaNombre 
+            FROM Productos p
+            INNER JOIN Categorias c ON p.CategoriaID = c.CategoriaID
+            ORDER BY p.ProductoID DESC";
+
+        using SqlCommand cmd = new(query, conn);
+        using SqlDataReader reader = await cmd.ExecuteReaderAsync();
+
+        while (await reader.ReadAsync())
+        {
+            _todosLosProductos.Add(new ProductoModel
+            {
+                ProductoID = reader.GetInt32(0),
+                CategoriaID = reader.GetInt32(1),
+                CodigoBarras = reader.GetString(2),
+                Nombre = reader.GetString(3),
+                Precio = reader.GetDecimal(4),
+                Stock = reader.GetInt32(5),
+                CategoriaNombre = reader.GetString(6)
+            });
+        }
+
+        FiltrarCatalogo(TxtBuscarGlobal?.Text);
+    }
+
+    // BÚSQUEDA DINÁMICA UNIFICADA: Producto, Código, Categoría o ID Categoría
+    private void OnBuscarGlobalTextChanged(object? sender, TextChangedEventArgs e)
+    {
+        FiltrarCatalogo(e.NewTextValue);
+    }
+
+    private void FiltrarCatalogo(string? filtro)
+    {
+        string criterio = (filtro ?? "").Trim().ToLower();
+
+        var coincidentes = string.IsNullOrWhiteSpace(criterio)
+            ? _todosLosProductos
+            : _todosLosProductos.Where(p =>
+                p.Nombre.ToLower().Contains(criterio) ||
+                p.CodigoBarras.ToLower().Contains(criterio) ||
+                p.CategoriaNombre.ToLower().Contains(criterio) ||
+                p.CategoriaID.ToString() == criterio
+            ).ToList();
+
+        ProductosFiltrados.Clear();
+        foreach (var prod in coincidentes)
+        {
+            ProductosFiltrados.Add(prod);
+        }
+    }
+
+    // VALIDACIÓN PREVIA DE CÓDIGO DE BARRAS DUPLICADO
+    private async Task<bool> ExisteCodigoBarrasAsync(string codigo, int idActual, SqlConnection conn)
+    {
+        string query = "SELECT COUNT(1) FROM Productos WHERE CodigoBarras = @CodigoBarras AND ProductoID != @ProductoID";
+        using SqlCommand cmd = new(query, conn);
+        cmd.Parameters.AddWithValue("@CodigoBarras", codigo);
+        cmd.Parameters.AddWithValue("@ProductoID", idActual);
+
+        int count = Convert.ToInt32(await cmd.ExecuteScalarAsync());
+        return count > 0;
+    }
+
+    // CREATE / UPDATE
+    private async void OnGuardarClicked(object? sender, EventArgs e)
+    {
+        if (PickerCategorias.SelectedItem is not CategoriaModel catSeleccionada)
+        {
+            await DisplayAlertAsync("⚠️ Validación", "Debe seleccionar una categoría para el producto.", "Entendido");
+            return;
+        }
+
+        string codigo = TxtCodigoBarras.Text?.Trim() ?? "";
+        string nombre = TxtNombre.Text?.Trim() ?? "";
+
+        if (string.IsNullOrWhiteSpace(codigo))
+        {
+            await DisplayAlertAsync("⚠️ Campo Requerido", "El código de barras no puede estar vacío.", "Entendido");
+            return;
+        }
+
+        if (string.IsNullOrWhiteSpace(nombre))
+        {
+            await DisplayAlertAsync("⚠️ Campo Requerido", "El nombre del producto es obligatorio.", "Entendido");
+            return;
+        }
+
+        if (!decimal.TryParse(TxtPrecio.Text, out decimal precio) || precio < 0)
+        {
+            await DisplayAlertAsync("⚠️ Valor Inválido", "Ingrese un precio numérico válido mayor o igual a 0.", "Entendido");
+            return;
+        }
+
+        if (!int.TryParse(TxtStock.Text, out int stock) || stock < 0)
+        {
+            await DisplayAlertAsync("⚠️ Valor Inválido", "Ingrese una cantidad de stock entera y positiva.", "Entendido");
+            return;
+        }
+
+        try
+        {
+            using SqlConnection conn = new(ObtenerCadenaConexion());
+            await conn.OpenAsync();
+
+            // Verificación previa de duplicados
+            if (await ExisteCodigoBarrasAsync(codigo, _productoEnEdicionId, conn))
+            {
+                await DisplayAlertAsync("⚠️ Código Duplicado", $"El código '{codigo}' ya pertenece a otro producto registrado.", "Aceptar");
+                return;
+            }
+
+            if (_productoEnEdicionId == 0)
+            {
+                // INSERT
+                string insertSql = @"
+                    INSERT INTO Productos (CategoriaID, CodigoBarras, Nombre, Precio, Stock)
+                    VALUES (@CategoriaID, @CodigoBarras, @Nombre, @Precio, @Stock)";
+
+                using SqlCommand cmd = new(insertSql, conn);
+                cmd.Parameters.AddWithValue("@CategoriaID", catSeleccionada.CategoriaID);
+                cmd.Parameters.AddWithValue("@CodigoBarras", codigo);
+                cmd.Parameters.AddWithValue("@Nombre", nombre);
+                cmd.Parameters.AddWithValue("@Precio", precio);
+                cmd.Parameters.AddWithValue("@Stock", stock);
+
+                await cmd.ExecuteNonQueryAsync();
+                await DisplayAlertAsync("✅ Inserción Exitosa", $"El producto '{nombre}' se registró correctamente.", "Aceptar");
+            }
+            else
+            {
+                // UPDATE
+                string updateSql = @"
+                    UPDATE Productos 
+                    SET CategoriaID = @CategoriaID, CodigoBarras = @CodigoBarras, Nombre = @Nombre, Precio = @Precio, Stock = @Stock
+                    WHERE ProductoID = @ProductoID";
+
+                using SqlCommand cmd = new(updateSql, conn);
+                cmd.Parameters.AddWithValue("@CategoriaID", catSeleccionada.CategoriaID);
+                cmd.Parameters.AddWithValue("@CodigoBarras", codigo);
+                cmd.Parameters.AddWithValue("@Nombre", nombre);
+                cmd.Parameters.AddWithValue("@Precio", precio);
+                cmd.Parameters.AddWithValue("@Stock", stock);
+                cmd.Parameters.AddWithValue("@ProductoID", _productoEnEdicionId);
+
+                await cmd.ExecuteNonQueryAsync();
+                await DisplayAlertAsync("✅ Actualización Exitosa", $"El producto #{_productoEnEdicionId} fue actualizado.", "Aceptar");
+            }
+
+            LimpiarFormulario();
+            await CargarProductos();
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlertAsync("❌ Error SQL", ex.Message, "OK");
+        }
+    }
+
+    // PREPARAR EDICIÓN
+    private void OnEditarClicked(object? sender, EventArgs e)
+    {
+        if (sender is Button btn && btn.CommandParameter is ProductoModel prod)
+        {
+            _productoEnEdicionId = prod.ProductoID;
+            TxtCodigoBarras.Text = prod.CodigoBarras;
+            TxtNombre.Text = prod.Nombre;
+            TxtPrecio.Text = prod.Precio.ToString("0.00");
+            TxtStock.Text = prod.Stock.ToString();
+
+            PickerCategorias.SelectedItem = Categorias.FirstOrDefault(c => c.CategoriaID == prod.CategoriaID);
+
+            LblModoFormulario.Text = $"✏️ Editando Producto #{prod.ProductoID}";
+            LblModoFormulario.TextColor = Color.FromArgb("#F59E0B");
+            BtnGuardar.Text = "Actualizar Cambios";
+            BtnGuardar.BackgroundColor = Color.FromArgb("#F59E0B");
+        }
+    }
+
+    // DELETE
+    private async void OnEliminarClicked(object? sender, EventArgs e)
+    {
+        if (sender is Button btn && btn.CommandParameter is int productoId)
+        {
+            var item = _todosLosProductos.FirstOrDefault(p => p.ProductoID == productoId);
+            string nombreItem = item?.Nombre ?? $"ID {productoId}";
+
+            bool confirmar = await DisplayAlertAsync(
+                "🗑️ Confirmar Eliminación", 
+                $"¿Seguro que deseas eliminar '{nombreItem}' del inventario?\nEsta acción no se puede deshacer.", 
+                "Sí, Eliminar", 
+                "Cancelar");
+
+            if (!confirmar) return;
+
+            try
+            {
+                using SqlConnection conn = new(ObtenerCadenaConexion());
+                await conn.OpenAsync();
+
+                string deleteSql = "DELETE FROM Productos WHERE ProductoID = @ProductoID";
+                using SqlCommand cmd = new(deleteSql, conn);
+                cmd.Parameters.AddWithValue("@ProductoID", productoId);
+
+                await cmd.ExecuteNonQueryAsync();
+
+                await DisplayAlertAsync("✅ Eliminado", $"El producto '{nombreItem}' ha sido removido.", "Aceptar");
+
+                if (_productoEnEdicionId == productoId)
+                {
+                    LimpiarFormulario();
+                }
+
+                await CargarProductos();
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlertAsync("❌ Error al Eliminar", ex.Message, "OK");
+            }
+        }
+    }
+
+    private void OnLimpiarClicked(object? sender, EventArgs e)
+    {
+        LimpiarFormulario();
+    }
+
+    private void LimpiarFormulario()
+    {
+        _productoEnEdicionId = 0;
+        TxtCodigoBarras.Text = string.Empty;
+        TxtNombre.Text = string.Empty;
+        TxtPrecio.Text = string.Empty;
+        TxtStock.Text = string.Empty;
+        PickerCategorias.SelectedItem = null;
+
+        LblModoFormulario.Text = "Nuevo Producto";
+        LblModoFormulario.TextColor = Color.FromArgb("#94A3B8");
+        BtnGuardar.Text = "Guardar";
+        BtnGuardar.BackgroundColor = Color.FromArgb("#10B981");
+    }
+}
+
+// MODELOS DE DATOS
+public class CategoriaModel
+{
+    public int CategoriaID { get; set; }
+    public string Nombre { get; set; } = string.Empty;
+    public string Descripcion { get; set; } = string.Empty;
+}
+
+public class ProductoModel
+{
+    public int ProductoID { get; set; }
+    public int CategoriaID { get; set; }
+    public string CodigoBarras { get; set; } = string.Empty;
+    public string Nombre { get; set; } = string.Empty;
+    public decimal Precio { get; set; }
+    public int Stock { get; set; }
+    public string CategoriaNombre { get; set; } = string.Empty;
+
+    public string CategoriaDetalle => $"Categoría: {CategoriaNombre} (ID: {CategoriaID})";
+}</code></pre>
+      </div>
+    </section>
+
+    <!-- 06. EMULACIÓN INTERACTIVA DE LA APP -->
+    <section class="brutalist-card">
+      <span class="section-title">06. EMULADOR INTERACTIVO DE LA APLICACIÓN</span>
+      <p class="intro-text">
+        Prueba interactiva del comportamiento exacto de la aplicación: el selector mapea el ID de categoría, el formulario valida unicidad de código de barras, las operaciones CRUD actualizan la lista y la caja de texto filtra en vivo por nombre, código de barras, categoría o ID.
+      </p>
+
+      <div class="sim-phone">
+        
+        <!-- Header de la App Simulada -->
+        <div class="sim-header">
+          <h3>GESTIÓN DE PRODUCTOS</h3>
+          <div class="sim-row">
+            <input type="text" id="sim-ip" class="sim-input" value="10.0.0.15" />
+            <button class="sim-btn-cyan" onclick="simularAlerta('✅ Conexión Exitosa', 'Base de datos conectada correctamente.')">Conectar</button>
+          </div>
+        </div>
+
+        <!-- Formulario CRUD -->
+        <div class="sim-card">
+          <div id="sim-lbl-modo" class="sim-form-title">Nuevo Producto</div>
+          <div class="sim-grid-inputs">
+            <select id="sim-picker" class="sim-select">
+              <option value="">Seleccione Categoría</option>
+              <option value="1">Bebidas (ID: 1)</option>
+              <option value="2">Snacks (ID: 2)</option>
+              <option value="3">Lácteos (ID: 3)</option>
+              <option value="4">Limpieza (ID: 4)</option>
+              <option value="5">Panadería (ID: 5)</option>
+              <option value="6">Enlatados (ID: 6)</option>
+            </select>
+            <input type="text" id="sim-barras" class="sim-input" placeholder="Cód. Barras" />
+            <input type="text" id="sim-nombre" class="sim-input" placeholder="Nombre" />
+            <input type="number" id="sim-precio" class="sim-input" placeholder="Precio (0.00)" />
+            <input type="number" id="sim-stock" class="sim-input" placeholder="Stock" />
+          </div>
+          <div class="sim-btn-group">
+            <button id="sim-btn-guardar" class="sim-btn-green" onclick="simGuardar()">Guardar</button>
+            <button class="sim-btn-slate" onclick="simLimpiar()">Limpiar / Cancelar</button>
+          </div>
+        </div>
+
+        <!-- Barra de Búsqueda Dinámica Unificada -->
+        <div class="sim-search-box">
+          <div style="font-size: 11px; color: #38bdf8; font-weight: bold; margin-bottom: 6px;">🔍 BÚSQUEDA DINÁMICA</div>
+          <input type="text" id="sim-buscar" class="sim-input" placeholder="Buscar por producto, código, categoría o ID..." oninput="simFiltrar()" />
+        </div>
+
+        <!-- Lista de Productos -->
+        <div style="font-size: 13px; color: #38bdf8; font-weight: bold; margin-bottom: 8px;">PRODUCTOS REGISTRADOS</div>
+        <div id="sim-lista" class="sim-list-container">
+          <!-- Inyectado dinámicamente -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 07. CONCLUSIÓN TÉCNICA -->
+    <section class="brutalist-card">
+      <span class="section-title">07. CONCLUSIÓN TÉCNICA</span>
+      <p style="font-size: 0.95rem; font-weight: bold; margin-bottom: 10px;">
+        La arquitectura implementada demuestra cómo resolver un sistema CRUD empresarial robusto y escalable limitando la solución a los dos archivos centrales (<code>MainPage.xaml</code> y <code>MainPage.xaml.cs</code>) sin sacrificar buenas prácticas de ingeniería de software.
+      </p>
+      <p style="font-size: 0.95rem;">
+        La integración directa mediante <code>Microsoft.Data.SqlClient</code> sobre el puerto 1433 ofrece tiempos de respuesta inmediatos para entornos locales y LAN. El desacoplamiento del ID técnico frente al nombre en el <code>Picker</code> protege la experiencia del usuario, mientras que las validaciones preventivas en C# neutralizan excepciones críticas de motor (como violaciones de restricciones <code>UNIQUE</code> o tipos de datos mal formateados). Finalmente, la unificación del filtrado en memoria garantiza búsquedas fluidas sin sobrecargar de peticiones repetitivas al servidor SQL.
+      </p>
+    </section>
+
+  </div>
+
+  <!-- TOAST DE ALERTA FLOTANTE -->
+  <div id="sim-alert"></div>
+
+  <!-- Scripts de Prism.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+
+  <!-- LÓGICA DE INTERACCIÓN (COPIADO + EMULADOR) -->
+  <script>
+    // 1. COPIADO AL PORTAPAPELES
+    function copiarCodigo(id) {
+      const codeElement = document.getElementById(id);
+      const text = codeElement.innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        mostrarToast("📋 ¡CÓDIGO COPIADO AL PORTAPAPELES!");
+      });
+    }
+
+    function mostrarToast(msg) {
+      const alertBox = document.getElementById('sim-alert');
+      alertBox.innerText = msg;
+      alertBox.style.display = 'block';
+      setTimeout(() => {
+        alertBox.style.display = 'none';
+      }, 2500);
+    }
+
+    function simularAlerta(titulo, msg) {
+      mostrarToast(`${titulo}: ${msg}`);
+    }
+
+    // 2. MOTOR DEL EMULADOR
+    const categoriasDB = {
+      1: "Bebidas",
+      2: "Snacks",
+      3: "Lácteos",
+      4: "Limpieza",
+      5: "Panadería",
+      6: "Enlatados"
+    };
+
+    let productosDB = [
+      { id: 1, catId: 1, codigo: "746001001", nombre: "Cerveza Extra 355ml", precio: 150.00, stock: 48 },
+      { id: 2, catId: 1, codigo: "746001002", nombre: "Malta 200ml", precio: 45.00, stock: 100 },
+      { id: 3, catId: 2, codigo: "746002001", nombre: "Platanitos Salados", precio: 35.00, stock: 60 },
+      { id: 4, catId: 4, codigo: "746004001", nombre: "Detergente Líquido 1L", precio: 185.00, stock: 40 },
+      { id: 5, catId: 4, codigo: "746004002", nombre: "Cloro Galón", precio: 120.00, stock: 30 }
+    ];
+
+    let editandoId = 0;
+
+    function renderizarLista(items) {
+      const contenedor = document.getElementById('sim-lista');
+      contenedor.innerHTML = "";
+
+      if (items.length === 0) {
+        contenedor.innerHTML = `<div style="text-align:center; padding:18px; color:#64748b; font-size:13px;">No se encontraron productos coincidentes.</div>`;
+        return;
+      }
+
+      items.forEach(prod => {
+        const catNombre = categoriasDB[prod.catId] || "Desconocida";
+        const div = document.createElement('div');
+        div.className = "sim-item";
+        div.innerHTML = `
+          <div class="sim-item-info">
+            <strong>${prod.nombre}</strong>
+            <span>Categoría: ${catNombre} (ID: ${prod.catId})</span>
+            <span>Código: ${prod.codigo}</span>
+            <div style="margin-top:4px;">
+              <span class="sim-item-price" style="display:inline;">RD$ ${prod.precio.toFixed(2)}</span>
+              <span class="sim-item-stock" style="display:inline;">Stock: ${prod.stock}</span>
+            </div>
+          </div>
+          <div class="sim-actions">
+            <button class="sim-act-btn sim-act-edit" onclick="simEditar(${prod.id})">✏️</button>
+            <button class="sim-act-btn sim-act-del" onclick="simEliminar(${prod.id})">🗑️</button>
+          </div>
+        `;
+        contenedor.appendChild(div);
+      });
+    }
+
+    function simFiltrar() {
+      const q = document.getElementById('sim-buscar').value.trim().toLowerCase();
+      if (!q) {
+        renderizarLista(productosDB);
+        return;
+      }
+
+      const filtrados = productosDB.filter(p => {
+        const catNombre = (categoriasDB[p.catId] || "").toLowerCase();
+        return p.nombre.toLowerCase().includes(q) ||
+               p.codigo.toLowerCase().includes(q) ||
+               catNombre.includes(q) ||
+               p.catId.toString() === q;
+      });
+
+      renderizarLista(filtrados);
+    }
+
+    function simGuardar() {
+      const picker = document.getElementById('sim-picker');
+      const catId = parseInt(picker.value);
+      const codigo = document.getElementById('sim-barras').value.trim();
+      const nombre = document.getElementById('sim-nombre').value.trim();
+      const precio = parseFloat(document.getElementById('sim-precio').value);
+      const stock = parseInt(document.getElementById('sim-stock').value);
+
+      if (!catId) {
+        simularAlerta("⚠️ Validación", "Debe seleccionar una categoría.");
+        return;
+      }
+      if (!codigo) {
+        simularAlerta("⚠️ Campo Requerido", "El código de barras no puede estar vacío.");
+        return;
+      }
+      if (!nombre) {
+        simularAlerta("⚠️ Campo Requerido", "El nombre del producto es obligatorio.");
+        return;
+      }
+      if (isNaN(precio) || precio < 0) {
+        simularAlerta("⚠️ Valor Inválido", "Ingrese un precio válido mayor o igual a 0.");
+        return;
+      }
+      if (isNaN(stock) || stock < 0) {
+        simularAlerta("⚠️ Valor Inválido", "Ingrese un stock entero y positivo.");
+        return;
+      }
+
+      // Validar duplicado de código de barras
+      const duplicado = productosDB.find(p => p.codigo === codigo && p.id !== editandoId);
+      if (duplicado) {
+        simularAlerta("⚠️ Código Duplicado", `El código '${codigo}' ya pertenece a otro producto.`);
+        return;
+      }
+
+      if (editandoId === 0) {
+        const nuevoId = productosDB.length > 0 ? Math.max(...productosDB.map(p => p.id)) + 1 : 1;
+        productosDB.unshift({ id: nuevoId, catId, codigo, nombre, precio, stock });
+        simularAlerta("✅ Inserción Exitosa", `El producto '${nombre}' se registró correctamente.`);
+      } else {
+        const index = productosDB.findIndex(p => p.id === editandoId);
+        if (index !== -1) {
+          productosDB[index] = { id: editandoId, catId, codigo, nombre, precio, stock };
+          simularAlerta("✅ Actualización Exitosa", `El producto #${editandoId} fue actualizado.`);
+        }
+      }
+
+      simLimpiar();
+      simFiltrar();
+    }
+
+    function simEditar(id) {
+      const prod = productosDB.find(p => p.id === id);
+      if (!prod) return;
+
+      editandoId = prod.id;
+      document.getElementById('sim-picker').value = prod.catId;
+      document.getElementById('sim-barras').value = prod.codigo;
+      document.getElementById('sim-nombre').value = prod.nombre;
+      document.getElementById('sim-precio').value = prod.precio;
+      document.getElementById('sim-stock').value = prod.stock;
+
+      const lblModo = document.getElementById('sim-lbl-modo');
+      lblModo.innerText = `✏️ Editando Producto #${prod.id}`;
+      lblModo.style.color = "#f59e0b";
+
+      const btnGuardar = document.getElementById('sim-btn-guardar');
+      btnGuardar.innerText = "Actualizar Cambios";
+      btnGuardar.style.background = "#f59e0b";
+    }
+
+    function simEliminar(id) {
+      const prod = productosDB.find(p => p.id === id);
+      if (!prod) return;
+
+      if (confirm(`🗑️ ¿Seguro que deseas eliminar '${prod.nombre}' del inventario?`)) {
+        productosDB = productosDB.filter(p => p.id !== id);
+        simularAlerta("✅ Eliminado", `El producto '${prod.nombre}' ha sido removido.`);
+        if (editandoId === id) simLimpiar();
+        simFiltrar();
+      }
+    }
+
+    function simLimpiar() {
+      editandoId = 0;
+      document.getElementById('sim-picker').value = "";
+      document.getElementById('sim-barras').value = "";
+      document.getElementById('sim-nombre').value = "";
+      document.getElementById('sim-precio').value = "";
+      document.getElementById('sim-stock').value = "";
+
+      const lblModo = document.getElementById('sim-lbl-modo');
+      lblModo.innerText = "Nuevo Producto";
+      lblModo.style.color = "#94a3b8";
+
+      const btnGuardar = document.getElementById('sim-btn-guardar');
+      btnGuardar.innerText = "Guardar";
+      btnGuardar.style.background = "#10b981";
+    }
+
+    // Inicialización del simulador
+    renderizarLista(productosDB);
+  </script>
+    <script type="module" src="script.js"></script>
+  </body>
+</html>
