@@ -1,0 +1,937 @@
+/* =========================================================
+       ESTILO BRUTALIST + PALETA DE TECNOLOGÍAS (.NET / C# / SQL / XAML / MAUI)
+       ========================================================= */
+    :root {
+      --bg: #f4efe6;
+      --card-bg: #ffffff;
+      --black: #000000;
+      --yellow: #ffde59;
+
+      /* Colores oficiales de tecnologías */
+      --maui-cyan: #00b4d8;
+      --maui-sky: #38bdf8;
+      --dotnet-purple: #512bd4;
+      --csharp-purple: #68217a;
+      --xaml-blue: #0078d4;
+      --sql-red: #cc2927;
+      --sql-orange: #ff6b35;
+      --android-green: #00e676;
+      --ps-navy: #012456;
+      --dash-violet: #8b5cf6;
+
+      --border: 4px solid #000000;
+      --border-sm: 2.5px solid #000000;
+      --shadow: 8px 8px 0px #000000;
+      --shadow-sm: 4px 4px 0px #000000;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 105px;
+    }
+
+    body {
+      background-color: var(--bg);
+      font-family: 'Segoe UI', system-ui, -apple-system, 'Courier New', monospace, sans-serif;
+      color: var(--black);
+      font-size: 19px;
+      line-height: 1.65;
+      padding-top: 104px;
+      padding-bottom: 60px;
+    }
+
+    /* =========================================================
+       MENÚ SUPERIOR FIJO (POSITION: FIXED) ANCLADO A SECCIONES
+       ========================================================= */
+    .fixed-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 10000;
+      background: #111111;
+      border-bottom: 4px solid var(--black);
+      box-shadow: 0 5px 0 var(--dotnet-purple);
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--yellow);
+      font-weight: 900;
+      font-size: 1.15rem;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      white-space: nowrap;
+      font-family: 'Courier New', monospace;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 2px;
+      scrollbar-width: thin;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #ffffff;
+      background: #222222;
+      border: 2px solid #ffffff;
+      padding: 6px 11px;
+      font-size: 0.88rem;
+      font-weight: 800;
+      white-space: nowrap;
+      transition: transform 0.1s ease, background 0.15s ease;
+      font-family: 'Courier New', monospace;
+    }
+
+    .nav-links a:hover {
+      background: var(--maui-cyan);
+      color: var(--black);
+      border-color: var(--black);
+      transform: translate(-2px, -2px);
+      box-shadow: 3px 3px 0 var(--yellow);
+    }
+
+    .nav-links a.active {
+      background: var(--yellow);
+      color: var(--black);
+      border-color: var(--black);
+      box-shadow: 3px 3px 0 var(--maui-cyan);
+    }
+
+    /* =========================================================
+       CONTENEDOR AL 80% DEL ANCHO DEL BODY
+       ========================================================= */
+    .cascade-container {
+      width: 80%;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    /* =========================================================
+       ENCABEZADO PRINCIPAL + LOGOS DE TECNOLOGÍAS
+       ========================================================= */
+    header {
+      background: linear-gradient(135deg, var(--dotnet-purple) 0%, var(--xaml-blue) 55%, var(--sql-red) 100%);
+      color: #ffffff;
+      border: var(--border);
+      box-shadow: var(--shadow);
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 18px;
+    }
+
+    header h1 {
+      font-size: 2.35rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: -0.5px;
+      line-height: 1.2;
+      text-shadow: 3px 3px 0px #000000;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-top: 8px;
+      color: #f8fafc;
+    }
+
+    .badge-status {
+      background: var(--yellow);
+      color: var(--black);
+      border: var(--border);
+      box-shadow: var(--shadow-sm);
+      padding: 10px 18px;
+      font-size: 1.05rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      font-family: 'Courier New', monospace;
+    }
+
+    .tech-stack-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding-top: 10px;
+      border-top: 3px dashed rgba(255, 255, 255, 0.45);
+    }
+
+    .tech-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border: 3px solid var(--black);
+      box-shadow: 4px 4px 0 var(--black);
+      font-weight: 900;
+      font-size: 0.98rem;
+      color: #ffffff;
+      font-family: 'Courier New', monospace;
+    }
+
+    .tech-dotnet { background: var(--dotnet-purple); }
+    .tech-csharp { background: var(--csharp-purple); }
+    .tech-maui   { background: var(--maui-cyan); color: var(--black); }
+    .tech-xaml   { background: var(--xaml-blue); }
+    .tech-sql    { background: var(--sql-red); }
+    .tech-ps     { background: var(--ps-navy); }
+    .tech-and    { background: var(--android-green); color: var(--black); }
+    .tech-dash   { background: var(--dash-violet); }
+
+    /* =========================================================
+       TARJETAS BRUTALISTAS DE SECCIÓN
+       ========================================================= */
+    .brutalist-card {
+      background: var(--card-bg);
+      border: var(--border);
+      box-shadow: var(--shadow);
+      padding: 34px;
+    }
+
+    .card-maui { border-top: 12px solid var(--dotnet-purple); }
+    .card-nuget { border-top: 12px solid var(--android-green); }
+    .card-sql { border-top: 12px solid var(--sql-red); }
+    .card-net { border-top: 12px solid var(--ps-navy); }
+    .card-xaml { border-top: 12px solid var(--xaml-blue); }
+    .card-csharp { border-top: 12px solid var(--csharp-purple); }
+    .card-dash { border-top: 12px solid var(--dash-violet); }
+    .card-sim { border-top: 12px solid var(--maui-cyan); }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 22px;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      background: var(--black);
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 18px;
+      font-family: 'Courier New', monospace;
+      box-shadow: 4px 4px 0 var(--yellow);
+    }
+
+    .section-title.t-sql { box-shadow: 4px 4px 0 var(--sql-red); }
+    .section-title.t-xaml { box-shadow: 4px 4px 0 var(--xaml-blue); }
+    .section-title.t-cs { box-shadow: 4px 4px 0 var(--dotnet-purple); }
+    .section-title.t-maui { box-shadow: 4px 4px 0 var(--maui-cyan); }
+    .section-title.t-green { box-shadow: 4px 4px 0 var(--android-green); }
+    .section-title.t-dash { box-shadow: 4px 4px 0 var(--dash-violet); }
+
+    .sub-title {
+      font-size: 1.25rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      background: var(--yellow);
+      border: 3px solid var(--black);
+      box-shadow: var(--shadow-sm);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      margin-top: 26px;
+      margin-bottom: 14px;
+      font-family: 'Courier New', monospace;
+    }
+
+    .sub-title.mode-gui { background: #dbeafe; }
+    .sub-title.mode-cli { background: #1e293b; color: #38bdf8; }
+
+    p {
+      font-size: 1.15rem;
+      margin-bottom: 14px;
+    }
+
+    .intro-text {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+      background: #fff8dc;
+      border: 3px solid var(--black);
+      border-left: 10px solid var(--dotnet-purple);
+      padding: 16px 20px;
+    }
+
+    .alert-box {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin: 18px 0;
+      background: #e0f2fe;
+      border: 3px solid var(--black);
+      box-shadow: var(--shadow-sm);
+      padding: 16px 20px;
+    }
+
+    .warn-box {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin: 18px 0;
+      background: #fee2e2;
+      border: 3px solid var(--black);
+      border-left: 10px solid var(--sql-red);
+      box-shadow: var(--shadow-sm);
+      padding: 16px 20px;
+    }
+
+    .num-list, .step-list {
+      padding-left: 28px;
+      font-size: 1.15rem;
+      margin-bottom: 18px;
+    }
+
+    .step-list {
+      list-style-type: square;
+    }
+
+    .num-list li, .step-list li {
+      margin-bottom: 14px;
+      font-weight: 500;
+    }
+
+    /* =========================================================
+       RESALTADOS DE PALABRAS CLAVE, CLICS, RUTAS Y VALORES
+       ========================================================= */
+    .kw-val {
+      background: var(--yellow);
+      color: var(--black);
+      border: 2px solid var(--black);
+      padding: 2px 8px;
+      font-weight: 900;
+      font-family: 'Courier New', monospace;
+      font-size: 1.05rem;
+      display: inline-block;
+    }
+
+    .kw-ui {
+      background: #e0e7ff;
+      color: #1e1b4b;
+      border: 2px solid var(--dotnet-purple);
+      padding: 2px 8px;
+      font-weight: 900;
+      font-size: 1.02rem;
+      display: inline-block;
+    }
+
+    .kw-path {
+      background: #f1f5f9;
+      color: #0f172a;
+      border: 2px solid #475569;
+      padding: 2px 8px;
+      font-weight: 800;
+      font-family: 'Courier New', monospace;
+      font-size: 1rem;
+      display: inline-block;
+    }
+
+    .kw-sql {
+      background: #fee2e2;
+      color: #991b1b;
+      border: 2px solid var(--sql-red);
+      padding: 2px 8px;
+      font-weight: 900;
+      font-family: 'Courier New', monospace;
+      font-size: 1.02rem;
+    }
+
+    .kw-cs {
+      background: #f3e8ff;
+      color: #4c1d95;
+      border: 2px solid var(--csharp-purple);
+      padding: 2px 8px;
+      font-weight: 900;
+      font-family: 'Courier New', monospace;
+      font-size: 1.02rem;
+    }
+
+    code:not([class*="language-"]) {
+      background: #eeeeee;
+      border: 2px solid var(--black);
+      padding: 2px 7px;
+      font-family: 'Courier New', monospace;
+      font-weight: 800;
+      font-size: 1.02rem;
+    }
+
+    .dual-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+      margin-top: 12px;
+    }
+
+    .panel-gui {
+      border: 3px solid var(--black);
+      background: #f8fafc;
+      padding: 22px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .panel-cli {
+      border: 3px solid var(--black);
+      background: #f0f9ff;
+      padding: 22px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* =========================================================
+       BLOQUES DE CÓDIGO SIN SCROLL Y TEXTO GRANDE
+       ========================================================= */
+    .code-container {
+      position: relative;
+      margin-top: 14px;
+      margin-bottom: 18px;
+      border: var(--border);
+      box-shadow: var(--shadow-sm);
+      background: #1a1b26;
+      overflow: visible !important;
+      height: auto !important;
+    }
+
+    .code-header {
+      background: #0d0e14;
+      color: #fff;
+      padding: 12px 18px;
+      font-size: 1rem;
+      font-weight: 900;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 3px solid #000;
+      text-transform: uppercase;
+      font-family: 'Courier New', monospace;
+    }
+
+    .code-header.hdr-sql { border-left: 10px solid var(--sql-red); }
+    .code-header.hdr-xaml { border-left: 10px solid var(--xaml-blue); }
+    .code-header.hdr-cs { border-left: 10px solid var(--dotnet-purple); }
+    .code-header.hdr-ps { border-left: 10px solid var(--maui-cyan); }
+    .code-header.hdr-and { border-left: 10px solid var(--android-green); }
+    .code-header.hdr-dash { border-left: 10px solid var(--dash-violet); }
+
+    .copy-btn {
+      background: var(--yellow);
+      color: var(--black);
+      border: 2.5px solid #000;
+      font-family: 'Courier New', monospace;
+      font-weight: 900;
+      font-size: 0.95rem;
+      padding: 6px 16px;
+      cursor: pointer;
+      box-shadow: 3px 3px 0px #000;
+      transition: transform 0.05s ease;
+    }
+
+    .copy-btn:hover {
+      background: var(--maui-cyan);
+    }
+
+    .copy-btn:active {
+      transform: translate(2px, 2px);
+      box-shadow: none;
+    }
+
+    pre[class*="language-"] {
+      margin: 0 !important;
+      padding: 20px !important;
+      font-size: 1rem !important;
+      line-height: 1.55 !important;
+      border-radius: 0 !important;
+      background: transparent !important;
+      max-height: none !important;
+      height: auto !important;
+      overflow: visible !important;
+      white-space: pre-wrap !important;
+      word-break: break-word !important;
+    }
+
+    code[class*="language-"] {
+      white-space: pre-wrap !important;
+      word-break: break-word !important;
+      max-height: none !important;
+      overflow: visible !important;
+      font-size: 1rem !important;
+    }
+
+    /* =========================================================
+       SIMULADOR MAUI ANDROID / DESKTOP + DASHBOARD INTERACTIVO
+       ========================================================= */
+    .sim-phone {
+      background: #0f172a;
+      border: var(--border);
+      box-shadow: 10px 10px 0px var(--black);
+      padding: 28px;
+      color: #f8fafc;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      margin-top: 14px;
+    }
+
+    .sim-header {
+      background: #1e293b;
+      padding: 18px;
+      border-radius: 12px;
+      margin-bottom: 18px;
+      border: 2px solid #334155;
+    }
+
+    .sim-header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      gap: 10px;
+    }
+
+    .sim-header h3 {
+      font-size: 19px;
+      color: #38bdf8;
+      text-transform: uppercase;
+      font-weight: 900;
+      margin: 0;
+    }
+
+    .sim-btn-purple {
+      background: #8b5cf6;
+      color: #fff;
+      font-weight: bold;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      white-space: nowrap;
+    }
+
+    .sim-row {
+      display: flex;
+      gap: 12px;
+    }
+
+    .sim-input {
+      background: #0f172a;
+      border: 1.5px solid #334155;
+      color: #fff;
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-size: 16px;
+      width: 100%;
+      outline: none;
+    }
+
+    .sim-btn-cyan {
+      background: #0284c7;
+      color: #fff;
+      font-weight: bold;
+      border: none;
+      padding: 12px 22px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      white-space: nowrap;
+    }
+
+    .sim-card {
+      background: #1e293b;
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 18px;
+      border: 2px solid #334155;
+    }
+
+    .sim-form-title {
+      font-size: 16px;
+      color: #94a3b8;
+      font-weight: bold;
+      margin-bottom: 14px;
+    }
+
+    .sim-grid-inputs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .sim-select {
+      background: #0f172a;
+      border: 1.5px solid #334155;
+      color: #fff;
+      padding: 12px 14px;
+      border-radius: 8px;
+      font-size: 16px;
+      width: 100%;
+      grid-column: span 2;
+      outline: none;
+    }
+
+    .sim-btn-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .sim-btn-green {
+      background: #10b981;
+      color: #fff;
+      font-weight: bold;
+      border: none;
+      padding: 13px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .sim-btn-slate {
+      background: #475569;
+      color: #fff;
+      font-weight: bold;
+      border: none;
+      padding: 13px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .sim-search-box {
+      background: #1e293b;
+      padding: 16px;
+      border-radius: 12px;
+      margin-bottom: 18px;
+      border: 2px solid #334155;
+    }
+
+    .sim-list-container {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .sim-item {
+      background: #1e293b;
+      border: 2px solid #334155;
+      padding: 16px;
+      border-radius: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .sim-item-info strong {
+      display: block;
+      color: #f8fafc;
+      font-size: 17px;
+    }
+
+    .sim-item-info span {
+      display: block;
+      color: #94a3b8;
+      font-size: 14px;
+    }
+
+    .sim-item-price {
+      color: #34d399;
+      font-weight: bold;
+      font-size: 16px;
+      margin-top: 6px;
+    }
+
+    .sim-item-stock {
+      color: #38bdf8;
+      font-size: 16px;
+      margin-left: 16px;
+    }
+
+    .sim-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .sim-act-btn {
+      border: none;
+      width: 46px;
+      height: 46px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    .sim-act-edit { background: #334155; color: #fff; }
+    .sim-act-del { background: #ef4444; color: #fff; }
+
+    /* Estilos del Dashboard Simulado */
+    .sim-kpi-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .sim-kpi-card {
+      background: #1e293b;
+      border: 1.5px solid #334155;
+      border-radius: 12px;
+      padding: 14px;
+    }
+
+    .sim-kpi-title {
+      font-size: 12px;
+      color: #94a3b8;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    .sim-kpi-val {
+      font-size: 20px;
+      font-weight: 900;
+      margin: 4px 0;
+    }
+
+    .sim-kpi-sub {
+      font-size: 11px;
+      color: #64748b;
+    }
+
+    .sim-bar-track {
+      width: 100%;
+      height: 10px;
+      background: #0f172a;
+      border-radius: 6px;
+      overflow: hidden;
+      margin: 6px 0;
+    }
+
+    .sim-bar-fill {
+      height: 100%;
+      background: #38bdf8;
+      border-radius: 6px;
+      transition: width 0.3s ease;
+    }
+
+    .sim-badge {
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: bold;
+      display: inline-block;
+    }
+
+    /* TOAST DE ALERTA FLOTANTE */
+    #sim-alert {
+      display: none;
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      background: var(--yellow);
+      color: var(--black);
+      border: var(--border);
+      box-shadow: var(--shadow);
+      padding: 16px 24px;
+      font-size: 1.1rem;
+      font-weight: 900;
+      z-index: 10001;
+    }
+
+    .btn-top {
+      background: var(--sql-red);
+      color: #fff !important;
+      border-color: #fff !important;
+    }
+
+
+
+/* =========================================================================
+   ESTILOS OFICIALES: PRESENTACIÓN DEL AUTOR & FOOTER NEO-BRUTALISTA (JPV)
+   ========================================================================= */
+
+/* --- CONTENEDOR HERO DE IMAGEN DE ALMACÉN --- */
+.hero-image-container {
+    border: var(--border);
+    box-shadow: var(--shadow);
+    background: #000000;
+    overflow: hidden;
+    margin-bottom: 24px;
+}
+
+.hero-image-container img {
+    width: 100%;
+    height: auto;
+    max-height: 520px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.hero-image-container:hover img {
+    transform: scale(1.01);
+}
+
+/* --- TARJETA DE PERFIL DEL AUTOR --- */
+.footer-profile-card {
+    background: #FFFFFF !important;
+    border: 3px solid #000000 !important;
+    border-radius: 12px !important;
+    padding: 2.2rem !important;
+    box-shadow: 8px 8px 0px #000000 !important;
+    margin-top: 2rem !important;
+    margin-bottom: 2rem !important;
+}
+
+.author-header-flex {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+}
+
+.author-avatar {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #000000;
+    box-shadow: 4px 4px 0px #000000;
+    flex-shrink: 0;
+}
+
+.author-title {
+    color: #000000 !important;
+    font-size: 1.6rem;
+    font-weight: 900;
+    margin-bottom: 6px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+.author-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.author-badge {
+    padding: 4px 10px;
+    font-size: 0.82rem;
+    font-weight: 900;
+    border-radius: 4px;
+    border: 1.5px solid #000;
+    box-shadow: 2px 2px 0 #000;
+    font-family: 'Courier New', monospace;
+    text-transform: uppercase;
+}
+
+.badge-dark-jpv   { background: #000000; color: #FFFFFF; }
+.badge-danger-jpv { background: #DA291C; color: #FFFFFF; }
+.badge-primary-jpv{ background: #0D6EFD; color: #FFFFFF; }
+.badge-warning-jpv{ background: #FFC107; color: #000000; }
+
+.author-text {
+    color: #0F172A !important;
+    font-weight: 500;
+    line-height: 1.65;
+    font-size: 1.05rem;
+    margin-bottom: 14px;
+}
+
+/* --- TECH PILLS (STACK CON LOGOS DEVICON) --- */
+.tech-pill-jpv {
+    background: #FFFFFF !important;
+    border: 2px solid #000000 !important;
+    color: #000000 !important;
+    font-weight: 800 !important;
+    padding: 0.35rem 0.75rem !important;
+    border-radius: 6px !important;
+    font-size: 0.88rem !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    box-shadow: 2px 2px 0px #000000 !important;
+    margin: 4px 3px !important;
+    vertical-align: middle !important;
+    transition: all 0.15s ease !important;
+    text-decoration: none !important;
+}
+
+.tech-pill-jpv:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 4px 4px 0px #000000 !important;
+    background: #FFDE59 !important;
+}
+
+.tech-pill-jpv img {
+    width: 20px !important;
+    height: 20px !important;
+    object-fit: contain !important;
+}
+
+/* --- BOTONES DE REDES SOCIALES --- */
+.social-btn-jpv {
+    width: 48px !important;
+    height: 48px !important;
+    background: #FFFFFF !important;
+    border: 2.5px solid #000000 !important;
+    border-radius: 8px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 1.35rem !important;
+    box-shadow: 4px 4px 0px #000000 !important;
+    transition: all 0.15s ease !important;
+    text-decoration: none !important;
+    color: #000000;
+}
+
+.social-btn-jpv:hover {
+    transform: translate(-2px, -2px) !important;
+    box-shadow: 6px 6px 0px #000000 !important;
+    background: #FFDE59 !important;
+}
+
+/* --- FOOTER OFICIAL INSTITUCIONAL --- */
+.footer-official-jpv {
+    background: #111111 !important;
+    border-top: 4px solid #000000 !important;
+    box-shadow: 0 -4px 0 var(--dotnet-purple);
+    padding: 2.5rem 0 !important;
+    width: 100% !important;
+    color: #FFFFFF !important;
+    margin-top: 40px;
+}

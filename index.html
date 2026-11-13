@@ -1,545 +1,635 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
-    <link type="text/css" rel="stylesheet" href="style.css"/>
-  <meta charset="UTF-8">
+      <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MANUAL TÉCNICO // .NET MAUI + SQL SERVER</title>
-  
-  <!-- Prism.js Tema Brutalista Oscuro -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+  <meta name="description" content="Manual Maestro de Ingeniería: .NET MAUI + C# + XAML + SQL Server + Dashboard BI Ejecutivo.">
+  <meta name="author" content="Ing. Juancito Peña Vizcaíno & DataIADev Pro">
+  <title>MANUAL MAESTRO // .NET MAUI + C# + XAML + SQL SERVER + DASHBOARD</title>
 
-  <style>
-    /* =========================================================
-       ESTILO BRUTALIST CSS PURO
-       ========================================================= */
-    :root {
-      --bg: #f5f0eb;
-      --card-bg: #ffffff;
-      --black: #000000;
-      --yellow: #ffde59;
-      --cyan: #00f0ff;
-      --green: #00e676;
-      --pink: #ff5252;
-      --blue: #2979ff;
-      --border: 3.5px solid #000000;
-      --shadow: 6px 6px 0px #000000;
-      --shadow-sm: 4px 4px 0px #000000;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      background-color: var(--bg);
-      font-family: 'Courier New', Courier, monospace, system-ui, sans-serif;
-      color: var(--black);
-      padding: 24px;
-      line-height: 1.5;
-    }
-
-    /* CONTENEDOR LINEAL EN CASCADA (SIN SPLIT SCREEN) */
-    .cascade-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      gap: 32px;
-    }
-
-    /* ENCABEZADO */
-    header {
-      background: var(--yellow);
-      border: var(--border);
-      box-shadow: var(--shadow);
-      padding: 24px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 16px;
-    }
-
-    header h1 {
-      font-size: 1.8rem;
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: -1px;
-    }
-
-    .badge-status {
-      background: var(--cyan);
-      border: var(--border);
-      box-shadow: var(--shadow-sm);
-      padding: 8px 16px;
-      font-size: 0.9rem;
-      font-weight: 900;
-      text-transform: uppercase;
-    }
-
-    /* TARJETAS BRUTALISTAS */
-    .brutalist-card {
-      background: var(--card-bg);
-      border: var(--border);
-      box-shadow: var(--shadow);
-      padding: 28px;
-    }
-
-    .section-title {
-      font-size: 1.3rem;
-      font-weight: 900;
-      text-transform: uppercase;
-      background: var(--black);
-      color: #fff;
-      display: inline-block;
-      padding: 6px 14px;
-      margin-bottom: 18px;
-    }
-
-    .step-list {
-      list-style-type: square;
-      padding-left: 24px;
-      font-weight: bold;
-      font-size: 1rem;
-      margin-bottom: 16px;
-    }
-
-    .step-list li {
-      margin-bottom: 10px;
-    }
-
-    .tag-cmd {
-      background: #eee;
-      border: 2px solid var(--black);
-      padding: 2px 8px;
-      display: inline-block;
-      font-size: 0.9rem;
-    }
-
-    .intro-text {
-      font-size: 1rem;
-      font-weight: 600;
-      margin-bottom: 16px;
-      background: #fff8e1;
-      border-left: 6px solid var(--black);
-      padding: 12px 16px;
-    }
-
-    /* =========================================================
-       REGLA ESTRICTA: SIN SCROLL EN LOS CÓDIGOS (COMPLETO)
-       ========================================================= */
-    .code-container {
-      position: relative;
-      margin-top: 14px;
-      border: var(--border);
-      box-shadow: var(--shadow-sm);
-      background: #1e1e1e;
-      overflow: visible !important; /* Desactiva scrollbar */
-      height: auto !important;
-    }
-
-    .code-header {
-      background: #111;
-      color: #fff;
-      padding: 8px 16px;
-      font-size: 0.85rem;
-      font-weight: 900;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 3px solid #000;
-      text-transform: uppercase;
-    }
-
-    .copy-btn {
-      background: var(--yellow);
-      border: 2px solid #000;
-      font-family: inherit;
-      font-weight: 900;
-      font-size: 0.8rem;
-      padding: 4px 12px;
-      cursor: pointer;
-      box-shadow: 2px 2px 0px #000;
-      transition: transform 0.05s ease;
-    }
-
-    .copy-btn:active {
-      transform: translate(2px, 2px);
-      box-shadow: none;
-    }
-
-    /* Código Prism sin cortes ni límites de altura */
-    pre[class*="language-"] {
-      margin: 0 !important;
-      padding: 16px !important;
-      font-size: 0.85rem !important;
-      border-radius: 0 !important;
-      background: transparent !important;
-      max-height: none !important; /* CERO LÍMITE DE ALTURA */
-      height: auto !important;
-      overflow: visible !important; /* CERO SCROLL */
-      white-space: pre-wrap !important; /* Ajuste limpio si excede pantalla */
-      word-break: break-all !important;
-    }
-
-    code[class*="language-"] {
-      white-space: pre-wrap !important;
-      word-break: break-all !important;
-      max-height: none !important;
-      overflow: visible !important;
-    }
-
-    /* =========================================================
-       SIMULADOR MAUI ANDROID / DESKTOP (AL FINAL EN CASCADA)
-       ========================================================= */
-    .sim-phone {
-      background: #0f172a;
-      border: var(--border);
-      box-shadow: 10px 10px 0px var(--black);
-      padding: 24px;
-      color: #f8fafc;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      margin-top: 10px;
-    }
-
-    .sim-header {
-      background: #1e293b;
-      padding: 14px;
-      border-radius: 10px;
-      margin-bottom: 16px;
-      border: 1px solid #334155;
-    }
-
-    .sim-header h3 {
-      font-size: 16px;
-      color: #38bdf8;
-      text-align: center;
-      margin-bottom: 10px;
-      text-transform: uppercase;
-      font-weight: 900;
-    }
-
-    .sim-row {
-      display: flex;
-      gap: 10px;
-    }
-
-    .sim-input {
-      background: #0f172a;
-      border: 1px solid #334155;
-      color: #fff;
-      padding: 10px 14px;
-      border-radius: 6px;
-      font-size: 13px;
-      width: 100%;
-      outline: none;
-    }
-
-    .sim-btn-cyan {
-      background: #0284c7;
-      color: #fff;
-      font-weight: bold;
-      border: none;
-      padding: 10px 16px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 13px;
-    }
-
-    .sim-card {
-      background: #1e293b;
-      padding: 18px;
-      border-radius: 10px;
-      margin-bottom: 16px;
-      border: 1px solid #334155;
-    }
-
-    .sim-form-title {
-      font-size: 13px;
-      color: #94a3b8;
-      font-weight: bold;
-      margin-bottom: 12px;
-    }
-
-    .sim-grid-inputs {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-bottom: 12px;
-    }
-
-    .sim-select {
-      background: #0f172a;
-      border: 1px solid #334155;
-      color: #fff;
-      padding: 10px 12px;
-      border-radius: 6px;
-      font-size: 13px;
-      width: 100%;
-      grid-column: span 2;
-      outline: none;
-    }
-
-    .sim-btn-group {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
-
-    .sim-btn-green {
-      background: #10b981;
-      color: #fff;
-      font-weight: bold;
-      border: none;
-      padding: 10px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 13px;
-    }
-
-    .sim-btn-slate {
-      background: #475569;
-      color: #fff;
-      font-weight: bold;
-      border: none;
-      padding: 10px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 13px;
-    }
-
-    .sim-search-box {
-      background: #1e293b;
-      padding: 14px;
-      border-radius: 10px;
-      margin-bottom: 16px;
-      border: 1px solid #334155;
-    }
-
-    .sim-list-container {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .sim-item {
-      background: #1e293b;
-      border: 1px solid #334155;
-      padding: 14px;
-      border-radius: 8px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .sim-item-info strong {
-      display: block;
-      color: #f8fafc;
-      font-size: 14px;
-    }
-
-    .sim-item-info span {
-      display: block;
-      color: #94a3b8;
-      font-size: 12px;
-    }
-
-    .sim-item-price {
-      color: #34d399;
-      font-weight: bold;
-      font-size: 13px;
-      margin-top: 4px;
-    }
-
-    .sim-item-stock {
-      color: #38bdf8;
-      font-size: 13px;
-      margin-left: 12px;
-    }
-
-    .sim-actions {
-      display: flex;
-      gap: 8px;
-    }
-
-    .sim-act-btn {
-      border: none;
-      width: 38px;
-      height: 38px;
-      border-radius: 6px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 15px;
-    }
-
-    .sim-act-edit { background: #334155; color: #fff; }
-    .sim-act-del { background: #ef4444; color: #fff; }
-
-    /* TOAST DE ALERTA */
-    #sim-alert {
-      display: none;
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      background: var(--yellow);
-      border: var(--border);
-      box-shadow: var(--shadow);
-      padding: 14px 20px;
-      font-size: 0.95rem;
-      font-weight: 900;
-      z-index: 9999;
-    }
-  </style>
+  <!-- Prism.js Tema Oscuro (Local Offline) -->
+  <link href="libs/prism-tomorrow.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <div class="cascade-container">
+  <!-- =========================================================
+       MENÚ FIJO SUPERIOR (FIXED) ANCLADO A TODAS LAS SECCIONES
+       ========================================================= -->
+  <nav class="fixed-nav" aria-label="Navegación principal del manual">
+    <div class="nav-brand">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <rect x="2" y="2" width="20" height="20" rx="4" fill="#512BD4" stroke="#FFDE59" stroke-width="2"/>
+        <path d="M7 16V8L12 13L17 8V16" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span>MAUI + SQL</span>
+    </div>
+    <div class="nav-links" id="nav-links">
+      <a href="#sec-01">01. Proyecto</a>
+      <a href="#sec-02">02. SQL Server</a>
+      <a href="#sec-03">03. Conectividad MAUI</a>
+      <a href="#sec-04">04. MainPage.xaml</a>
+      <a href="#sec-05">05. MainPage.cs</a>
+      <a href="#sec-06">06. ReportePage.xaml</a>
+      <a href="#sec-07">07. ReportePage.cs</a>
+      <a href="#sec-08">08. Simulador</a>
+      <a href="#sec-09">09. Ejecución</a>
+      <a href="#top" class="btn-top">⬆ Inicio</a>
+    </div></nav>
 
-    <!-- HEADER -->
+  <div id="top" class="cascade-container">
+
+    <!-- =========================================================
+         HEADER PRINCIPAL CON LOGOS OFICIALES EN SVG
+         ========================================================= -->
     <header>
-      <div>
-        <h1>⚡ GUÍA TÉCNICA MAUI + SQL SERVER</h1>
-        <p>Documentación integral, arquitectura en 2 archivos, CRUD reactivo y ejecución en cascada.</p>
+      <div class="header-top">
+        <div>
+          <h1>⚡ MANUAL MAESTRO: .NET MAUI + SQL SERVER + DASHBOARD BI</h1>
+          <p>Arquitectura multipágina (CRUD + Reporte Analítico) con Interfaz Gráfica (GUI) y Comandos (CLI / T-SQL / PowerShell) en <strong>InventarioMauiApp2</strong>.</p>
+        </div>
+        <div class="badge-status">✅ AUDITADO Y COMPILANDO 100%</div>
       </div>
-      <div class="badge-status">ESTADO: 100% PRODUCCIÓN</div>
+
+      <div class="tech-stack-bar">
+        <span class="tech-pill tech-dotnet">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#fff"/><text x="3" y="16" fill="#512BD4" font-size="10" font-weight="900" font-family="monospace">.NET</text></svg>
+          .NET 9 / 10
+        </span>
+        <span class="tech-pill tech-maui">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="5" y="2" width="14" height="20" rx="2.5" stroke="#000" stroke-width="2.2" fill="#fff"/><circle cx="12" cy="18" r="1.2" fill="#000"/></svg>
+          .NET MAUI
+        </span>
+        <span class="tech-pill tech-csharp">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><polygon points="12,2 21,7 21,17 12,22 3,17 3,7" fill="#fff" stroke="#000" stroke-width="1.5"/><text x="5.5" y="15.5" fill="#68217A" font-size="9.5" font-weight="900" font-family="sans-serif">C#</text></svg>
+          C# 13
+        </span>
+        <span class="tech-pill tech-xaml">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M8 7L3 12L8 17M16 7L21 12L16 17M14 5L10 19" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          XAML UI
+        </span>
+        <span class="tech-pill tech-dash">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="12" width="4" height="8" fill="#FFDE59"/><rect x="10" y="7" width="4" height="13" fill="#fff"/><rect x="17" y="4" width="4" height="16" fill="#00E676"/></svg>
+          DASHBOARD KPI
+        </span>
+        <span class="tech-pill tech-sql">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><ellipse cx="12" cy="6" rx="8" ry="3" fill="#fff"/><path d="M4 6V18C4 19.66 7.58 21 12 21C16.42 21 20 19.66 20 18V6" stroke="#fff" stroke-width="2.2"/><path d="M4 12C4 13.66 7.58 15 12 15C16.42 15 20 13.66 20 12" stroke="#fff" stroke-width="2"/></svg>
+          SQL SERVER 1433
+        </span>
+        <span class="tech-pill tech-ps">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="2" stroke="#38BDF8" stroke-width="2" fill="#0F172A"/><path d="M7 9L11 12L7 15M12 15H17" stroke="#FFDE59" stroke-width="2" stroke-linecap="round"/></svg>
+          POWERSHELL + FIREWALL
+        </span>
+      </div>
     </header>
 
-    <!-- 01. INICIALIZACIÓN DEL PROYECTO -->
-    <section class="brutalist-card">
-      <span class="section-title">01. INICIALIZACIÓN DEL PROYECTO</span>
-      <p class="intro-text">
-        El proyecto debe inicializarse utilizando la plantilla oficial de <strong>.NET MAUI</strong> en Visual Studio 2026 o a través de la interfaz de comandos CLI de .NET. Esta plantilla configura los destinos multiplataforma (Android, Windows, iOS, MacCatalyst) bajo un único proyecto unificado.
-      </p>
-      <ul class="step-list">
-        <li><strong>Nombre Oficial del Proyecto:</strong> <span class="tag-cmd">InventarioMauiApp1</span></li>
-        <li><strong>Target Framework Requerido:</strong> <code>net8.0</code> o <code>net9.0</code></li>
-        <li><strong>Comando CLI de Creación:</strong></li>
-      </ul>
-      <div class="code-container">
-        <div class="code-header">
-          <span>Terminal / PowerShell</span>
-          <button class="copy-btn" onclick="copiarCodigo('cmd-create')">Copiar</button>
+    <!-- =========================================================
+         GALERÍA HERO Y CAPTURAS DEL SISTEMA (PORTADA PRINCIPAL)
+         ========================================================= -->
+    <section class="brutalist-card card-showcase" style="border-top: 12px solid var(--maui-cyan); padding: 26px;">
+      <div class="section-header" style="margin-bottom: 18px;">
+        <span class="section-title t-maui">📸 PORTADA DEL PROYECTO &amp; CAPTURAS EN VIVO</span>
+      </div>
+
+      <!-- 1. IMAGEN PRINCIPAL EN GRANDE (HERO IMAGE) -->
+      <div class="hero-image-container">
+        <div style="background: #111111; color: var(--yellow); padding: 12px 20px; font-weight: 900; font-family: 'Courier New', monospace; font-size: 1.1rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid #000000; flex-wrap: wrap; gap: 8px;">
+          <span>🏭 ARQUITECTURA DE ALMACÉN LOGÍSTICO Y CONTROL DE INVENTARIO</span>
+          <span style="background: var(--yellow); color: #000; padding: 3px 12px; border-radius: 4px; font-size: 0.85rem; font-weight: 900;">HERO HD 4K</span>
         </div>
-        <pre><code id="cmd-create" class="language-bash">dotnet new maui -n InventarioMauiApp1
-cd InventarioMauiApp1</code></pre>
+        <img src="img/portada_almacen_principal.jpg" alt="Almacén Logístico Inteligente - Control, Organización y Eficiencia">
+        <div style="background: #0f172a; color: #f8fafc; padding: 14px 20px; font-size: 1.05rem; font-weight: 600; border-top: 3px solid #334155;">
+          📍 <strong>Centro de Distribución y Almacén Inteligente:</strong> Control de inventario en tiempo real, trazabilidad de artículos mediante códigos de barras, categorización por familias de productos y abastecimiento automatizado conectado directamente a SQL Server.
+        </div>
+      </div>
+
+      <!-- 2. REJILLA DE LAS 3 CAPTURAS DEL SISTEMA (BENTO GRID) -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; margin-top: 10px;">
+        
+        <!-- Captura 1: App Móvil en Android -->
+        <div style="border: var(--border); box-shadow: var(--shadow-sm); background: #ffffff; border-radius: 8px; overflow: hidden; display: flex; flex-direction: column;">
+          <div style="background: #0284c7; color: #ffffff; padding: 10px 14px; font-weight: 900; font-size: 0.95rem; font-family: 'Courier New', monospace; display: flex; justify-content: space-between;">
+            <span>📱 01. APLICACIÓN MÓVIL EN ANDROID</span>
+            <span style="background: #ffffff; color: #0284c7; padding: 1px 6px; border-radius: 3px; font-size: 0.78rem;">ANDROID EMULATOR</span>
+          </div>
+          <div style="background: #0f172a; padding: 12px; text-align: center; flex: 1; display: flex; align-items: center; justify-content: center;">
+            <img src="img/movil.png" alt="Aplicación Móvil .NET MAUI en Android" style="max-width: 100%; max-height: 250px; object-fit: contain; border-radius: 6px; box-shadow: 0 4px 14px rgba(0,0,0,0.6);">
+          </div>
+          <div style="padding: 12px 16px; background: #f8fafc; font-size: 0.92rem; font-weight: 600; color: #1e293b; border-top: 2px solid #e2e8f0;">
+            Interfaz táctil responsiva en dispositivo móvil, conectada por socket TCP/IP 1433 a la base de datos de la red local.
+          </div>
+        </div>
+
+        <!-- Captura 2: Gestión CRUD en Windows Machine -->
+        <div style="border: var(--border); box-shadow: var(--shadow-sm); background: #ffffff; border-radius: 8px; overflow: hidden; display: flex; flex-direction: column;">
+          <div style="background: #512bd4; color: #ffffff; padding: 10px 14px; font-weight: 900; font-size: 0.95rem; font-family: 'Courier New', monospace; display: flex; justify-content: space-between;">
+            <span>💻 02. GESTIÓN CRUD EN VISUAL STUDIO</span>
+            <span style="background: #ffffff; color: #512bd4; padding: 1px 6px; border-radius: 3px; font-size: 0.78rem;">WINDOWS MACHINE</span>
+          </div>
+          <div style="background: #0f172a; padding: 12px; text-align: center; flex: 1; display: flex; align-items: center; justify-content: center;">
+            <img src="img/Screenshot_1.png" alt="Módulo de Gestión CRUD en Windows Machine" style="max-width: 100%; max-height: 250px; object-fit: contain; border-radius: 6px; box-shadow: 0 4px 14px rgba(0,0,0,0.6);">
+          </div>
+          <div style="padding: 12px 16px; background: #f8fafc; font-size: 0.92rem; font-weight: 600; color: #1e293b; border-top: 2px solid #e2e8f0;">
+            Pantalla principal con creación, edición en vivo, búsqueda por texto/código y eliminación con confirmación modal asíncrona.
+          </div>
+        </div>
+
+        <!-- Captura 3: Dashboard Analítico con Semáforo -->
+        <div style="border: var(--border); box-shadow: var(--shadow-sm); background: #ffffff; border-radius: 8px; overflow: hidden; display: flex; flex-direction: column;">
+          <div style="background: #8b5cf6; color: #ffffff; padding: 10px 14px; font-weight: 900; font-size: 0.95rem; font-family: 'Courier New', monospace; display: flex; justify-content: space-between;">
+            <span>📊 03. DASHBOARD Y SEMÁFORO DE STOCK</span>
+            <span style="background: #ffffff; color: #8b5cf6; padding: 1px 6px; border-radius: 3px; font-size: 0.78rem;">BI &amp; ANALYTICS</span>
+          </div>
+          <div style="background: #0f172a; padding: 12px; text-align: center; flex: 1; display: flex; align-items: center; justify-content: center;">
+            <img src="img/Screenshot_2.png" alt="Dashboard Ejecutivo y Reporte Analítico" style="max-width: 100%; max-height: 250px; object-fit: contain; border-radius: 6px; box-shadow: 0 4px 14px rgba(0,0,0,0.6);">
+          </div>
+          <div style="padding: 12px 16px; background: #f8fafc; font-size: 0.92rem; font-weight: 600; color: #1e293b; border-top: 2px solid #e2e8f0;">
+            KPIs de capital, barras porcentuales por categoría y ranking ordenado de mayor a menor con semáforo 🟢 🟡 🔴.
+          </div>
+        </div>
+
       </div>
     </section>
 
-    <!-- 02. INSTALACIÓN DE LIBRERÍAS Y PERMISOS -->
-    <section class="brutalist-card">
-      <span class="section-title">02. INSTALACIÓN DE LIBRERÍAS Y PERMISOS</span>
-      <p class="intro-text">
-        Para comunicar la aplicación cliente directamente con el motor Microsoft SQL Server en el puerto 1433 se requiere el paquete oficial <code>Microsoft.Data.SqlClient</code>. Además, en plataformas como Android, el sistema operativo bloquea por defecto las conexiones de red salientes y el tráfico sin cifrado TLS estricto si no se definen explícitamente en el manifiesto.
-      </p>
-      <p>Instalación del controlador NuGet:</p>
-      <div class="code-container">
-        <div class="code-header">
-          <span>Package Manager Console / Terminal</span>
-          <button class="copy-btn" onclick="copiarCodigo('cmd-nuget')">Copiar</button>
-        </div>
-        <pre><code id="cmd-nuget" class="language-bash">dotnet add package Microsoft.Data.SqlClient</code></pre>
+
+    <!-- =========================================================
+         SECCIÓN 01: CREACIÓN DEL PROYECTO .NET MAUI DESDE CERO
+         ========================================================= -->
+    <section id="sec-01" class="brutalist-card card-maui">
+      <div class="section-header">
+        <span class="section-title t-maui">🛠️ 01. CREACIÓN DEL PROYECTO .NET MAUI Y ARQUITECTURA</span>
       </div>
 
-      <p style="margin-top: 18px;">Permisos de red en <code>Platforms/Android/AndroidManifest.xml</code>:</p>
-      <div class="code-container">
-        <div class="code-header">
-          <span>AndroidManifest.xml</span>
-          <button class="copy-btn" onclick="copiarCodigo('xml-manifest')">Copiar</button>
+      <div class="intro-text">
+        🎯 <strong>Objetivo del Proyecto:</strong> Crear desde cero la solución empresarial llamada <span class="kw-val">InventarioMauiApp2</span> en .NET MAUI con soporte multiplataforma (.NET 10 / 9 / 8), configurando la arquitectura desacoplada para navegación entre páginas (<code>MainPage</code> para operaciones CRUD y <code>ReportePage</code> para analítica ejecutiva).
+      </div>
+
+      <div class="dual-grid">
+        <div class="panel-gui">
+          <div class="sub-title mode-gui">🖱️ OPCIÓN A: MODO INTERFAZ GRÁFICA (VISUAL STUDIO)</div>
+          <ol class="num-list">
+            <li>Abre <strong>Visual Studio</strong> (2022 o 2026) y haz clic en <span class="kw-ui">Crear un proyecto</span>.</li>
+            <li>En el buscador superior escribe <span class="kw-val">MAUI</span>, filtra por lenguaje <strong>C#</strong> y selecciona la plantilla oficial: <span class="kw-ui">Aplicación .NET MAUI</span> &rarr; Pulsa <span class="kw-ui">Siguiente</span>.</li>
+            <li>En <strong>Nombre del proyecto</strong> y <strong>Nombre de la solución</strong> escribe exactamente: <span class="kw-val">InventarioMauiApp2</span>.</li>
+            <li>En <strong>Ubicación</strong> selecciona tu carpeta de repositorios (ejemplo: <code>C:\Users\User\source\repos</code>) &rarr; Pulsa <span class="kw-ui">Siguiente</span>.</li>
+            <li>En <strong>Marco de trabajo (Framework)</strong> selecciona <span class="kw-val">.NET 10.0</span> (o <span class="kw-val">.NET 9.0</span> / <span class="kw-val">.NET 8.0</span> según tu entorno) y haz clic en <span class="kw-ui">Crear</span>.</li>
+          </ol>
         </div>
-        <pre><code id="xml-manifest" class="language-xml">&lt;uses-permission android:name="android.permission.INTERNET" /&gt;
-&lt;application android:usesCleartextTraffic="true"&gt;</code></pre>
+
+        <div class="panel-cli">
+          <div class="sub-title mode-cli">⌨️ OPCIÓN B: MODO LÍNEA DE COMANDOS (CLI / POWERSHELL)</div>
+          <p>Si prefieres automatizar la creación mediante la consola de comandos de .NET CLI, abre PowerShell y ejecuta los siguientes comandos:</p>
+          <div class="code-container">
+            <div class="code-header hdr-ps">
+              <span>PowerShell / .NET CLI (Creación Automática)</span>
+              <button class="copy-btn" onclick="copiarCodigo('cmd-create')">📋 Copiar Comandos</button>
+            </div>
+            <pre><code id="cmd-create" class="language-bash"># 1. Crear y ubicarse en el directorio de repositorios
+mkdir -p C:\Users\User\source\repos
+cd C:\Users\User\source\repos
+
+# 2. Crear la Solución (.sln) y el proyecto .NET MAUI
+dotnet new sln -n InventarioMauiApp2
+dotnet new maui -n InventarioMauiApp2
+
+# 3. Vincular el proyecto a la solución y acceder a la carpeta
+dotnet sln InventarioMauiApp2.sln add InventarioMauiApp2/InventarioMauiApp2.csproj
+cd InventarioMauiApp2</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-box box-tip" style="margin-top: 20px;">
+        <div class="info-title">💡 ESTRUCTURA GENERADA DEL PROYECTO:</div>
+        <p>Una vez creado el proyecto, Visual Studio genera la solución con la siguiente arquitectura:</p>
+        <ul class="step-list" style="margin-left: 20px; margin-top: 8px;">
+          <li><code>App.xaml</code> / <code>App.xaml.cs</code>: Punto de entrada de la aplicación y definición del tema visual.</li>
+          <li><code>AppShell.xaml</code>: Contenedor jerárquico de navegación entre vistas.</li>
+          <li><code>MainPage.xaml</code> / <code>MainPage.xaml.cs</code>: Página principal donde implementaremos el CRUD de inventario.</li>
+          <li><code>Platforms/</code>: Carpetas de configuración nativa para Android, iOS, MacCatalyst y Windows.</li>
+          <li><code>Resources/</code>: Fuentes, imágenes, estilos y splash screen compartidos.</li>
+        </ul>
       </div>
     </section>
 
-    <!-- 03. SCRIPT SQL SERVER -->
-    <section class="brutalist-card">
-      <span class="section-title">03. SCRIPT SQL SERVER (BASE DE DATOS Y TABLAS)</span>
-      <p class="intro-text">
-        <strong>¿Qué hace este script?</strong><br>
-        1. Crea la base de datos <code>InventarioDB1</code> y se posiciona en ella.<br>
-        2. Define la tabla padre <code>Categorias</code> con clave primaria <code>IDENTITY(1,1)</code>.<br>
-        3. Define la tabla relacionada <code>Productos</code> vinculada mediante la clave foránea <code>FK_Productos_Categorias</code> con eliminación en cascada (<code>ON DELETE CASCADE</code>) y una restricción única <code>UNIQUE</code> en <code>CodigoBarras</code>.<br>
-        4. Puebla datos maestros de categorías y productos iniciales.<br>
-        5. Crea la vista analítica <code>vw_ReporteInventario</code> con cálculo en línea del valor total del stock y un semáforo condicional de existencias.
-      </p>
-      <div class="code-container">
-        <div class="code-header">
-          <span>SQL Server Management Studio (T-SQL)</span>
-          <button class="copy-btn" onclick="copiarCodigo('code-sql')">Copiar</button>
+
+    <!-- =========================================================
+         SECCIÓN 02: ECOSISTEMA SQL SERVER COMPLETO
+         ========================================================= -->
+    <section id="sec-02" class="brutalist-card card-sql">
+      <div class="section-header">
+        <span class="section-title t-sql">🗄️ 02. ECOSISTEMA SQL SERVER: INSTALACIÓN, CONFIGURACIÓN, SEGURIDAD, RED Y T-SQL MAESTRO</span>
+      </div>
+
+      <div class="intro-text">
+        🎯 <strong>Objetivo del Ecosistema de Datos:</strong> Configurar el motor de base de datos relacional <strong>Microsoft SQL Server</strong> y su herramienta de administración <strong>SSMS</strong>. Aprenderás a autenticarte localmente, crear usuarios con privilegios totales, diseñar diagramas entidad-relación, habilitar conexiones remotas TCP/IP en el puerto <code>1433</code>, configurar el Firewall y desplegar el script T-SQL completo con tablas, vista analítica y ciclo CRUD.
+      </div>
+
+      <!-- PASO 2.1: ENLACES OFICIALES E INSTALACIÓN -->
+      <div class="sub-title mode-gui">📥 PASO 2.1: ENLACES OFICIALES DE DESCARGA E INSTALACIÓN PASO A PASO (EXPRESS & SSMS)</div>
+      
+      <p>Para montar el servidor de base de datos en tu equipo de desarrollo, necesitas dos componentes gratuitos provistos oficialmente por Microsoft:</p>
+
+      <div class="dual-grid" style="margin-bottom: 20px;">
+        <div class="panel-gui" style="border-left: 8px solid var(--sql-red);">
+          <div style="font-weight: 900; font-size: 1.15rem; margin-bottom: 8px; color: var(--sql-red);">1. MICROSOFT SQL SERVER EXPRESS</div>
+          <p>Motor de base de datos relacional gratuito de alto rendimiento, ideal para desarrollo local y aplicaciones cliente/servidor ligeras.</p>
+          <p><strong>Enlace Oficial de Descarga:</strong></p>
+          <a href="https://www.microsoft.com/es-es/sql-server/sql-server-downloads" target="_blank" rel="noopener noreferrer" style="display: inline-block; background: var(--sql-red); color: #fff; font-weight: 800; padding: 8px 16px; border: 2px solid #000; box-shadow: 3px 3px 0 #000; text-decoration: none; font-family: 'Courier New', monospace; margin-top: 6px;">
+            🔗 Descargar SQL Server Express Oficial
+          </a>
+          <div style="margin-top: 14px; font-size: 0.95rem; line-height: 1.5;">
+            <strong>Guía de Instalación:</strong>
+            <ol class="num-list" style="margin-top: 8px; font-size: 0.95rem;">
+              <li>Ejecuta el instalador descargado (<code>SQL2022-SSEI-Expr.exe</code>).</li>
+              <li>Selecciona el tipo de instalación: <span class="kw-ui">Básica</span> (recomendada para desarrollo rápido).</li>
+              <li>Acepta los Términos de Licencia de Microsoft.</li>
+              <li>Deja la ruta de instalación predeterminada (<code>C:\Program Files\Microsoft SQL Server</code>) y pulsa <span class="kw-ui">Instalar</span>.</li>
+              <li>El asistente descargará e instalará los paquetes automáticamente creando la instancia predeterminada <span class="kw-val">SQLEXPRESS</span>.</li>
+            </ol>
+          </div>
         </div>
-        <pre><code id="code-sql" class="language-sql">IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = N'InventarioDB1')
+
+        <div class="panel-cli" style="border-left: 8px solid var(--dotnet-purple);">
+          <div style="font-weight: 900; font-size: 1.15rem; margin-bottom: 8px; color: var(--dotnet-purple);">2. SQL SERVER MANAGEMENT STUDIO (SSMS)</div>
+          <p>Entorno gráfico integral (GUI) para consultar, administrar, configurar y diseñar bases de datos, diagramas y seguridad en SQL Server.</p>
+          <p><strong>Enlace Oficial de Descarga:</strong></p>
+          <a href="https://learn.microsoft.com/es-es/sql/ssms/download-sql-server-management-studio-ssms" target="_blank" rel="noopener noreferrer" style="display: inline-block; background: var(--dotnet-purple); color: #fff; font-weight: 800; padding: 8px 16px; border: 2px solid #000; box-shadow: 3px 3px 0 #000; text-decoration: none; font-family: 'Courier New', monospace; margin-top: 6px;">
+            🔗 Descargar SSMS (Management Studio) Oficial
+          </a>
+          <div style="margin-top: 14px; font-size: 0.95rem; line-height: 1.5;">
+            <strong>Guía de Instalación:</strong>
+            <ol class="num-list" style="margin-top: 8px; font-size: 0.95rem;">
+              <li>Ejecuta el instalador de SSMS (<code>SSMS-Setup-ESN.exe</code>).</li>
+              <li>Verifica la ubicación predeterminada y haz clic en <span class="kw-ui">Instalar</span>.</li>
+              <li>El instalador configurará los componentes de Visual Studio Shell y librerías de conexión.</li>
+              <li>Al finalizar, pulsa <span class="kw-ui">Cerrar</span>. Si el instalador solicita reiniciar el equipo, reinícialo.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <!-- PASO 2.2: INICIO DE SESIÓN MANUAL Y MODO MIXTO -->
+      <div class="sub-title mode-gui">🔑 PASO 2.2: INICIO DE SESIÓN MANUAL (LOGIN LOCAL) Y MODO DE AUTENTICACIÓN MIXTA</div>
+
+      <p>Una vez instalados el motor y SSMS, el primer paso es conectarte localmente mediante tu cuenta de Windows y habilitar el modo de autenticación mixto para admitir conexiones de usuarios con contraseña:</p>
+
+      <div class="panel-gui" style="margin-bottom: 20px;">
+        <div style="font-weight: 900; font-size: 1.1rem; margin-bottom: 10px;">A. Conectarse por Primera Vez en SSMS (Windows Authentication):</div>
+        <ol class="num-list">
+          <li>Abre <strong>SQL Server Management Studio</strong> desde el Menú Inicio de Windows.</li>
+          <li>En el cuadro de diálogo <strong>Connect to Server</strong> (Conectar al servidor), configura:
+            <ul style="margin-left: 20px; margin-top: 6px;">
+              <li><strong>Server type:</strong> <span class="kw-val">Database Engine</span> (Motor de base de datos).</li>
+              <li><strong>Server name:</strong> Escribe <code>.</code> (un solo punto), o <code>localhost</code>, o <code>.\SQLEXPRESS</code>, o <code>(localdb)\MSSQLLocalDB</code> según el tipo de instancia instalada.</li>
+              <li><strong>Authentication:</strong> <span class="kw-ui">Windows Authentication</span> (Autenticación de Windows).</li>
+            </ul>
+          </li>
+          <li>Haz clic en el botón <span class="kw-ui">Connect</span>. En el panel izquierdo aparecerá el <em>Object Explorer</em> (Explorador de objetos) con el árbol del servidor.</li>
+        </ol>
+
+        <div style="font-weight: 900; font-size: 1.1rem; margin-top: 18px; margin-bottom: 10px;">B. Habilitar el Modo de Autenticación Mixta (SQL Server and Windows Authentication):</div>
+        <ol class="num-list">
+          <li>En el <strong>Object Explorer</strong>, haz clic derecho sobre el nodo raíz del servidor (el primer icono que muestra el nombre de tu máquina) &rarr; selecciona <span class="kw-ui">Properties</span> (Propiedades).</li>
+          <li>En la ventana emergente <em>Server Properties</em>, ve al menú lateral izquierdo y haz clic en <span class="kw-ui">Security</span> (Seguridad).</li>
+          <li>Bajo la sección <strong>Server authentication</strong>, cambia la selección de <em>Windows Authentication mode</em> a:
+            <br><span class="kw-val" style="margin-top: 6px;">🔘 SQL Server and Windows Authentication mode</span> (Modo Mixto).
+          </li>
+          <li>Haz clic en <span class="kw-ui">OK</span>. Aparecerá un cuadro de advertencia informando que los cambios no tendrán efecto hasta que el servicio de SQL Server sea reiniciado. Pulsa <span class="kw-ui">OK</span>.</li>
+          <li><strong>Reiniciar el Servicio:</strong> En el Object Explorer, haz clic derecho sobre el nodo raíz del servidor &rarr; selecciona <span class="kw-ui">Restart</span> (Reiniciar) &rarr; Confirma haciendo clic en <span class="kw-ui">Yes</span>.</li>
+        </ol>
+      </div>
+
+      <!-- PASO 2.3: GESTIÓN DE USUARIOS Y PERMISOS TOTALES -->
+      <div class="sub-title mode-gui">👤 PASO 2.3: CREACIÓN DE USUARIOS, ASIGNACIÓN DE ROLES Y PERMISOS TOTALES (CRUD Y BD)</div>
+
+      <div class="intro-text" style="background: #f1f5f9; border-left-color: var(--sql-red);">
+        📌 <strong>Concepto Clave de Seguridad en SQL Server:</strong>
+        <br>• <strong>Login (Inicio de Sesión):</strong> Existe a nivel del servidor/instancia. Permite autenticarse y entrar al motor de SQL Server.
+        <br>• <strong>User (Usuario):</strong> Existe dentro de cada base de datos específica. Asocia un Login con roles de permisos para leer, escribir, crear o borrar tablas.
+      </div>
+
+      <div class="dual-grid" style="margin-bottom: 20px;">
+        <div class="panel-gui">
+          <div style="font-weight: 900; margin-bottom: 10px;">🖱️ CREAR USUARIO Y PERMISOS POR INTERFAZ (GUI SSMS):</div>
+          <ol class="num-list" style="font-size: 0.95rem;">
+            <li>En el Object Explorer, despliega la carpeta <span class="kw-path">Security</span> &rarr; Clic derecho en <span class="kw-path">Logins</span> &rarr; <span class="kw-ui">New Login...</span></li>
+            <li>En la página <strong>General</strong>:
+              <br>• Escribe el <em>Login name:</em> <span class="kw-val">JUANCITO</span>.
+              <br>• Marca la casilla <span class="kw-ui">SQL Server authentication</span>.
+              <br>• <em>Password:</em> <span class="kw-val">123456</span> | <em>Confirm password:</em> <span class="kw-val">123456</span>.
+              <br>• Desmarca <em>Enforce password policy</em> y <em>Enforce password expiration</em>.
+            </li>
+            <li>En la página <strong>Server Roles</strong>:
+              <br>• Marca <span class="kw-val">sysadmin</span> (administrador absoluto) y <span class="kw-val">dbcreator</span> (permite crear, alterar y eliminar cualquier base de datos).
+            </li>
+            <li>En la página <strong>User Mapping</strong>:
+              <br>• Marca la casilla de la base de datos <span class="kw-val">InventarioDB1</span>.
+              <br>• En el panel inferior marca los roles:
+              <br>&nbsp;&nbsp;✔ <span class="kw-val">db_owner</span> (Control total administrativo de la base de datos).
+              <br>&nbsp;&nbsp;✔ <span class="kw-val">db_datareader</span> (Permiso para SELECT en todas las tablas).
+              <br>&nbsp;&nbsp;✔ <span class="kw-val">db_datawriter</span> (Permiso para INSERT, UPDATE, DELETE).
+              <br>&nbsp;&nbsp;✔ <span class="kw-val">db_ddladmin</span> (Permiso para crear y borrar tablas/vistas).
+            </li>
+            <li>Haz clic en <span class="kw-ui">OK</span> para crear el Login con privilegios completos.</li>
+          </ol>
+        </div>
+
+        <div class="panel-cli">
+          <div style="font-weight: 900; margin-bottom: 10px; color: var(--sql-red);">⌨️ CREAR USUARIO Y PERMISOS POR COMANDOS (T-SQL):</div>
+          <p style="font-size: 0.95rem;">Si deseas automatizar la creación del Login y sus permisos en un solo paso, ejecuta el siguiente script en SSMS:</p>
+          <div class="code-container">
+            <div class="code-header hdr-sql">
+              <span>T-SQL - Login JUANCITO y Permisos de Motor</span>
+              <button class="copy-btn" onclick="copiarCodigo('sql-user-script')">📋 Copiar T-SQL</button>
+            </div>
+            <pre><code id="sql-user-script" class="language-sql">-- 1. Crear el Login a nivel de servidor (si no existe)
+USE [master];
+GO
+IF NOT EXISTS (SELECT name FROM sys.server_principals WHERE name = N'JUANCITO')
 BEGIN
-    CREATE DATABASE InventarioDB1;
+    CREATE LOGIN [JUANCITO] WITH PASSWORD = N'123456',
+        DEFAULT_DATABASE = [master],
+        CHECK_EXPIRATION = OFF,
+        CHECK_POLICY = OFF;
 END
 GO
 
+-- 2. Asignar Roles de Servidor (Administración y Creación de BDs)
+ALTER SERVER ROLE [sysadmin] ADD MEMBER [JUANCITO];
+ALTER SERVER ROLE [dbcreator] ADD MEMBER [JUANCITO];
+ALTER LOGIN [JUANCITO] ENABLE;
+GRANT CONNECT SQL TO [JUANCITO];
+GO
+
+-- 3. Asignar permisos completos dentro de InventarioDB1
+USE [InventarioDB1];
+GO
+IF NOT EXISTS (SELECT name FROM sys.database_principals WHERE name = N'JUANCITO')
+BEGIN
+    CREATE USER [JUANCITO] FOR LOGIN [JUANCITO];
+END
+GO
+ALTER ROLE [db_owner] ADD MEMBER [JUANCITO];
+GO</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- PASO 2.4: CREACIÓN DE DIAGRAMAS DE BASE DE DATOS -->
+      <div class="sub-title mode-gui">📐 PASO 2.4: CREACIÓN Y GESTIÓN DE DIAGRAMAS DE BASE DE DATOS EN SSMS</div>
+
+      <p>Los diagramas de base de datos permiten visualizar de forma gráfica las tablas, sus columnas y las relaciones de clave foránea (integridad referencial) entre ellas:</p>
+
+      <div class="panel-gui" style="margin-bottom: 20px;">
+        <ol class="num-list">
+          <li>En el <strong>Object Explorer</strong> de SSMS, despliega la carpeta <span class="kw-path">Databases</span> &rarr; despliega <span class="kw-path">InventarioDB1</span>.</li>
+          <li>Haz clic derecho sobre la carpeta <span class="kw-path">Database Diagrams</span>:
+            <br>Si aparece el cuadro de diálogo informando: <em>"This database does not have one or more of the support objects required to use database diagramming. Do you wish to create them?"</em>, haz clic en <span class="kw-ui">Yes</span>.
+          </li>
+          <li>Vuelve a hacer clic derecho sobre <span class="kw-path">Database Diagrams</span> &rarr; selecciona <span class="kw-ui">New Database Diagram</span> (Nuevo diagrama de base de datos).</li>
+          <li>En la ventana emergente <strong>Add Table</strong>:
+            <br>• Selecciona la tabla <span class="kw-val">Categorias</span> y haz clic en <span class="kw-ui">Add</span>.
+            <br>• Selecciona la tabla <span class="kw-val">Productos</span> y haz clic en <span class="kw-ui">Add</span>.
+            <br>• Haz clic en <span class="kw-ui">Close</span>.
+          </li>
+          <li><strong>Inspección Gráfica de la Relación:</strong>
+            <br>Observa cómo SSMS dibuja automáticamente ambas tablas conectadas por una línea relacional. En el extremo de la tabla <code>Categorias</code> verás una <strong>llave dorada</strong> (indicando que <code>CategoriaID</code> es la <em>Primary Key</em>), y en el extremo de la tabla <code>Productos</code> verás el <strong>símbolo de infinito (`∞`)</strong> (indicando que es una relación de 1 a Muchos mediante la <em>Foreign Key</em>).
+          </li>
+          <li><strong>Guardar el Diagrama:</strong> Presiona <span class="kw-ui">Ctrl + S</span> o haz clic en el icono de disquete en la barra de herramientas, escribe el nombre <span class="kw-val">Diagrama_Inventario</span> y pulsa <span class="kw-ui">OK</span>.</li>
+        </ol>
+      </div>
+
+      <!-- PASO 2.5: CONEXIONES REMOTAS, TCP/IP 1433 Y FIREWALL -->
+      <div class="sub-title mode-cli">🌐 PASO 2.5: ACTIVAR CONEXIONES REMOTAS, CONFIGURAR TCP/IP 1433 Y REGLAS DE FIREWALL</div>
+
+      <div class="warn-box">
+        ⚠️ <strong>Requisito Indispensable para Conectar Celulares y Emuladores:</strong>
+        Por motivos de seguridad predeterminada de Windows, SQL Server viene configurado de fábrica para <em>rechazar conexiones remotas por red</em> y escuchar en puertos dinámicos. Para que tu aplicación móvil en Android o Windows Machine se comunique con la base de datos, debes cumplir estrictamente estos 3 pasos:
+      </div>
+
+      <ol class="num-list" style="margin-bottom: 20px;">
+        <li>
+          <strong>1. Activar Conexiones Remotas en SSMS:</strong>
+          <br>En el Object Explorer, clic derecho en el nodo raíz del servidor &rarr; <span class="kw-ui">Properties</span> &rarr; menú <span class="kw-ui">Connections</span> &rarr; Asegúrate de que la casilla <strong>"Allow remote connections to this server"</strong> (Permitir conexiones remotas a este servidor) esté <strong>marcada</strong> &rarr; Clic en <span class="kw-ui">OK</span>.
+        </li>
+        <li>
+          <strong>2. Habilitar Protocolo TCP/IP y Asignar Puerto Estático 1433 en Configuration Manager:</strong>
+          <br>• Presiona <span class="kw-ui">Win + R</span>, escribe <code>SQLServerManager16.msc</code> (o <code>SQLServerManager15.msc</code>) y pulsa <span class="kw-ui">Enter</span>.
+          <br>• En el panel izquierdo despliega <span class="kw-path">SQL Server Network Configuration</span> &rarr; haz clic en <span class="kw-path">Protocols for SQLEXPRESS</span> (o <em>Protocols for MSSQLSERVER</em>).
+          <br>• En el panel derecho haz clic derecho sobre <span class="kw-val">TCP/IP</span> &rarr; selecciona <span class="kw-ui">Enable</span> &rarr; pulsa <span class="kw-ui">OK</span>.
+          <br>• Haz doble clic sobre <span class="kw-val">TCP/IP</span> &rarr; ve a la pestaña <span class="kw-ui">IP Addresses</span>.
+          <br>• Desplázate hasta el final de la lista hasta encontrar la sección <strong>IPAll</strong>:
+          <br>&nbsp;&nbsp;- En <strong>TCP Dynamic Ports</strong>: borra cualquier número y déjalo <strong>completamente en blanco</strong>.
+          <br>&nbsp;&nbsp;- En <strong>TCP Port</strong>: escribe exactamente <span class="kw-val">1433</span>.
+          <br>&nbsp;&nbsp;- Haz clic en <span class="kw-ui">Apply</span> y luego en <span class="kw-ui">OK</span>.
+        </li>
+        <li>
+          <strong>3. Abrir Puertos en el Firewall de Windows y Activar SQL Server Browser:</strong>
+          <br>Ejecuta PowerShell como <strong>Administrador</strong> para abrir el puerto TCP 1433 (Motor de SQL), el puerto UDP 1434 (SQL Browser, necesario para que los dispositivos móviles resuelvan la instancia), activar el servicio SQL Browser y reiniciar el motor de base de datos.
+        </li>
+      </ol>
+
+      <div class="code-container">
+        <div class="code-header hdr-ps">
+          <span>PowerShell (Ejecutar como Administrador) - Reglas Firewall, SQL Browser y Reinicio</span>
+          <button class="copy-btn" onclick="copiarCodigo('ps-firewall-full')">📋 Copiar Script PowerShell</button>
+        </div>
+        <pre><code id="ps-firewall-full" class="language-powershell"># ==============================================================================
+# SCRIPT DE CONFIGURACIÓN DE RED Y FIREWALL PARA SQL SERVER (PUERTO 1433 Y 1434)
+# ==============================================================================
+
+# 1. Crear Regla de Entrada en el Firewall para el Puerto TCP 1433 (Motor SQL Server)
+New-NetFirewallRule -DisplayName "SQL Server Port 1433 TCP" `
+    -Direction Inbound -LocalPort 1433 -Protocol TCP -Action Allow `
+    -Description "Permite conexiones de clientes MAUI y Power BI al motor SQL Server"
+
+# 2. Crear Regla de Entrada en el Firewall para el Puerto UDP 1433
+New-NetFirewallRule -DisplayName "SQL Server Port 1433 UDP" `
+    -Direction Inbound -LocalPort 1433 -Protocol UDP -Action Allow
+
+# 3. Crear Regla de Entrada para el Puerto UDP 1434 (Servicio SQL Server Browser)
+New-NetFirewallRule -DisplayName "SQL Server Browser Port 1434 UDP" `
+    -Direction Inbound -LocalPort 1434 -Protocol UDP -Action Allow `
+    -Description "Permite el descubrimiento de instancias nombradas de SQL Server en red local"
+
+# 4. Habilitar y Configurar el Servicio SQL Server Browser en Inicio Automático
+Set-Service -Name "SQLBrowser" -StartupType Automatic
+Start-Service -Name "SQLBrowser"
+
+# 5. Reiniciar el Servicio de SQL Server para que cargue la configuración TCP/IP
+# Nota: Si tu instancia es Express, el servicio se llama 'MSSQL$SQLEXPRESS'. Si es por defecto, 'MSSQLSERVER'.
+try {
+    Restart-Service -Name "MSSQLSERVER" -Force -ErrorAction Stop
+    Write-Host "✅ Servicio MSSQLSERVER reiniciado con éxito." -ForegroundColor Green
+} catch {
+    Restart-Service -Name "MSSQL`$SQLEXPRESS" -Force
+    Write-Host "✅ Servicio MSSQL`$SQLEXPRESS reiniciado con éxito." -ForegroundColor Green
+}
+
+# 6. Mostrar la Dirección IPv4 Local de tu PC (Esta es la IP que usarás en tu celular)
+Write-Host "`n📡 TUS DIRECCIONES IP LOCALES:" -ForegroundColor Yellow
+ipconfig | findstr /i "IPv4"</code></pre>
+      </div>
+
+      <!-- PASO 2.6: INTRODUCCIÓN A BASES DE DATOS, CRUD Y VISTAS -->
+      <div class="sub-title mode-gui">📚 PASO 2.6: FUNDAMENTOS DE BASES DE DATOS RELACIONALES, TABLAS, CICLO CRUD Y VISTAS</div>
+
+      <p>Antes de ejecutar el script, comprende los fundamentos de ingeniería de datos aplicados en este proyecto:</p>
+
+      <div class="dual-grid" style="margin-bottom: 20px;">
+        <div class="panel-gui">
+          <div style="font-weight: 900; color: var(--sql-red); margin-bottom: 8px;">1. ¿QUÉ ES UNA BASE DE DATOS Y SUS TABLAS?</div>
+          <p style="font-size: 0.95rem;">Una <strong>Base de Datos Relacional (RDBMS)</strong> es un contenedor estructurado que garantiza la integridad, consistencia (principios ACID) y persistencia de la información en disco.</p>
+          <ul class="step-list" style="font-size: 0.95rem; margin-left: 18px;">
+            <li><strong>Tabla:</strong> Representa una entidad del negocio (ej. <code>Productos</code>). Se organiza en filas y columnas.</li>
+            <li><strong>Columna (Campo):</strong> Atributo tipado con rigor: <code>INT</code> para enteros, <code>NVARCHAR(N)</code> para textos Unicode, <code>DECIMAL(18,2)</code> para importes monetarios.</li>
+            <li><strong>Clave Primaria (Primary Key - PK):</strong> Identificador único e irrepetible de cada fila con auto-incremento (<code>IDENTITY(1,1)</code>).</li>
+            <li><strong>Clave Foránea (Foreign Key - FK):</strong> Campo que enlaza un registro hijo con la clave primaria de su tabla padre (ej. <code>Productos.CategoriaID &rarr; Categorias.CategoriaID</code> con <code>ON DELETE CASCADE</code>).</li>
+          </ul>
+        </div>
+
+        <div class="panel-cli">
+          <div style="font-weight: 900; color: var(--dotnet-purple); margin-bottom: 8px;">2. EL CICLO CRUD Y SU EQUIVALENCIA T-SQL</div>
+          <p style="font-size: 0.95rem;">CRUD representa las cuatro operaciones fundamentales sobre cualquier entidad de datos persistente:</p>
+          <ul class="step-list" style="font-size: 0.95rem; margin-left: 18px;">
+            <li><strong>C - Create (Crear):</strong> Se ejecuta con <span class="kw-sql">INSERT INTO</span> para registrar nuevos elementos.</li>
+            <li><strong>R - Read (Leer):</strong> Se ejecuta con <span class="kw-sql">SELECT</span> para consultar, filtrar (<code>WHERE</code>) y ordenar (<code>ORDER BY</code>).</li>
+            <li><strong>U - Update (Actualizar):</strong> Se ejecuta con <span class="kw-sql">UPDATE ... SET ... WHERE</span> para modificar datos existentes con control de seguridad.</li>
+            <li><strong>D - Delete (Eliminar):</strong> Se ejecuta con <span class="kw-sql">DELETE FROM ... WHERE</span> para suprimir registros específicos de forma controlada.</li>
+          </ul>
+          <div style="margin-top: 10px; font-weight: 900; color: var(--sql-red);">3. ¿QUÉ ES UNA VISTA (VIEW) Y POR QUÉ ES CRUCIAL?</div>
+          <p style="font-size: 0.95rem; margin-top: 4px;">Una <strong>Vista (`VIEW`)</strong> es una consulta SQL pre-compilada guardada en el servidor que actúa como una tabla virtual. No duplica datos; une tablas mediante <code>INNER JOIN</code> y calcula indicadores en tiempo real (como <code>ValorInventario = Precio * Stock</code> y alertas de semáforo <code>CASE WHEN Stock = 0 THEN 'Agotado'</code>). Permite a la app móvil y a Power BI consultar KPIs analíticos con un simple <code>SELECT * FROM vw_ReporteInventario</code>.</p>
+        </div>
+      </div>
+
+      <!-- PASO 2.7: SCRIPT T-SQL COMPLETO Y PROFESIONALMENTE COMENTADO -->
+      <div class="sub-title mode-cli">📜 PASO 2.7: SCRIPT T-SQL COMPLETO (BD, TABLAS, SEMILLAS, VISTA Y PRUEBAS CRUD COMENTADAS)</div>
+
+      <div class="intro-text" style="background: #fff8dc;">
+        📌 <strong>Instrucciones de Ejecución:</strong> En SSMS, abre una nueva ventana de consulta pulsando <span class="kw-ui">New Query</span> (o <span class="kw-ui">Ctrl + N</span>), pega el siguiente script completo y presiona <span class="kw-val">F5</span> (o haz clic en <span class="kw-ui">Execute</span>).
+      </div>
+
+      <div class="code-container">
+        <div class="code-header hdr-sql">
+          <span>SSMS - Script T-SQL Canónico Completo (InventarioDB1 + Semillas + Vista + Pruebas CRUD)</span>
+          <button class="copy-btn" onclick="copiarCodigo('code-sql-master')">📋 Copiar Script T-SQL</button>
+        </div>
+        <pre><code id="code-sql-master" class="language-sql">-- =============================================================================
+-- PROYECTO: SISTEMA DE INVENTARIO .NET MAUI + SQL SERVER + DASHBOARD ANALÍTICO
+-- AUTOR: ING. JUANCITO PEÑA VIZCAÍNO & DATAIADEV PRO
+-- DESCRIPCIÓN: CREACIÓN DE BASE DE DATOS, TABLAS RELACIONADAS, INTEGRIDAD
+--              REFERENCIAL, DATOS SEMILLA, VISTA DE KPIS Y PRUEBAS CRUD.
+-- =============================================================================
+
+-- =============================================================================
+-- FASE 1: CREACIÓN DE LA BASE DE DATOS (CON COMPROBACIÓN DE EXISTENCIA)
+-- =============================================================================
+USE [master];
+GO
+
+IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = N'InventarioDB1')
+BEGIN
+    PRINT 'Creando la base de datos InventarioDB1...';
+    CREATE DATABASE InventarioDB1;
+END
+ELSE
+BEGIN
+    PRINT 'La base de datos InventarioDB1 ya existe en el servidor.';
+END
+GO
+
+-- Conectar el contexto de ejecución a la base de datos InventarioDB1
 USE InventarioDB1;
 GO
 
--- 1. Tabla Principal
-CREATE TABLE Categorias (
-    CategoriaID INT IDENTITY(1,1) PRIMARY KEY,
-    Nombre NVARCHAR(100) NOT NULL,
-    Descripcion NVARCHAR(250) NULL
-);
+-- =============================================================================
+-- FASE 2: CREACIÓN DE TABLAS CON CLAVES PRIMARIAS Y FORÁNEAS (MODELO RELACIONAL)
+-- =============================================================================
+
+-- 2.1 Tabla Maestra: Categorías de Productos
+--     Contiene la clasificación general de los productos.
+IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = N'Categorias')
+BEGIN
+    CREATE TABLE Categorias (
+        CategoriaID INT IDENTITY(1,1) NOT NULL, -- Clave Primaria Auto-incremental
+        Nombre NVARCHAR(100) NOT NULL,          -- Nombre descriptivo de la categoría
+        Descripcion NVARCHAR(250) NULL,         -- Detalle opcional
+        CONSTRAINT PK_Categorias PRIMARY KEY CLUSTERED (CategoriaID)
+    );
+    PRINT 'Tabla Categorias creada con éxito.';
+END
 GO
 
--- 2. Tabla Relacionada (CRUD objetivo)
-CREATE TABLE Productos (
-    ProductoID INT IDENTITY(1,1) PRIMARY KEY,
-    CategoriaID INT NOT NULL,
-    CodigoBarras NVARCHAR(50) NOT NULL UNIQUE,
-    Nombre NVARCHAR(120) NOT NULL,
-    Precio DECIMAL(18,2) NOT NULL DEFAULT 0.00,
-    Stock INT NOT NULL DEFAULT 0,
-    CONSTRAINT FK_Productos_Categorias FOREIGN KEY (CategoriaID)
-        REFERENCES Categorias(CategoriaID) ON DELETE CASCADE
-);
+-- 2.2 Tabla Detalle: Productos (Entidad Principal para Operaciones CRUD)
+--     Vinculada con Categorias mediante Clave Foránea con eliminación en cascada.
+IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = N'Productos')
+BEGIN
+    CREATE TABLE Productos (
+        ProductoID INT IDENTITY(1,1) NOT NULL,       -- Clave Primaria Auto-incremental
+        CategoriaID INT NOT NULL,                    -- Clave Foránea hacia Categorias
+        CodigoBarras NVARCHAR(50) NOT NULL UNIQUE,   -- Código único para escáner/búsqueda rápida
+        Nombre NVARCHAR(120) NOT NULL,               -- Nombre comercial del producto
+        Precio DECIMAL(18,2) NOT NULL DEFAULT 0.00,  -- Precio unitario (dos decimales)
+        Stock INT NOT NULL DEFAULT 0,                -- Existencia actual en almacén
+        CONSTRAINT PK_Productos PRIMARY KEY CLUSTERED (ProductoID),
+        CONSTRAINT FK_Productos_Categorias FOREIGN KEY (CategoriaID)
+            REFERENCES Categorias(CategoriaID)
+            ON DELETE CASCADE                       -- Si se elimina la categoría, se eliminan sus productos
+            ON UPDATE CASCADE
+    );
+    PRINT 'Tabla Productos creada con éxito.';
+END
 GO
 
--- Datos iniciales de prueba
-INSERT INTO Categorias (Nombre, Descripcion) VALUES
-('Bebidas', 'Refrescos, maltas y cervezas'),
-('Snacks', 'Papas, galletas y frituras'),
-('Lácteos', 'Quesos y leches');
+-- =============================================================================
+-- FASE 3: INSERCIÓN DE DATOS INICIALES (SEMILLAS DE PRUEBA REALISTAS)
+-- =============================================================================
 
-INSERT INTO Productos (CategoriaID, CodigoBarras, Nombre, Precio, Stock) VALUES
-(1, '746001001', 'Cerveza Extra 355ml', 150.00, 48),
-(1, '746001002', 'Malta 200ml', 45.00, 100),
-(2, '746002001', 'Platanitos Salados', 35.00, 60);
+-- 3.1 Poblar Categorías (solo si la tabla está vacía)
+IF NOT EXISTS (SELECT TOP 1 1 FROM Categorias)
+BEGIN
+    INSERT INTO Categorias (Nombre, Descripcion) VALUES
+    ('Bebidas', 'Refrescos, maltas, jugos y cervezas nacionales'),
+    ('Snacks', 'Papas fritas, galletas, platanitos y frutos secos'),
+    ('Lácteos', 'Leches pasteurizadas, quesos crema y yogures'),
+    ('Limpieza', 'Detergentes líquidos, cloro, desinfectantes y jabones'),
+    ('Panadería', 'Panes de agua, pan sobao, bizcochos y repostería'),
+    ('Enlatados', 'Maíz dulce, habichuelas, sardinas y atún en conserva');
+    PRINT 'Semillas de Categorias insertadas.';
+END
 GO
 
--- NUEVAS CATEGORÍAS
-INSERT INTO Categorias (Nombre, Descripcion)
-VALUES
-('Limpieza', 'Productos para higiene y limpieza del hogar'),
-('Panadería', 'Panes, bizcochos y repostería'),
-('Enlatados', 'Productos conservados en latas');
+-- 3.2 Poblar Productos iniciales con diversidad de precios y niveles de stock
+IF NOT EXISTS (SELECT TOP 1 1 FROM Productos)
+BEGIN
+    INSERT INTO Productos (CategoriaID, CodigoBarras, Nombre, Precio, Stock) VALUES
+    (1, '746001001', 'Cerveza Extra 355ml', 150.00, 48),
+    (1, '746001002', 'Malta Morena 200ml', 45.00, 100),
+    (1, '746001003', 'Refresco Cola 500ml', 50.00, 75),
+    (2, '746002001', 'Platanitos Salados 45g', 35.00, 60),
+    (2, '746002002', 'Galletas Dulces Vainilla', 40.00, 25),
+    (3, '746003001', 'Queso Cheddar 1lb', 280.00, 15),
+    (4, '746004001', 'Detergente Líquido 1L', 185.00, 40),
+    (4, '746004002', 'Cloro Concentrado Galón', 120.00, 30),
+    (5, '746005001', 'Pan Integral de Molde', 75.00, 5),   -- Alerta: Stock Bajo (<= 5)
+    (5, '746005002', 'Bizcocho Vainilla Mini', 250.00, 12),
+    (6, '746006001', 'Maíz Dulce Enlatado 400g', 95.00, 50),
+    (6, '746006002', 'Habichuelas Rojas 400g', 85.00, 0);    -- Alerta: Agotado (= 0)
+    PRINT 'Semillas de Productos insertadas.';
+END
 GO
 
--- NUEVOS PRODUCTOS
-INSERT INTO Productos (CategoriaID, CodigoBarras, Nombre, Precio, Stock)
-VALUES
--- Limpieza (CategoriaID = 4)
-(4, '746004001', 'Detergente Líquido 1L', 185.00, 40),
-(4, '746004002', 'Cloro Galón', 120.00, 30),
-
--- Panadería (CategoriaID = 5)
-(5, '746005001', 'Pan Integral', 75.00, 25),
-(5, '746005002', 'Bizcocho Vainilla', 250.00, 12),
-
--- Enlatados (CategoriaID = 6)
-(6, '746006001', 'Maíz Dulce Enlatado', 95.00, 50),
-(6, '746006002', 'Habichuelas Rojas Enlatadas', 85.00, 45);
-GO
-
--- VISTA DE REPORTE DE INVENTARIO
-CREATE VIEW vw_ReporteInventario
+-- =============================================================================
+-- FASE 4: VISTA ANALÍTICA PARA DASHBOARDS Y REPORTES (.NET MAUI & POWER BI)
+-- =============================================================================
+-- Esta vista une las tablas mediante INNER JOIN y calcula en tiempo real:
+-- 1. ValorInventario = Precio * Stock
+-- 2. EstadoStock = Alerta semafórica ('Agotado', 'Stock Bajo', 'Óptimo')
+CREATE OR ALTER VIEW vw_ReporteInventario
 AS
 SELECT
     P.ProductoID,
@@ -549,12 +639,11 @@ SELECT
     C.Nombre AS Categoria,
     P.Precio,
     P.Stock,
-    (P.Precio * P.Stock) AS ValorInventario,
+    CAST((P.Precio * P.Stock) AS DECIMAL(18,2)) AS ValorInventario,
     CASE
         WHEN P.Stock = 0 THEN 'Agotado'
-        WHEN P.Stock &lt;= 20 THEN 'Stock Bajo'
-        WHEN P.Stock &lt;= 50 THEN 'Stock Medio'
-        ELSE 'Stock Disponible'
+        WHEN P.Stock &lt;= 5 THEN 'Stock Bajo'
+        ELSE 'Óptimo'
     END AS EstadoStock,
     C.Descripcion AS DescripcionCategoria
 FROM Productos P
@@ -562,47 +651,201 @@ INNER JOIN Categorias C
     ON P.CategoriaID = C.CategoriaID;
 GO
 
-SELECT * FROM vw_ReporteInventario;
+PRINT 'Vista vw_ReporteInventario compilada con éxito.';
+GO
+
+-- =============================================================================
+-- FASE 5: PRUEBAS Y VALIDACIÓN DEL CICLO CRUD (EJEMPLOS COMENTADOS)
+-- =============================================================================
+
+-- [TEST CRUD - 1. CREATE / INSERT]: Registrar un nuevo producto
+-- INSERT INTO Productos (CategoriaID, CodigoBarras, Nombre, Precio, Stock)
+-- VALUES (1, '746001999', 'Jugo Naranja Natural 1L', 110.00, 20);
+
+-- [TEST CRUD - 2. READ / SELECT]: Consultar todos los productos ordenados por Stock
+-- SELECT * FROM Productos ORDER BY Stock ASC;
+
+-- [TEST CRUD - 3. UPDATE]: Actualizar precio y reponer stock de un producto
+-- UPDATE Productos 
+-- SET Precio = 90.00, Stock = 35 
+-- WHERE CodigoBarras = '746006002';
+
+-- [TEST CRUD - 4. DELETE]: Eliminar un producto específico por su ID
+-- DELETE FROM Productos WHERE CodigoBarras = '746001999';
+
+-- [TEST ANALÍTICO]: Consultar la Vista de Reporte Ejecutivo
+SELECT * FROM vw_ReporteInventario ORDER BY EstadoStock ASC, Producto ASC;
 GO</code></pre>
       </div>
     </section>
 
-    <!-- 04. MAINPAGE.XAML -->
-    <section class="brutalist-card">
-      <span class="section-title">04. MAINPAGE.XAML (INTERFAZ DE USUARIO)</span>
-      <p class="intro-text">
-        <strong>¿Qué hace este código XAML?</strong><br>
-        1. Configura una estética oscura (Dark Mode) con paleta Slate/Cyan/Emerald de alto contraste.<br>
-        2. Proporciona un panel superior para ingresar y cambiar dinámicamente la dirección IP del servidor SQL.<br>
-        3. Integra un formulario completo con un <code>Picker</code> enlazado a la entidad padre para seleccionar la categoría sin obligar al usuario a digitar IDs numéricos.<br>
-        4. Corrige el contenedor de métricas utilizando <code>HorizontalStackLayout</code> (eliminando el error de compilación de la propiedad <code>Orientation</code>).<br>
-        5. Presenta una <strong>caja de búsqueda única y centralizada</strong> (<code>TxtBuscarGlobal</code>) que dispara el filtrado reactivo de la lista en tiempo real.<br>
-        6. Utiliza una <code>CollectionView</code> con tarjetas personalizadas y botones de acceso rápido para edición y borrado.
-      </p>
+
+    <!-- =========================================================
+         SECCIÓN 03: CONECTIVIDAD .NET MAUI, NUGET Y RED ANDROID
+         ========================================================= -->
+    <section id="sec-03" class="brutalist-card card-nuget">
+      <div class="section-header">
+        <span class="section-title t-green">📦 03. CONECTIVIDAD .NET MAUI: NUGET, ANDROIDMANIFEST Y GUÍA DE IPs</span>
+      </div>
+
+      <div class="intro-text">
+        🎯 <strong>Objetivo de Conectividad:</strong> Instalar el driver oficial de base de datos <span class="kw-val">Microsoft.Data.SqlClient</span> en el proyecto .NET MAUI, habilitar los permisos de red y tráfico en texto plano en Android, y comprender con exactitud qué dirección IP configurar según el dispositivo de pruebas (Emulador, Celular Físico o Windows).
+      </div>
+
+      <!-- PASO 3.1: PAQUETE NUGET -->
+      <div class="sub-title mode-gui">📦 PASO 3.1: INSTALACIÓN DEL PAQUETE NUGET MICROSOFT.DATA.SQLCLIENT</div>
+
+      <p>El paquete <code>Microsoft.Data.SqlClient</code> es el proveedor oficial y moderno de ADO.NET para interactuar con SQL Server desde aplicaciones .NET:</p>
+
+      <div class="dual-grid" style="margin-bottom: 20px;">
+        <div class="panel-gui">
+          <div style="font-weight: 900; margin-bottom: 8px;">🖱️ INSTALAR VÍA ADMINISTRADOR DE PAQUETES (VISUAL STUDIO):</div>
+          <ol class="num-list" style="font-size: 0.95rem;">
+            <li>En Visual Studio, haz clic derecho sobre el proyecto <span class="kw-val">InventarioMauiApp2</span> &rarr; selecciona <span class="kw-ui">Administrar paquetes NuGet...</span></li>
+            <li>Haz clic en la pestaña <span class="kw-ui">Examinar</span>.</li>
+            <li>En la barra de búsqueda escribe: <span class="kw-val">Microsoft.Data.SqlClient</span>.</li>
+            <li>Selecciona el paquete oficial publicado por <em>Microsoft</em> y haz clic en <span class="kw-ui">Instalar</span> &rarr; Acepta la licencia.</li>
+          </ol>
+        </div>
+
+        <div class="panel-cli">
+          <div style="font-weight: 900; color: var(--dotnet-purple); margin-bottom: 8px;">⌨️ INSTALAR VÍA TERMINAL (.NET CLI):</div>
+          <p style="font-size: 0.95rem;">O ejecuta el siguiente comando en PowerShell dentro de la carpeta del proyecto:</p>
+          <div class="code-container">
+            <div class="code-header hdr-ps">
+              <span>Terminal CLI - Instalación de Driver SQL</span>
+              <button class="copy-btn" onclick="copiarCodigo('cmd-nuget-add')">📋 Copiar Comando</button>
+            </div>
+            <pre><code id="cmd-nuget-add" class="language-bash">dotnet add package Microsoft.Data.SqlClient</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- PASO 3.2: PERMISOS EN ANDROID (ANDROIDMANIFEST.XML) -->
+      <div class="sub-title">🤖 PASO 3.2: HABILITAR PERMISOS EN ANDROID (ANDROIDMANIFEST.XML)</div>
+
+      <div class="info-box box-important" style="margin-bottom: 20px;">
+        <div class="info-title">⚠️ REGLA CRÍTICA DE COMUNICACIÓN EN ANDROID (LEER OBLIGATORIAMENTE):</div>
+        <p>A partir de <strong>Android 9.0 (API 28)</strong>, el sistema operativo <strong>bloquea por defecto todo el tráfico de red en texto plano (sin cifrar)</strong>. Como las conexiones directas a SQL Server por TCP/IP en el puerto 1433 no utilizan certificados SSL/TLS en entornos locales de desarrollo, Android rechazará la conexión con un error silencioso de <code>SocketException: Connection refused / Timeout</code>.</p>
+        <p style="margin-top: 8px;">Para permitir que tu aplicación se conecte con la IP de SQL Server, es <strong>100% indispensable</strong> activar el atributo <code>android:usesCleartextTraffic="true"</code> dentro de la etiqueta <code>&lt;application&gt;</code> y declarar los permisos de red antes de ella.</p>
+      </div>
+
+      <ol class="num-list" style="margin-bottom: 20px;">
+        <li>
+          <strong>Paso A (Localizar el archivo):</strong> En Visual Studio, ve a la ventana del <strong>Explorador de soluciones</strong> (Solution Explorer) a la derecha. Despliega la carpeta <code>Platforms</code> haciendo clic en su flechita, luego despliega la subcarpeta <code>Android</code>.
+        </li>
+        <li>
+          <strong>Paso B (Abrir el editor):</strong> Haz doble clic sobre <code>AndroidManifest.xml</code> (o haz clic derecho &rarr; <em>Ver código / View Code</em>).
+        </li>
+        <li>
+          <strong>Paso C (Estructura de Permisos):</strong> Coloca los permisos <code>INTERNET</code> y <code>ACCESS_NETWORK_STATE</code> como hijos directos de <code>&lt;manifest&gt;</code>, justo arriba de <code>&lt;application&gt;</code>.
+        </li>
+        <li>
+          <strong>Paso D (Habilitar Cleartext):</strong> Asegúrate de que dentro de la etiqueta <code>&lt;application&gt;</code> esté escrito el atributo:
+          <br><code style="background:#0f172a; color:#38bdf8; padding:3px 8px; border-radius:4px; font-weight:bold; display:inline-block; margin-top:5px;">android:usesCleartextTraffic="true"</code>
+        </li>
+      </ol>
+
       <div class="code-container">
-        <div class="code-header">
-          <span>MainPage.xaml</span>
-          <button class="copy-btn" onclick="copiarCodigo('code-xaml')">Copiar</button>
+        <div class="code-header hdr-and">
+          <span>Platforms/Android/AndroidManifest.xml (Código Completo y Listo para Producción)</span>
+          <button class="copy-btn" onclick="copiarCodigo('xml-manifest')">📋 Copiar XML</button>
+        </div>
+        <pre><code id="xml-manifest" class="language-xml">&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;manifest xmlns:android="http://schemas.android.com/apk/res/android"&gt;
+
+    &lt;!-- =================================================================== --&gt;
+    &lt;!-- 1. PERMISOS OBLIGATORIOS PARA CONECTARSE A LA IP DE SQL SERVER       --&gt;
+    &lt;!--    INTERNET: Permite abrir conexiones de sockets TCP en puerto 1433   --&gt;
+    &lt;!--    ACCESS_NETWORK_STATE: Permite validar si hay Wi-Fi o datos activos  --&gt;
+    &lt;!-- =================================================================== --&gt;
+    &lt;uses-permission android:name="android.permission.INTERNET" /&gt;
+    &lt;uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /&gt;
+
+    &lt;!-- =================================================================== --&gt;
+    &lt;!-- 2. CONFIGURACIÓN DE LA APLICACIÓN ANDROID                           --&gt;
+    &lt;!--    android:usesCleartextTraffic="true" ES OBLIGATORIO para evitar   --&gt;
+    &lt;!--    el bloqueo de tráfico TCP/IP no cifrado hacia SQL Server         --&gt;
+    &lt;!-- =================================================================== --&gt;
+    &lt;application
+        android:allowBackup="true"
+        android:icon="@mipmap/appicon"
+        android:roundIcon="@mipmap/appicon_round"
+        android:supportsRtl="true"
+        android:usesCleartextTraffic="true"&gt;
+    &lt;/application&gt;
+
+&lt;/manifest&gt;</code></pre>
+      </div>
+
+      <!-- PASO 3.3: GUÍA RÁPIDA DE DIRECCIONES IP -->
+      <div class="info-box box-tip" style="margin-top: 20px; border-left: 5px solid #0284c7; background: #f0f9ff;">
+        <div class="info-title" style="color: #0369a1; font-weight: 800; font-size: 15px; letter-spacing: 0.3px; background: #e0f2fe; padding: 6px 12px; border: 2px solid #0284c7; border-radius: 4px; display: inline-block; margin-bottom: 10px; box-shadow: 2px 2px 0px #0284c7;">
+          <strong>💡 GUÍA RÁPIDA DE DIRECCIONES IP EN ANDROID (¿CUÁL IP PONER?):</strong>
+        </div>
+        <ul style="margin-left: 20px; margin-top: 6px; line-height: 1.7; color: #0f172a;">
+          <li><strong>Si ejecutas en el Emulador Android de Visual Studio:</strong> Usa la IP especial <code>10.0.2.2</code> (esta es la dirección virtual reservada por Android para apuntar al <code>localhost</code> de tu PC).</li>
+          <li><strong>Si ejecutas en un Teléfono Físico Android por Wi-Fi o USB:</strong> Usa la IP privada de tu PC en la red local (ejemplo: <code>10.0.0.15</code> o <code>192.168.1.X</code>, o <code>172.16.0.x</code>). El teléfono y tu PC deben estar conectados a la misma red Wi-Fi.</li>
+          <li><strong>Si compilas para Windows (Windows Machine):</strong> Puedes usar <code>localhost</code>, <code>127.0.0.1</code>, o la IP local (<code>10.0.0.x</code>, <code>172.16.0.x</code> o <code>192.168.0.x</code>).</li>
+        </ul>
+      </div>
+    </section>
+
+<section id="sec-04" class="brutalist-card card-xaml">
+      <div class="section-header">
+        <span class="section-title t-xaml">🎨 04. MAINPAGE.XAML (INTERFAZ CRUD + BOTÓN 📊 REPORTE)</span>
+      </div>
+
+      <div class="intro-text">
+        👁️ <strong>Validado:</strong> Todas las etiquetas XAML están correctamente cerradas bajo <code>x:Class="InventarioMauiApp2.MainPage"</code> y el botón <span class="kw-ui">📊 Reporte</span> está integrado en la tarjeta superior.
+      </div>
+
+      <div class="code-container">
+        <div class="code-header hdr-xaml">
+          <span>MainPage.xaml (Namespace InventarioMauiApp2)</span>
+          <button class="copy-btn" onclick="copiarCodigo('code-xaml')">📋 Copiar XAML</button>
         </div>
         <pre><code id="code-xaml" class="language-xml">&lt;?xml version="1.0" encoding="utf-8" ?&gt;
 &lt;ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="InventarioMauiApp1.MainPage"
+             x:Class="InventarioMauiApp2.MainPage"
+             Title="Inventario"
              BackgroundColor="#0F172A"&gt;
 
     &lt;Grid RowDefinitions="Auto, *"&gt;
-        &lt;!-- Encabezado y configuración de IP --&gt;
+
+        &lt;!-- ===================================================================
+             FILA 0: ENCABEZADO, BOTÓN DASHBOARD Y CONEXIÓN AL SERVIDOR SQL
+             =================================================================== --&gt;
         &lt;Border Grid.Row="0" BackgroundColor="#1E293B" StrokeThickness="0" Margin="12,10,12,6" Padding="14"&gt;
             &lt;Border.StrokeShape&gt;
                 &lt;RoundRectangle CornerRadius="12" /&gt;
             &lt;/Border.StrokeShape&gt;
-            &lt;VerticalStackLayout Spacing="8"&gt;
-                &lt;Label Text="GESTIÓN DE PRODUCTOS" 
-                       TextColor="#38BDF8" 
-                       FontSize="18" 
-                       FontAttributes="Bold" 
-                       HorizontalOptions="Center" /&gt;
 
+            &lt;VerticalStackLayout Spacing="8"&gt;
+                
+                &lt;!-- Título principal y botón de acceso al Dashboard --&gt;
+                &lt;Grid ColumnDefinitions="*, Auto" VerticalOptions="Center"&gt;
+                    &lt;Label Grid.Column="0"
+                           Text="GESTIÓN DE PRODUCTOS" 
+                           TextColor="#38BDF8" 
+                           FontSize="17" 
+                           FontAttributes="Bold" 
+                           VerticalOptions="Center" /&gt;
+
+                    &lt;Button Grid.Column="1"
+                            Text="📊 Reporte"
+                            Clicked="OnIrReporteClicked"
+                            BackgroundColor="#8B5CF6"
+                            TextColor="White"
+                            FontAttributes="Bold"
+                            FontSize="12"
+                            CornerRadius="8"
+                            HeightRequest="36"
+                            Padding="12,0" /&gt;
+                &lt;/Grid&gt;
+
+                &lt;!-- Fila de conexión: IP y Botón Conectar --&gt;
                 &lt;Grid ColumnDefinitions="*, Auto" ColumnSpacing="8"&gt;
                     &lt;Border BackgroundColor="#0F172A" Stroke="#334155" StrokeThickness="1" Padding="8,0"&gt;
                         &lt;Border.StrokeShape&gt;
@@ -612,10 +855,11 @@ GO</code></pre>
                                Placeholder="IP del servidor (ej. 10.0.0.15)" 
                                PlaceholderColor="#64748B" 
                                TextColor="#F8FAFC" 
-                               Text="10.0.0.15"
+                               Text="10.0.0.15" 
                                Keyboard="Url"
                                FontSize="13" /&gt;
                     &lt;/Border&gt;
+
                     &lt;Button Grid.Column="1" 
                             Text="Conectar" 
                             Clicked="OnProbarConexionClicked" 
@@ -628,11 +872,13 @@ GO</code></pre>
             &lt;/VerticalStackLayout&gt;
         &lt;/Border&gt;
 
-        &lt;!-- Contenido principal: Formulario CRUD + Búsqueda Unificada + Lista --&gt;
+        &lt;!-- ===================================================================
+             FILA 1: CONTENIDO PRINCIPAL DESPLAZABLE (FORMULARIO + BÚSQUEDA + LISTA)
+             =================================================================== --&gt;
         &lt;ScrollView Grid.Row="1" Padding="12,0,12,12"&gt;
             &lt;VerticalStackLayout Spacing="12"&gt;
-                
-                &lt;!-- Tarjeta Formulario --&gt;
+
+                &lt;!-- 1. TARJETA DEL FORMULARIO CRUD (CREAR / ACTUALIZAR PRODUCTOS) --&gt;
                 &lt;Border BackgroundColor="#1E293B" StrokeThickness="0" Padding="14"&gt;
                     &lt;Border.StrokeShape&gt;
                         &lt;RoundRectangle CornerRadius="12" /&gt;
@@ -645,7 +891,8 @@ GO</code></pre>
                                FontAttributes="Bold" /&gt;
 
                         &lt;Grid ColumnDefinitions="*, *" ColumnSpacing="8" RowDefinitions="Auto, Auto, Auto" RowSpacing="8"&gt;
-                            &lt;!-- Categoría (Picker) --&gt;
+
+                            &lt;!-- Fila 0: Selector desplegable de Categorías --&gt;
                             &lt;Border Grid.Row="0" Grid.ColumnSpan="2" BackgroundColor="#0F172A" Stroke="#334155" StrokeThickness="1"&gt;
                                 &lt;Border.StrokeShape&gt;
                                     &lt;RoundRectangle CornerRadius="8" /&gt;
@@ -657,7 +904,7 @@ GO</code></pre>
                                         ItemDisplayBinding="{Binding Nombre}" /&gt;
                             &lt;/Border&gt;
 
-                            &lt;!-- Código de Barras --&gt;
+                            &lt;!-- Fila 1: Código de Barras y Nombre --&gt;
                             &lt;Border Grid.Row="1" Grid.Column="0" BackgroundColor="#0F172A" Stroke="#334155" StrokeThickness="1" Padding="8,0"&gt;
                                 &lt;Border.StrokeShape&gt;
                                     &lt;RoundRectangle CornerRadius="8" /&gt;
@@ -668,7 +915,6 @@ GO</code></pre>
                                        TextColor="#F8FAFC" /&gt;
                             &lt;/Border&gt;
 
-                            &lt;!-- Nombre Producto --&gt;
                             &lt;Border Grid.Row="1" Grid.Column="1" BackgroundColor="#0F172A" Stroke="#334155" StrokeThickness="1" Padding="8,0"&gt;
                                 &lt;Border.StrokeShape&gt;
                                     &lt;RoundRectangle CornerRadius="8" /&gt;
@@ -679,7 +925,7 @@ GO</code></pre>
                                        TextColor="#F8FAFC" /&gt;
                             &lt;/Border&gt;
 
-                            &lt;!-- Precio --&gt;
+                            &lt;!-- Fila 2: Precio y Stock --&gt;
                             &lt;Border Grid.Row="2" Grid.Column="0" BackgroundColor="#0F172A" Stroke="#334155" StrokeThickness="1" Padding="8,0"&gt;
                                 &lt;Border.StrokeShape&gt;
                                     &lt;RoundRectangle CornerRadius="8" /&gt;
@@ -691,7 +937,6 @@ GO</code></pre>
                                        Keyboard="Numeric" /&gt;
                             &lt;/Border&gt;
 
-                            &lt;!-- Stock --&gt;
                             &lt;Border Grid.Row="2" Grid.Column="1" BackgroundColor="#0F172A" Stroke="#334155" StrokeThickness="1" Padding="8,0"&gt;
                                 &lt;Border.StrokeShape&gt;
                                     &lt;RoundRectangle CornerRadius="8" /&gt;
@@ -704,7 +949,7 @@ GO</code></pre>
                             &lt;/Border&gt;
                         &lt;/Grid&gt;
 
-                        &lt;!-- Botones de Acción --&gt;
+                        &lt;!-- Botones Guardar y Limpiar --&gt;
                         &lt;Grid ColumnDefinitions="*, *" ColumnSpacing="8" Margin="0,4,0,0"&gt;
                             &lt;Button x:Name="BtnGuardar" 
                                     Grid.Column="0" 
@@ -725,13 +970,13 @@ GO</code></pre>
                     &lt;/VerticalStackLayout&gt;
                 &lt;/Border&gt;
 
-                &lt;!-- CAJA DE BÚSQUEDA DINÁMICA MULTI-PARÁMETRO --&gt;
+                &lt;!-- 2. TARJETA DE BÚSQUEDA DINÁMICA UNIFICADA EN MEMORIA --&gt;
                 &lt;Border BackgroundColor="#1E293B" StrokeThickness="0" Padding="12"&gt;
                     &lt;Border.StrokeShape&gt;
                         &lt;RoundRectangle CornerRadius="12" /&gt;
                     &lt;/Border.StrokeShape&gt;
                     &lt;VerticalStackLayout Spacing="6"&gt;
-                        &lt;Label Text="🔍 BÚSQUEDA DINÁMICA" 
+                        &lt;Label Text="🔍BÚSQUEDA DINÁMICA" 
                                TextColor="#38BDF8" 
                                FontSize="12" 
                                FontAttributes="Bold" /&gt;
@@ -750,7 +995,7 @@ GO</code></pre>
                     &lt;/VerticalStackLayout&gt;
                 &lt;/Border&gt;
 
-                &lt;!-- Listado de Productos --&gt;
+                &lt;!-- 3. LISTADO DE PRODUCTOS FILTRADOS --&gt;
                 &lt;Label Text="PRODUCTOS REGISTRADOS" 
                        TextColor="#38BDF8" 
                        FontSize="14" 
@@ -764,12 +1009,14 @@ GO</code></pre>
                                HorizontalOptions="Center" 
                                Margin="0,20" /&gt;
                     &lt;/CollectionView.EmptyView&gt;
+
                     &lt;CollectionView.ItemTemplate&gt;
                         &lt;DataTemplate&gt;
                             &lt;Border BackgroundColor="#1E293B" Stroke="#334155" StrokeThickness="1" Margin="0,4" Padding="12"&gt;
                                 &lt;Border.StrokeShape&gt;
                                     &lt;RoundRectangle CornerRadius="10" /&gt;
                                 &lt;/Border.StrokeShape&gt;
+
                                 &lt;Grid ColumnDefinitions="*, Auto" RowDefinitions="Auto, Auto"&gt;
                                     &lt;VerticalStackLayout Grid.Column="0" Grid.Row="0" Spacing="2"&gt;
                                         &lt;Label Text="{Binding Nombre}" 
@@ -794,7 +1041,6 @@ GO</code></pre>
                                                FontSize="13" /&gt;
                                     &lt;/HorizontalStackLayout&gt;
 
-                                    &lt;!-- Acciones Editar y Eliminar --&gt;
                                     &lt;HorizontalStackLayout Grid.Column="1" Grid.RowSpan="2" Spacing="6" VerticalOptions="Center"&gt;
                                         &lt;Button Text="✏️" 
                                                 Clicked="OnEditarClicked" 
@@ -828,51 +1074,77 @@ GO</code></pre>
       </div>
     </section>
 
-    <!-- 05. MAINPAGE.XAML.CS -->
-    <section class="brutalist-card">
-      <span class="section-title">05. MAINPAGE.XAML.CS (LÓGICA C# Y ADO.NET)</span>
-      <p class="intro-text">
-        <strong>¿Qué hace este código C#?</strong><br>
-        1. Utiliza el método nativo <strong><code>DisplayAlertAsync</code></strong> requerido por las versiones recientes de MAUI para suprimir los avisos de obsolescencia <code>CS0618</code>.<br>
-        2. Incluye firmas con nulabilidad explícita (<code>object? sender</code>) suprimiendo los avisos del compilador <code>CS8622</code>.<br>
-        3. <strong>Previene colisiones de clave única:</strong> ejecuta el método auxiliar <code>ExisteCodigoBarrasAsync</code> antes de guardar, informando al usuario de forma amigable si el código de barras ya existe en otro registro sin lanzar excepciones SQL no controladas.<br>
-        4. <strong>Filtro unificado en memoria:</strong> el método <code>FiltrarCatalogo</code> evalúa si el texto ingresado coincide con el nombre del producto, el código de barras, el nombre de la categoría o el identificador numérico de la categoría.<br>
-        5. Maneja la alternancia entre inserción (<code>INSERT</code>) y actualización (<code>UPDATE</code>) según el valor de <code>_productoEnEdicionId</code>.
-      </p>
+    <!-- =========================================================
+         SECCIÓN 06: MAINPAGE.XAML.CS (CORREGIDO CON DISPLAYALERTASYNC)
+         ========================================================= -->
+    <section id="sec-05" class="brutalist-card card-csharp">
+      <div class="section-header">
+        <span class="section-title t-cs">⚙️ 05. MAINPAGE.XAML.CS (LÓGICA CRUD + NAVEGACIÓN A REPORTE)</span>
+      </div>
+
+      <div class="intro-text">
+        💻 <strong>Corregido:</strong> Usa <code>DisplayAlertAsync(...)</code> (método nativo de .NET MAUI <code>Page</code> en lugar de <code>DisplayAlertAsync</code> que no existe) y limpia directivas de plataforma innecesarias.
+      </div>
+
       <div class="code-container">
-        <div class="code-header">
-          <span>MainPage.xaml.cs</span>
-          <button class="copy-btn" onclick="copiarCodigo('code-cs')">Copiar</button>
+        <div class="code-header hdr-cs">
+          <span>MainPage.xaml.cs (Namespace InventarioMauiApp2)</span>
+          <button class="copy-btn" onclick="copiarCodigo('code-cs')">📋 Copiar C#</button>
         </div>
         <pre><code id="code-cs" class="language-csharp">using Microsoft.Data.SqlClient;
 using System.Collections.ObjectModel;
 using System.Data;
 
-namespace InventarioMauiApp1;
+namespace InventarioMauiApp2;
 
+/// &lt;summary&gt;
+/// Página principal de la aplicación encargada de gestionar el CRUD de productos,
+/// la carga de categorías, el filtrado dinámico y la navegación hacia el Dashboard.
+/// &lt;/summary&gt;
 public partial class MainPage : ContentPage
 {
+    // =========================================================================
+    // CONSTANTES DE CONFIGURACIÓN PARA CONEXIÓN A SQL SERVER
+    // =========================================================================
     private const string SqlUser = "JUANCITO";
     private const string SqlPass = "123456";
     private const string SqlDb = "InventarioDB1";
     private const int SqlPort = 1433;
 
-    public ObservableCollection<CategoriaModel> Categorias { get; set; } = new();
-    
-    // Lista completa en memoria
-    private readonly List<ProductoModel> _todosLosProductos = new();
-    
-    // Lista enlazada a la vista
-    public ObservableCollection<ProductoModel> ProductosFiltrados { get; set; } = new();
+    // =========================================================================
+    // COLECCIONES DE DATOS Y VARIABLES DE ESTADO
+    // =========================================================================
 
+    public ObservableCollection&lt;CategoriaModel&gt; Categorias { get; set; } = new();
+    private readonly List&lt;ProductoModel&gt; _todosLosProductos = new();
+    public ObservableCollection&lt;ProductoModel&gt; ProductosFiltrados { get; set; } = new();
     private int _productoEnEdicionId = 0;
 
     public MainPage()
     {
         InitializeComponent();
+
+        // Enlace de datos (Data Binding) directo hacia los controles de la UI
         PickerCategorias.ItemsSource = Categorias;
         CvProductos.ItemsSource = ProductosFiltrados;
     }
+
+    // =========================================================================
+    // NAVEGACIÓN AL DASHBOARD DE REPORTES
+    // =========================================================================
+
+    /// &lt;summary&gt;
+    /// Navega hacia la página de Dashboard y Reportes enviando la IP configurada.
+    /// &lt;/summary&gt;
+    private async void OnIrReporteClicked(object? sender, EventArgs e)
+    {
+        string ipActual = TxtServerIp.Text?.Trim() ?? "10.0.0.15";
+        await Navigation.PushAsync(new ReportePage(ipActual));
+    }
+
+    // =========================================================================
+    // CONEXIÓN Y CARGA INICIAL
+    // =========================================================================
 
     private string ObtenerCadenaConexion()
     {
@@ -899,7 +1171,10 @@ public partial class MainPage : ContentPage
         }
     }
 
-    // READ: Categorías
+    // =========================================================================
+    // OPERACIONES DE LECTURA (READ) Y BÚSQUEDA EN MEMORIA
+    // =========================================================================
+
     private async Task CargarCategorias()
     {
         Categorias.Clear();
@@ -922,10 +1197,10 @@ public partial class MainPage : ContentPage
         }
     }
 
-    // READ: Productos (INNER JOIN)
     private async Task CargarProductos()
     {
         _todosLosProductos.Clear();
+
         using SqlConnection conn = new(ObtenerCadenaConexion());
         await conn.OpenAsync();
 
@@ -955,7 +1230,6 @@ public partial class MainPage : ContentPage
         FiltrarCatalogo(TxtBuscarGlobal?.Text);
     }
 
-    // BÚSQUEDA DINÁMICA UNIFICADA: Producto, Código, Categoría o ID Categoría
     private void OnBuscarGlobalTextChanged(object? sender, TextChangedEventArgs e)
     {
         FiltrarCatalogo(e.NewTextValue);
@@ -967,7 +1241,7 @@ public partial class MainPage : ContentPage
 
         var coincidentes = string.IsNullOrWhiteSpace(criterio)
             ? _todosLosProductos
-            : _todosLosProductos.Where(p =>
+            : _todosLosProductos.Where(p =&gt;
                 p.Nombre.ToLower().Contains(criterio) ||
                 p.CodigoBarras.ToLower().Contains(criterio) ||
                 p.CategoriaNombre.ToLower().Contains(criterio) ||
@@ -981,19 +1255,22 @@ public partial class MainPage : ContentPage
         }
     }
 
-    // VALIDACIÓN PREVIA DE CÓDIGO DE BARRAS DUPLICADO
-    private async Task<bool> ExisteCodigoBarrasAsync(string codigo, int idActual, SqlConnection conn)
+    // =========================================================================
+    // VALIDACIONES Y OPERACIONES DE ESCRITURA (CREATE / UPDATE)
+    // =========================================================================
+
+    private async Task&lt;bool&gt; ExisteCodigoBarrasAsync(string codigo, int idActual, SqlConnection conn)
     {
         string query = "SELECT COUNT(1) FROM Productos WHERE CodigoBarras = @CodigoBarras AND ProductoID != @ProductoID";
         using SqlCommand cmd = new(query, conn);
+
         cmd.Parameters.AddWithValue("@CodigoBarras", codigo);
         cmd.Parameters.AddWithValue("@ProductoID", idActual);
 
         int count = Convert.ToInt32(await cmd.ExecuteScalarAsync());
-        return count > 0;
+        return count &gt; 0;
     }
 
-    // CREATE / UPDATE
     private async void OnGuardarClicked(object? sender, EventArgs e)
     {
         if (PickerCategorias.SelectedItem is not CategoriaModel catSeleccionada)
@@ -1017,13 +1294,13 @@ public partial class MainPage : ContentPage
             return;
         }
 
-        if (!decimal.TryParse(TxtPrecio.Text, out decimal precio) || precio < 0)
+        if (!decimal.TryParse(TxtPrecio.Text, out decimal precio) || precio &lt; 0)
         {
             await DisplayAlertAsync("⚠️ Valor Inválido", "Ingrese un precio numérico válido mayor o igual a 0.", "Entendido");
             return;
         }
 
-        if (!int.TryParse(TxtStock.Text, out int stock) || stock < 0)
+        if (!int.TryParse(TxtStock.Text, out int stock) || stock &lt; 0)
         {
             await DisplayAlertAsync("⚠️ Valor Inválido", "Ingrese una cantidad de stock entera y positiva.", "Entendido");
             return;
@@ -1034,7 +1311,6 @@ public partial class MainPage : ContentPage
             using SqlConnection conn = new(ObtenerCadenaConexion());
             await conn.OpenAsync();
 
-            // Verificación previa de duplicados
             if (await ExisteCodigoBarrasAsync(codigo, _productoEnEdicionId, conn))
             {
                 await DisplayAlertAsync("⚠️ Código Duplicado", $"El código '{codigo}' ya pertenece a otro producto registrado.", "Aceptar");
@@ -1043,7 +1319,6 @@ public partial class MainPage : ContentPage
 
             if (_productoEnEdicionId == 0)
             {
-                // INSERT
                 string insertSql = @"
                     INSERT INTO Productos (CategoriaID, CodigoBarras, Nombre, Precio, Stock)
                     VALUES (@CategoriaID, @CodigoBarras, @Nombre, @Precio, @Stock)";
@@ -1060,7 +1335,6 @@ public partial class MainPage : ContentPage
             }
             else
             {
-                // UPDATE
                 string updateSql = @"
                     UPDATE Productos 
                     SET CategoriaID = @CategoriaID, CodigoBarras = @CodigoBarras, Nombre = @Nombre, Precio = @Precio, Stock = @Stock
@@ -1087,10 +1361,13 @@ public partial class MainPage : ContentPage
         }
     }
 
-    // PREPARAR EDICIÓN
+    // =========================================================================
+    // PREPARACIÓN DE EDICIÓN Y ELIMINACIÓN (DELETE)
+    // =========================================================================
+
     private void OnEditarClicked(object? sender, EventArgs e)
     {
-        if (sender is Button btn && btn.CommandParameter is ProductoModel prod)
+        if (sender is Button btn &amp;&amp; btn.CommandParameter is ProductoModel prod)
         {
             _productoEnEdicionId = prod.ProductoID;
             TxtCodigoBarras.Text = prod.CodigoBarras;
@@ -1098,7 +1375,7 @@ public partial class MainPage : ContentPage
             TxtPrecio.Text = prod.Precio.ToString("0.00");
             TxtStock.Text = prod.Stock.ToString();
 
-            PickerCategorias.SelectedItem = Categorias.FirstOrDefault(c => c.CategoriaID == prod.CategoriaID);
+            PickerCategorias.SelectedItem = Categorias.FirstOrDefault(c =&gt; c.CategoriaID == prod.CategoriaID);
 
             LblModoFormulario.Text = $"✏️ Editando Producto #{prod.ProductoID}";
             LblModoFormulario.TextColor = Color.FromArgb("#F59E0B");
@@ -1107,12 +1384,11 @@ public partial class MainPage : ContentPage
         }
     }
 
-    // DELETE
     private async void OnEliminarClicked(object? sender, EventArgs e)
     {
-        if (sender is Button btn && btn.CommandParameter is int productoId)
+        if (sender is Button btn &amp;&amp; btn.CommandParameter is int productoId)
         {
-            var item = _todosLosProductos.FirstOrDefault(p => p.ProductoID == productoId);
+            var item = _todosLosProductos.FirstOrDefault(p =&gt; p.ProductoID == productoId);
             string nombreItem = item?.Nombre ?? $"ID {productoId}";
 
             bool confirmar = await DisplayAlertAsync(
@@ -1150,6 +1426,10 @@ public partial class MainPage : ContentPage
         }
     }
 
+    // =========================================================================
+    // UTILIDADES DEL FORMULARIO
+    // =========================================================================
+
     private void OnLimpiarClicked(object? sender, EventArgs e)
     {
         LimpiarFormulario();
@@ -1171,7 +1451,10 @@ public partial class MainPage : ContentPage
     }
 }
 
-// MODELOS DE DATOS
+// =============================================================================
+// MODELOS DE DATOS (ENTIDADES)
+// =============================================================================
+
 public class CategoriaModel
 {
     public int CategoriaID { get; set; }
@@ -1189,288 +1472,763 @@ public class ProductoModel
     public int Stock { get; set; }
     public string CategoriaNombre { get; set; } = string.Empty;
 
-    public string CategoriaDetalle => $"Categoría: {CategoriaNombre} (ID: {CategoriaID})";
+    public string CategoriaDetalle =&gt; $"Categoría: {CategoriaNombre} (ID: {CategoriaID})";
 }</code></pre>
       </div>
     </section>
 
-    <!-- 06. EMULACIÓN INTERACTIVA DE LA APP -->
-    <section class="brutalist-card">
-      <span class="section-title">06. EMULADOR INTERACTIVO DE LA APLICACIÓN</span>
-      <p class="intro-text">
-        Prueba interactiva del comportamiento exacto de la aplicación: el selector mapea el ID de categoría, el formulario valida unicidad de código de barras, las operaciones CRUD actualizan la lista y la caja de texto filtra en vivo por nombre, código de barras, categoría o ID.
-      </p>
+    <!-- =========================================================
+         SECCIÓN 07: NUEVA PÁGINA REPORTEPAGE.XAML (DASHBOARD UI)
+         ========================================================= -->
+        <!-- =========================================================
+         SECCIÓN 06: REPORTEPAGE.XAML (DASHBOARD ANALÍTICO SEMAFÓRICO)
+         ========================================================= -->
+    <section id="sec-06" class="brutalist-card card-dash">
+      <div class="section-header">
+        <span class="section-title t-dash">📊 06. REPORTEPAGE.XAML (DASHBOARD ANALÍTICO SEMAFÓRICO)</span>
+      </div>
 
-      <div class="sim-phone">
-        
-        <!-- Header de la App Simulada -->
-        <div class="sim-header">
-          <h3>GESTIÓN DE PRODUCTOS</h3>
-          <div class="sim-row">
-            <input type="text" id="sim-ip" class="sim-input" value="10.0.0.15" />
-            <button class="sim-btn-cyan" onclick="simularAlerta('✅ Conexión Exitosa', 'Base de datos conectada correctamente.')">Conectar</button>
-          </div>
+      <div class="intro-text">
+        🆕 <strong>Cómo crear esta página en Visual Studio:</strong> Haz clic derecho sobre <span class="kw-val">InventarioMauiApp2</span> &rarr; <span class="kw-ui">Agregar</span> &rarr; <span class="kw-ui">Nuevo elemento...</span> &rarr; selecciona <span class="kw-ui">.NET MAUI ContentPage (XAML)</span> y nómbralo exactamente <span class="kw-val">ReportePage.xaml</span>. 
+        <br>Incluye tarjetas de KPIs 2x2, gráfico de barras nativo y la lista de inventario ordenada de <strong>mayor a menor</strong> con <strong>tarjetas y badges semafóricos (🟢 Verde = Óptimo, 🟡 Amarillo = Stock Bajo, 🔴 Rojo = Agotado)</strong>.
+      </div>
+
+      <div class="code-container">
+        <div class="code-header hdr-dash">
+          <span>ReportePage.xaml (KPIs + Barras por Categoría + Semáforo de Mayor a Menor)</span>
+          <button class="copy-btn" onclick="copiarCodigo('code-rep-xaml')">📋 Copiar XAML</button>
         </div>
+        <pre><code id="code-rep-xaml" class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
+&lt;ContentPage xmlns=&quot;http://schemas.microsoft.com/dotnet/2021/maui&quot;
+             xmlns:x=&quot;http://schemas.microsoft.com/winfx/2009/xaml&quot;
+             x:Class=&quot;InventarioMauiApp2.ReportePage&quot;
+             Title=&quot;Dashboard de Inventario&quot;
+             BackgroundColor=&quot;#0F172A&quot;&gt;
 
-        <!-- Formulario CRUD -->
-        <div class="sim-card">
-          <div id="sim-lbl-modo" class="sim-form-title">Nuevo Producto</div>
-          <div class="sim-grid-inputs">
-            <select id="sim-picker" class="sim-select">
-              <option value="">Seleccione Categoría</option>
-              <option value="1">Bebidas (ID: 1)</option>
-              <option value="2">Snacks (ID: 2)</option>
-              <option value="3">Lácteos (ID: 3)</option>
-              <option value="4">Limpieza (ID: 4)</option>
-              <option value="5">Panadería (ID: 5)</option>
-              <option value="6">Enlatados (ID: 6)</option>
-            </select>
-            <input type="text" id="sim-barras" class="sim-input" placeholder="Cód. Barras" />
-            <input type="text" id="sim-nombre" class="sim-input" placeholder="Nombre" />
-            <input type="number" id="sim-precio" class="sim-input" placeholder="Precio (0.00)" />
-            <input type="number" id="sim-stock" class="sim-input" placeholder="Stock" />
-          </div>
-          <div class="sim-btn-group">
-            <button id="sim-btn-guardar" class="sim-btn-green" onclick="simGuardar()">Guardar</button>
-            <button class="sim-btn-slate" onclick="simLimpiar()">Limpiar / Cancelar</button>
-          </div>
-        </div>
+    &lt;Grid RowDefinitions=&quot;Auto, *&quot;&gt;
 
-        <!-- Barra de Búsqueda Dinámica Unificada -->
-        <div class="sim-search-box">
-          <div style="font-size: 11px; color: #38bdf8; font-weight: bold; margin-bottom: 6px;">🔍 BÚSQUEDA DINÁMICA</div>
-          <input type="text" id="sim-buscar" class="sim-input" placeholder="Buscar por producto, código, categoría o ID..." oninput="simFiltrar()" />
-        </div>
+        &lt;!-- ENCABEZADO DEL DASHBOARD --&gt;
+        &lt;Border Grid.Row=&quot;0&quot; BackgroundColor=&quot;#1E293B&quot; StrokeThickness=&quot;0&quot; Margin=&quot;12,10,12,6&quot; Padding=&quot;14&quot;&gt;
+            &lt;Border.StrokeShape&gt;
+                &lt;RoundRectangle CornerRadius=&quot;12&quot; /&gt;
+            &lt;/Border.StrokeShape&gt;
+            &lt;Grid ColumnDefinitions=&quot;*, Auto&quot;&gt;
+                &lt;VerticalStackLayout Grid.Column=&quot;0&quot; Spacing=&quot;2&quot;&gt;
+                    &lt;Label Text=&quot;📊 DASHBOARD DE INVENTARIO&quot;
+                           TextColor=&quot;#38BDF8&quot;
+                           FontSize=&quot;17&quot;
+                           FontAttributes=&quot;Bold&quot; /&gt;
+                    &lt;Label x:Name=&quot;LblServidorActivo&quot;
+                           Text=&quot;Servidor: 10.0.0.15&quot;
+                           TextColor=&quot;#94A3B8&quot;
+                           FontSize=&quot;12&quot; /&gt;
+                &lt;/VerticalStackLayout&gt;
 
-        <!-- Lista de Productos -->
-        <div style="font-size: 13px; color: #38bdf8; font-weight: bold; margin-bottom: 8px;">PRODUCTOS REGISTRADOS</div>
-        <div id="sim-lista" class="sim-list-container">
-          <!-- Inyectado dinámicamente -->
-        </div>
+                &lt;Button Grid.Column=&quot;1&quot;
+                        Text=&quot;🔄 Actualizar&quot;
+                        Clicked=&quot;OnActualizarReporteClicked&quot;
+                        BackgroundColor=&quot;#0284C7&quot;
+                        TextColor=&quot;White&quot;
+                        FontAttributes=&quot;Bold&quot;
+                        FontSize=&quot;12&quot;
+                        CornerRadius=&quot;8&quot;
+                        HeightRequest=&quot;38&quot; /&gt;
+            &lt;/Grid&gt;
+        &lt;/Border&gt;
 
+        &lt;!-- CONTENIDO DESPLAZABLE --&gt;
+        &lt;ScrollView Grid.Row=&quot;1&quot; Padding=&quot;12,0,12,16&quot;&gt;
+            &lt;VerticalStackLayout Spacing=&quot;12&quot;&gt;
+
+                &lt;!-- 1. TARJETAS DE KPIs (CUADRÍCULA 2x2) --&gt;
+                &lt;Grid ColumnDefinitions=&quot;*, *&quot; RowDefinitions=&quot;Auto, Auto&quot; ColumnSpacing=&quot;10&quot; RowSpacing=&quot;10&quot;&gt;
+
+                    &lt;!-- KPI 1: Valor Total --&gt;
+                    &lt;Border Grid.Row=&quot;0&quot; Grid.Column=&quot;0&quot; BackgroundColor=&quot;#1E293B&quot; Stroke=&quot;#334155&quot; StrokeThickness=&quot;1&quot; Padding=&quot;12&quot;&gt;
+                        &lt;Border.StrokeShape&gt;
+                            &lt;RoundRectangle CornerRadius=&quot;12&quot; /&gt;
+                        &lt;/Border.StrokeShape&gt;
+                        &lt;VerticalStackLayout Spacing=&quot;4&quot;&gt;
+                            &lt;Label Text=&quot;VALOR TOTAL&quot; TextColor=&quot;#94A3B8&quot; FontSize=&quot;11&quot; FontAttributes=&quot;Bold&quot; /&gt;
+                            &lt;Label x:Name=&quot;LblValorTotal&quot; Text=&quot;RD$ 0.00&quot; TextColor=&quot;#34D399&quot; FontSize=&quot;18&quot; FontAttributes=&quot;Bold&quot; /&gt;
+                            &lt;Label Text=&quot;Capital en almacén&quot; TextColor=&quot;#64748B&quot; FontSize=&quot;10&quot; /&gt;
+                        &lt;/VerticalStackLayout&gt;
+                    &lt;/Border&gt;
+
+                    &lt;!-- KPI 2: Unidades Totales --&gt;
+                    &lt;Border Grid.Row=&quot;0&quot; Grid.Column=&quot;1&quot; BackgroundColor=&quot;#1E293B&quot; Stroke=&quot;#334155&quot; StrokeThickness=&quot;1&quot; Padding=&quot;12&quot;&gt;
+                        &lt;Border.StrokeShape&gt;
+                            &lt;RoundRectangle CornerRadius=&quot;12&quot; /&gt;
+                        &lt;/Border.StrokeShape&gt;
+                        &lt;VerticalStackLayout Spacing=&quot;4&quot;&gt;
+                            &lt;Label Text=&quot;STOCK FÍSICO&quot; TextColor=&quot;#94A3B8&quot; FontSize=&quot;11&quot; FontAttributes=&quot;Bold&quot; /&gt;
+                            &lt;Label x:Name=&quot;LblTotalUnidades&quot; Text=&quot;0 uds&quot; TextColor=&quot;#38BDF8&quot; FontSize=&quot;18&quot; FontAttributes=&quot;Bold&quot; /&gt;
+                            &lt;Label Text=&quot;Total artículos&quot; TextColor=&quot;#64748B&quot; FontSize=&quot;10&quot; /&gt;
+                        &lt;/VerticalStackLayout&gt;
+                    &lt;/Border&gt;
+
+                    &lt;!-- KPI 3: Total Productos (SKUs) --&gt;
+                    &lt;Border Grid.Row=&quot;1&quot; Grid.Column=&quot;0&quot; BackgroundColor=&quot;#1E293B&quot; Stroke=&quot;#334155&quot; StrokeThickness=&quot;1&quot; Padding=&quot;12&quot;&gt;
+                        &lt;Border.StrokeShape&gt;
+                            &lt;RoundRectangle CornerRadius=&quot;12&quot; /&gt;
+                        &lt;/Border.StrokeShape&gt;
+                        &lt;VerticalStackLayout Spacing=&quot;4&quot;&gt;
+                            &lt;Label Text=&quot;VARIEDAD SKUs&quot; TextColor=&quot;#94A3B8&quot; FontSize=&quot;11&quot; FontAttributes=&quot;Bold&quot; /&gt;
+                            &lt;Label x:Name=&quot;LblTotalProductos&quot; Text=&quot;0&quot; TextColor=&quot;#F8FAFC&quot; FontSize=&quot;18&quot; FontAttributes=&quot;Bold&quot; /&gt;
+                            &lt;Label Text=&quot;Productos registrados&quot; TextColor=&quot;#64748B&quot; FontSize=&quot;10&quot; /&gt;
+                        &lt;/VerticalStackLayout&gt;
+                    &lt;/Border&gt;
+
+                    &lt;!-- KPI 4: Stock Crítico / Agotado --&gt;
+                    &lt;Border Grid.Row=&quot;1&quot; Grid.Column=&quot;1&quot; BackgroundColor=&quot;#1E293B&quot; Stroke=&quot;#334155&quot; StrokeThickness=&quot;1&quot; Padding=&quot;12&quot;&gt;
+                        &lt;Border.StrokeShape&gt;
+                            &lt;RoundRectangle CornerRadius=&quot;12&quot; /&gt;
+                        &lt;/Border.StrokeShape&gt;
+                        &lt;VerticalStackLayout Spacing=&quot;4&quot;&gt;
+                            &lt;Label Text=&quot;ALERTAS SEMÁFORO&quot; TextColor=&quot;#94A3B8&quot; FontSize=&quot;11&quot; FontAttributes=&quot;Bold&quot; /&gt;
+                            &lt;Label x:Name=&quot;LblStockBajo&quot; Text=&quot;0 críticos&quot; TextColor=&quot;#F87171&quot; FontSize=&quot;18&quot; FontAttributes=&quot;Bold&quot; /&gt;
+                            &lt;Label Text=&quot;Agotados o ≤ 5 uds&quot; TextColor=&quot;#64748B&quot; FontSize=&quot;10&quot; /&gt;
+                        &lt;/VerticalStackLayout&gt;
+                    &lt;/Border&gt;
+                &lt;/Grid&gt;
+
+                &lt;!-- 2. GRÁFICO DE BARRAS NATIVO: VALOR POR CATEGORÍA --&gt;
+                &lt;Border BackgroundColor=&quot;#1E293B&quot; StrokeThickness=&quot;0&quot; Padding=&quot;14&quot;&gt;
+                    &lt;Border.StrokeShape&gt;
+                        &lt;RoundRectangle CornerRadius=&quot;12&quot; /&gt;
+                    &lt;/Border.StrokeShape&gt;
+                    &lt;VerticalStackLayout Spacing=&quot;10&quot;&gt;
+                        &lt;Label Text=&quot;📈 DISTRIBUCIÓN DE VALOR POR CATEGORÍA&quot;
+                               TextColor=&quot;#38BDF8&quot;
+                               FontSize=&quot;13&quot;
+                               FontAttributes=&quot;Bold&quot; /&gt;
+
+                        &lt;CollectionView x:Name=&quot;CvCategoriasResumen&quot; SelectionMode=&quot;None&quot;&gt;
+                            &lt;CollectionView.ItemTemplate&gt;
+                                &lt;DataTemplate&gt;
+                                    &lt;VerticalStackLayout Spacing=&quot;4&quot; Margin=&quot;0,4&quot;&gt;
+                                        &lt;Grid ColumnDefinitions=&quot;*, Auto&quot;&gt;
+                                            &lt;Label Grid.Column=&quot;0&quot;
+                                                   Text=&quot;{Binding CategoriaNombre}&quot;
+                                                   TextColor=&quot;#F8FAFC&quot;
+                                                   FontSize=&quot;13&quot;
+                                                   FontAttributes=&quot;Bold&quot; /&gt;
+                                            &lt;Label Grid.Column=&quot;1&quot;
+                                                   Text=&quot;{Binding ValorFormateado}&quot;
+                                                   TextColor=&quot;#34D399&quot;
+                                                   FontSize=&quot;12&quot;
+                                                   FontAttributes=&quot;Bold&quot; /&gt;
+                                        &lt;/Grid&gt;
+
+                                        &lt;!-- Barra de progreso nativa representando el % del valor total --&gt;
+                                        &lt;ProgressBar Progress=&quot;{Binding Porcentaje}&quot;
+                                                     ProgressColor=&quot;#38BDF8&quot;
+                                                     BackgroundColor=&quot;#0F172A&quot;
+                                                     HeightRequest=&quot;8&quot; /&gt;
+
+                                        &lt;Label Text=&quot;{Binding DetalleItems}&quot;
+                                               TextColor=&quot;#64748B&quot;
+                                               FontSize=&quot;11&quot; /&gt;
+                                    &lt;/VerticalStackLayout&gt;
+                                &lt;/DataTemplate&gt;
+                            &lt;/CollectionView.ItemTemplate&gt;
+                        &lt;/CollectionView&gt;
+                    &lt;/VerticalStackLayout&gt;
+                &lt;/Border&gt;
+
+                &lt;!-- 3. TABLA ANALÍTICA: RANKING DE INVENTARIO (MAYOR A MENOR CON SEMÁFORO) --&gt;
+                &lt;Grid ColumnDefinitions=&quot;*, Auto&quot; Margin=&quot;4,6,4,0&quot;&gt;
+                    &lt;Label Grid.Column=&quot;0&quot;
+                           Text=&quot;📋 RANKING DE INVENTARIO (DE MAYOR A MENOR)&quot;
+                           TextColor=&quot;#38BDF8&quot;
+                           FontSize=&quot;13&quot;
+                           FontAttributes=&quot;Bold&quot;
+                           VerticalOptions=&quot;Center&quot; /&gt;
+                    &lt;Label Grid.Column=&quot;1&quot;
+                           Text=&quot;🟢 Óptimo  🟡 Bajo  🔴 Agotado&quot;
+                           TextColor=&quot;#94A3B8&quot;
+                           FontSize=&quot;11&quot;
+                           VerticalOptions=&quot;Center&quot; /&gt;
+                &lt;/Grid&gt;
+
+                &lt;CollectionView x:Name=&quot;CvReporteProductos&quot; SelectionMode=&quot;None&quot;&gt;
+                    &lt;CollectionView.EmptyView&gt;
+                        &lt;Label Text=&quot;Presiona Actualizar para consultar la vista vw_ReporteInventario.&quot;
+                               TextColor=&quot;#64748B&quot;
+                               HorizontalOptions=&quot;Center&quot;
+                               Margin=&quot;0,20&quot; /&gt;
+                    &lt;/CollectionView.EmptyView&gt;
+
+                    &lt;CollectionView.ItemTemplate&gt;
+                        &lt;DataTemplate&gt;
+                            &lt;!-- Tarjeta con borde semafórico dinámico según nivel de stock --&gt;
+                            &lt;Border BackgroundColor=&quot;#1E293B&quot; 
+                                    Stroke=&quot;{Binding ColorEstadoBorde}&quot; 
+                                    StrokeThickness=&quot;1.5&quot; 
+                                    Margin=&quot;0,5&quot; 
+                                    Padding=&quot;12&quot;&gt;
+                                &lt;Border.StrokeShape&gt;
+                                    &lt;RoundRectangle CornerRadius=&quot;10&quot; /&gt;
+                                &lt;/Border.StrokeShape&gt;
+
+                                &lt;Grid ColumnDefinitions=&quot;*, Auto&quot; RowDefinitions=&quot;Auto, Auto&quot; RowSpacing=&quot;6&quot;&gt;
+                                    &lt;VerticalStackLayout Grid.Row=&quot;0&quot; Grid.Column=&quot;0&quot; Spacing=&quot;2&quot;&gt;
+                                        &lt;Label Text=&quot;{Binding Nombre}&quot;
+                                               TextColor=&quot;#F8FAFC&quot;
+                                               FontSize=&quot;14&quot;
+                                               FontAttributes=&quot;Bold&quot; /&gt;
+                                        &lt;Label Text=&quot;{Binding CategoriaNombre}&quot;
+                                               TextColor=&quot;#94A3B8&quot;
+                                               FontSize=&quot;12&quot; /&gt;
+                                    &lt;/VerticalStackLayout&gt;
+
+                                    &lt;!-- Badge Semafórico: Verde 🟢, Amarillo 🟡, Rojo 🔴 --&gt;
+                                    &lt;Border Grid.Row=&quot;0&quot; Grid.Column=&quot;1&quot;
+                                            BackgroundColor=&quot;{Binding ColorEstadoFondo}&quot;
+                                            Stroke=&quot;{Binding ColorEstadoBorde}&quot;
+                                            StrokeThickness=&quot;1&quot;
+                                            Padding=&quot;10,4&quot;
+                                            VerticalOptions=&quot;Start&quot;&gt;
+                                        &lt;Border.StrokeShape&gt;
+                                            &lt;RoundRectangle CornerRadius=&quot;6&quot; /&gt;
+                                        &lt;/Border.StrokeShape&gt;
+                                        &lt;Label Text=&quot;{Binding TextoEstado}&quot;
+                                               TextColor=&quot;{Binding ColorEstadoTexto}&quot;
+                                               FontSize=&quot;11&quot;
+                                               FontAttributes=&quot;Bold&quot; /&gt;
+                                    &lt;/Border&gt;
+
+                                    &lt;!-- Detalle de unidades y valor total calculado --&gt;
+                                    &lt;Label Grid.Row=&quot;1&quot; Grid.Column=&quot;0&quot;
+                                           Text=&quot;{Binding CalculoDetalle}&quot;
+                                           TextColor=&quot;#94A3B8&quot;
+                                           FontSize=&quot;12&quot; /&gt;
+
+                                    &lt;Label Grid.Row=&quot;1&quot; Grid.Column=&quot;1&quot;
+                                           Text=&quot;{Binding ValorTotalFormateado}&quot;
+                                           TextColor=&quot;#34D399&quot;
+                                           FontSize=&quot;13&quot;
+                                           FontAttributes=&quot;Bold&quot;
+                                           HorizontalOptions=&quot;End&quot; /&gt;
+                                &lt;/Grid&gt;
+                            &lt;/Border&gt;
+                        &lt;/DataTemplate&gt;
+                    &lt;/CollectionView.ItemTemplate&gt;
+                &lt;/CollectionView&gt;
+
+            &lt;/VerticalStackLayout&gt;
+        &lt;/ScrollView&gt;
+    &lt;/Grid&gt;
+&lt;/ContentPage&gt;
+</code></pre>
       </div>
     </section>
 
-    <!-- 07. CONCLUSIÓN TÉCNICA -->
-    <section class="brutalist-card">
-      <span class="section-title">07. CONCLUSIÓN TÉCNICA</span>
-      <p style="font-size: 0.95rem; font-weight: bold; margin-bottom: 10px;">
-        La arquitectura implementada demuestra cómo resolver un sistema CRUD empresarial robusto y escalable limitando la solución a los dos archivos centrales (<code>MainPage.xaml</code> y <code>MainPage.xaml.cs</code>) sin sacrificar buenas prácticas de ingeniería de software.
-      </p>
-      <p style="font-size: 0.95rem;">
-        La integración directa mediante <code>Microsoft.Data.SqlClient</code> sobre el puerto 1433 ofrece tiempos de respuesta inmediatos para entornos locales y LAN. El desacoplamiento del ID técnico frente al nombre en el <code>Picker</code> protege la experiencia del usuario, mientras que las validaciones preventivas en C# neutralizan excepciones críticas de motor (como violaciones de restricciones <code>UNIQUE</code> o tipos de datos mal formateados). Finalmente, la unificación del filtrado en memoria garantiza búsquedas fluidas sin sobrecargar de peticiones repetitivas al servidor SQL.
-      </p>
+    <!-- =========================================================
+         SECCIÓN 07: REPORTEPAGE.XAML.CS (LÓGICA CON VISTA SQL Y SEMÁFORO)
+         ========================================================= -->
+    <section id="sec-07" class="brutalist-card card-dash">
+      <div class="section-header">
+        <span class="section-title t-dash">📈 07. REPORTEPAGE.XAML.CS (LÓGICA CON VISTA SQL Y SEMÁFORO)</span>
+      </div>
+
+      <div class="intro-text">
+        🧮 <strong>Integración con la Base de Datos:</strong> Este código consume directamente la vista <span class="kw-sql">vw_ReporteInventario</span> creada en el Paso 02, ordenando los datos de <strong>mayor a menor existencia (Stock DESC, ValorInventario DESC)</strong>. Asigna automáticamente los colores y badges semafóricos (<code>ColorEstadoFondo</code>, <code>ColorEstadoTexto</code>, <code>ColorEstadoBorde</code>) y utiliza <code>DisplayAlertAsync(...)</code> para manejo de alertas.
+      </div>
+
+      <div class="code-container">
+        <div class="code-header hdr-dash">
+          <span>ReportePage.xaml.cs (Namespace InventarioMauiApp2 - Conexión Vista vw_ReporteInventario)</span>
+          <button class="copy-btn" onclick="copiarCodigo('code-rep-cs')">📋 Copiar C#</button>
+        </div>
+        <pre><code id="code-rep-cs" class="language-csharp">using Microsoft.Data.SqlClient;
+using System.Collections.ObjectModel;
+
+namespace InventarioMauiApp2;
+
+/// &lt;summary&gt;
+/// Página de Dashboard Analítico que consulta la vista oficial &#x27;vw_ReporteInventario&#x27;
+/// en SQL Server, ordenando los productos de MAYOR a MENOR existencia con semáforo
+/// de colores (Verde = Óptimo, Amarillo = Stock Bajo, Rojo = Agotado).
+/// &lt;/summary&gt;
+public partial class ReportePage : ContentPage
+{
+    private const string SqlUser = &quot;JUANCITO&quot;;
+    private const string SqlPass = &quot;123456&quot;;
+    private const string SqlDb = &quot;InventarioDB1&quot;;
+    private const int SqlPort = 1433;
+    private readonly string _serverIp;
+
+    public ObservableCollection&lt;CategoriaResumenModel&gt; ResumenCategorias { get; set; } = new();
+    public ObservableCollection&lt;ReporteProductoItem&gt; ProductosReporte { get; set; } = new();
+
+    public ReportePage(string serverIp)
+    {
+        InitializeComponent();
+        _serverIp = string.IsNullOrWhiteSpace(serverIp) ? &quot;10.0.0.15&quot; : serverIp;
+        LblServidorActivo.Text = $&quot;Servidor: {_serverIp}&quot;;
+
+        CvCategoriasResumen.ItemsSource = ResumenCategorias;
+        CvReporteProductos.ItemsSource = ProductosReporte;
+    }
+
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        await CargarDashboardAsync();
+    }
+
+    private string ObtenerCadenaConexion()
+    {
+        return $&quot;Server={_serverIp},{SqlPort};Database={SqlDb};User Id={SqlUser};Password={SqlPass};TrustServerCertificate=True;Encrypt=False;Connect Timeout=5;&quot;;
+    }
+
+    private async void OnActualizarReporteClicked(object? sender, EventArgs e)
+    {
+        await CargarDashboardAsync();
+    }
+
+    private async Task CargarDashboardAsync()
+    {
+        try
+        {
+            var listaTemporal = new List&lt;ReporteProductoItem&gt;();
+
+            using SqlConnection conn = new(ObtenerCadenaConexion());
+            await conn.OpenAsync();
+
+            // Consulta directa sobre la vista analítica &#x27;vw_ReporteInventario&#x27;
+            // ORDENADA ESTRICTAMENTE DE MAYOR A MENOR EXISTENCIA (Stock DESC)
+            string query = @&quot;
+                SELECT ProductoID, CodigoBarras, Producto, CategoriaID, Categoria, 
+                       Precio, Stock, ValorInventario, EstadoStock
+                FROM vw_ReporteInventario
+                ORDER BY Stock DESC, ValorInventario DESC;&quot;;
+
+            using SqlCommand cmd = new(query, conn);
+            using SqlDataReader reader = await cmd.ExecuteReaderAsync();
+
+            while (await reader.ReadAsync())
+            {
+                listaTemporal.Add(new ReporteProductoItem
+                {
+                    ProductoID = reader.GetInt32(0),
+                    CodigoBarras = reader.GetString(1),
+                    Nombre = reader.GetString(2),
+                    CategoriaID = reader.GetInt32(3),
+                    CategoriaNombre = reader.GetString(4),
+                    Precio = reader.GetDecimal(5),
+                    Stock = reader.GetInt32(6),
+                    ValorTotal = reader.GetDecimal(7),
+                    EstadoStock = reader.GetString(8)
+                });
+            }
+
+            // 1. Cálculo de KPIs globales
+            decimal valorTotalInventario = listaTemporal.Sum(x =&gt; x.ValorTotal);
+            int totalUnidades = listaTemporal.Sum(x =&gt; x.Stock);
+            int totalProductos = listaTemporal.Count;
+            int productosCriticos = listaTemporal.Count(x =&gt; x.Stock &lt;= 5);
+
+            LblValorTotal.Text = $&quot;RD$ {valorTotalInventario:N2}&quot;;
+            LblTotalUnidades.Text = $&quot;{totalUnidades:N0} uds&quot;;
+            LblTotalProductos.Text = totalProductos.ToString();
+            LblStockBajo.Text = $&quot;{productosCriticos} críticos&quot;;
+
+            // 2. Agrupación para el gráfico de barras por Categoría
+            ResumenCategorias.Clear();
+            var grupos = listaTemporal
+                .GroupBy(p =&gt; p.CategoriaNombre)
+                .Select(g =&gt; new
+                {
+                    Categoria = g.Key,
+                    Valor = g.Sum(x =&gt; x.ValorTotal),
+                    Unidades = g.Sum(x =&gt; x.Stock),
+                    CantidadProductos = g.Count()
+                })
+                .OrderByDescending(x =&gt; x.Valor)
+                .ToList();
+
+            foreach (var g in grupos)
+            {
+                double pct = valorTotalInventario &gt; 0 ? (double)(g.Valor / valorTotalInventario) : 0;
+                ResumenCategorias.Add(new CategoriaResumenModel
+                {
+                    CategoriaNombre = g.Categoria,
+                    ValorTotal = g.Valor,
+                    Porcentaje = pct,
+                    ValorFormateado = $&quot;RD$ {g.Valor:N2} ({pct:P0})&quot;,
+                    DetalleItems = $&quot;{g.CantidadProductos} productos • {g.Unidades} unidades en stock&quot;
+                });
+            }
+
+            // 3. Poblar la lista detallada (ya ordenada de mayor a menor)
+            ProductosReporte.Clear();
+            foreach (var item in listaTemporal)
+            {
+                ProductosReporte.Add(item);
+            }
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlertAsync(&quot;❌ Error al generar reporte&quot;, @$&quot;Verifica la conexión con {_serverIp}: &quot; + ex.Message, &quot;OK&quot;);
+        }
+    }
+}
+
+// =============================================================================
+// MODELOS ANALÍTICOS PARA EL DASHBOARD
+// =============================================================================
+
+public class CategoriaResumenModel
+{
+    public string CategoriaNombre { get; set; } = string.Empty;
+    public decimal ValorTotal { get; set; }
+    public double Porcentaje { get; set; }
+    public string ValorFormateado { get; set; } = string.Empty;
+    public string DetalleItems { get; set; } = string.Empty;
+}
+
+public class ReporteProductoItem
+{
+    public int ProductoID { get; set; }
+    public string CodigoBarras { get; set; } = string.Empty;
+    public string Nombre { get; set; } = string.Empty;
+    public int CategoriaID { get; set; }
+    public string CategoriaNombre { get; set; } = string.Empty;
+    public decimal Precio { get; set; }
+    public int Stock { get; set; }
+    public decimal ValorTotal { get; set; }
+    public string EstadoStock { get; set; } = string.Empty;
+
+    public string CalculoDetalle =&gt; $&quot;{Stock} uds × RD$ {Precio:N2}&quot;;
+    public string ValorTotalFormateado =&gt; $&quot;RD$ {ValorTotal:N2}&quot;;
+
+    // Semáforo condicional: Verde (Óptimo &gt; 5), Amarillo (Bajo 1-5), Rojo (Agotado = 0)
+    public string SemaforoIcono =&gt; Stock == 0 ? &quot;🔴&quot; : (Stock &lt;= 5 ? &quot;🟡&quot; : &quot;🟢&quot;);
+    public string TextoEstado =&gt; $&quot;{SemaforoIcono} {(Stock == 0 ? &quot;AGOTADO&quot; : (Stock &lt;= 5 ? &quot;STOCK BAJO&quot; : &quot;ÓPTIMO&quot;))}&quot;;
+
+    // Colores Semáforo de Fondo (Dark Background con tinte temático)
+    public Color ColorEstadoFondo =&gt; Stock == 0
+        ? Color.FromArgb(&quot;#450A0A&quot;)   // Rojo oscuro
+        : (Stock &lt;= 5 ? Color.FromArgb(&quot;#451A03&quot;) : Color.FromArgb(&quot;#064E3B&quot;)); // Ámbar / Verde oscuro
+
+    // Colores Semáforo de Texto y Bordes (Alto Contraste)
+    public Color ColorEstadoTexto =&gt; Stock == 0
+        ? Color.FromArgb(&quot;#EF4444&quot;)   // Rojo vivo
+        : (Stock &lt;= 5 ? Color.FromArgb(&quot;#F59E0B&quot;) : Color.FromArgb(&quot;#10B981&quot;)); // Amarillo / Verde vivo
+
+    public Color ColorEstadoBorde =&gt; Stock == 0
+        ? Color.FromArgb(&quot;#EF4444&quot;)
+        : (Stock &lt;= 5 ? Color.FromArgb(&quot;#F59E0B&quot;) : Color.FromArgb(&quot;#10B981&quot;));
+}
+</code></pre>
+      </div>
     </section>
+
+<section id="sec-08" class="brutalist-card card-sim">
+      <div class="section-header">
+        <span class="section-title t-maui">📱 08. EMULADOR INTERACTIVO EN VIVO (CRUD + DASHBOARD)</span>
+      </div>
+
+      <div class="intro-text">
+        🧪 <strong>Prueba ambas pantallas en vivo:</strong> Crea, edita o elimina productos en <code>MainPage</code> y luego haz clic en el botón morado <span class="kw-ui">📊 Reporte</span> para ver cómo se recalculan automáticamente los KPIs, las barras por categoría y el ranking con formato condicional.
+      </div>
+
+      <div class="sim-phone">
+        <!-- VISTA 1: MAINPAGE -->
+        <div id="sim-view-main">
+          <div class="sim-header">
+            <div class="sim-header-top">
+              <h3>GESTIÓN DE PRODUCTOS</h3>
+              <button class="sim-btn-purple" onclick="simAbrirReporte()">📊 Reporte</button>
+            </div>
+            <div class="sim-row">
+              <input type="text" id="sim-ip" class="sim-input" value="10.0.0.15" />
+              <button class="sim-btn-cyan" onclick="simularAlerta('✅ Conexión Exitosa', 'Base de datos conectada correctamente.')">Conectar</button>
+            </div>
+          </div>
+
+          <div class="sim-card">
+            <div id="sim-lbl-modo" class="sim-form-title">Nuevo Producto</div>
+            <div class="sim-grid-inputs">
+              <select id="sim-picker" class="sim-select">
+                <option value="">Seleccione Categoría</option>
+                <option value="1">Bebidas (ID: 1)</option>
+                <option value="2">Snacks (ID: 2)</option>
+                <option value="3">Lácteos (ID: 3)</option>
+                <option value="4">Limpieza (ID: 4)</option>
+                <option value="5">Panadería (ID: 5)</option>
+                <option value="6">Enlatados (ID: 6)</option>
+              </select>
+              <input type="text" id="sim-barras" class="sim-input" placeholder="Cód. Barras" />
+              <input type="text" id="sim-nombre" class="sim-input" placeholder="Nombre" />
+              <input type="number" id="sim-precio" class="sim-input" placeholder="Precio (0.00)" />
+              <input type="number" id="sim-stock" class="sim-input" placeholder="Stock" />
+            </div>
+            <div class="sim-btn-group">
+              <button id="sim-btn-guardar" class="sim-btn-green" onclick="simGuardar()">Guardar</button>
+              <button class="sim-btn-slate" onclick="simLimpiar()">Limpiar / Cancelar</button>
+            </div>
+          </div>
+
+          <div class="sim-search-box">
+            <div style="font-size: 13px; color: #38bdf8; font-weight: bold; margin-bottom: 8px;">🔍BÚSQUEDA DINÁMICA</div>
+            <input type="text" id="sim-buscar" class="sim-input" placeholder="Buscar por producto, código, categoría o ID..." oninput="simFiltrar()" />
+          </div>
+
+          <div style="font-size: 15px; color: #38bdf8; font-weight: bold; margin-bottom: 10px;">PRODUCTOS REGISTRADOS</div>
+          <div id="sim-lista" class="sim-list-container"></div>
+        </div>
+
+        <!-- VISTA 2: REPORTEPAGE (DASHBOARD) -->
+        <div id="sim-view-reporte" style="display: none;">
+          <div class="sim-header">
+            <div class="sim-header-top" style="margin-bottom: 0;">
+              <div>
+                <h3>📊 DASHBOARD DE INVENTARIO</h3>
+                <div id="sim-rep-server" style="font-size: 12px; color: #94a3b8; margin-top: 2px;">Servidor: 10.0.0.15</div>
+              </div>
+              <div style="display: flex; gap: 8px;">
+                <button class="sim-btn-cyan" style="padding: 8px 14px; font-size: 13px;" onclick="simActualizarReporte()">🔄 Actualizar</button>
+                <button class="sim-btn-slate" style="padding: 8px 14px; font-size: 13px;" onclick="simVolverMain()">⬅ Volver</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4 KPIs -->
+          <div class="sim-kpi-grid">
+            <div class="sim-kpi-card">
+              <div class="sim-kpi-title">VALOR TOTAL</div>
+              <div id="sim-kpi-valor" class="sim-kpi-val" style="color: #34d399;">RD$ 0.00</div>
+              <div class="sim-kpi-sub">Capital en almacén</div>
+            </div>
+            <div class="sim-kpi-card">
+              <div class="sim-kpi-title">STOCK FÍSICO</div>
+              <div id="sim-kpi-unidades" class="sim-kpi-val" style="color: #38bdf8;">0 uds</div>
+              <div class="sim-kpi-sub">Unidades disponibles</div>
+            </div>
+            <div class="sim-kpi-card">
+              <div class="sim-kpi-title">PRODUCTOS (SKUs)</div>
+              <div id="sim-kpi-skus" class="sim-kpi-val" style="color: #a78bfa;">0</div>
+              <div class="sim-kpi-sub">Referencias activas</div>
+            </div>
+            <div class="sim-kpi-card">
+              <div class="sim-kpi-title">ALERTA STOCK BAJO</div>
+              <div id="sim-kpi-criticos" class="sim-kpi-val" style="color: #f87171;">0 críticos</div>
+              <div class="sim-kpi-sub">Con 5 o menos unidades</div>
+            </div>
+          </div>
+
+          <!-- Barras por Categoría -->
+          <div class="sim-card">
+            <div style="font-size: 14px; color: #38bdf8; font-weight: bold; margin-bottom: 12px;">📈 DISTRIBUCIÓN DE VALOR POR CATEGORÍA</div>
+            <div id="sim-rep-categorias" style="display: flex; flex-direction: column; gap: 12px;"></div>
+          </div>
+
+          <!-- Ranking Detallado -->
+          <div style="font-size: 14px; color: #38bdf8; font-weight: bold; margin-bottom: 10px;">📋 RANKING DE VALORIZACIÓN Y ESTADO</div>
+          <div id="sim-rep-ranking" class="sim-list-container"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         SECCIÓN 10: CÓMO EJECUTAR Y VERIFICACIÓN FINAL
+         ========================================================= -->
+    <section id="sec-09" class="brutalist-card">
+      <div class="section-header">
+        <span class="section-title t-green">🚀 09. EJECUCIÓN FINAL Y SOLUCIÓN DE PROBLEMAS</span>
+      </div>
+
+      <ol class="num-list">
+        <li>Verifica que los 5 archivos de la app compartan el mismo espacio de nombres <code>InventarioMauiApp2</code>: <code>App.xaml.cs</code>, <code>MainPage.xaml</code>, <code>MainPage.xaml.cs</code>, <code>ReportePage.xaml</code> y <code>ReportePage.xaml.cs</code>.</li>
+        <li>En Visual Studio, selecciona <strong>Windows Machine</strong> o tu <strong>Emulador de Android</strong> y pulsa <span class="kw-val">F5</span> (<span class="kw-ui">▶</span>).</li>
+        <li>Escribe la IPv4 de tu equipo (ej. <span class="kw-val">10.0.0.15</span>) y pulsa <span class="kw-ui">Conectar</span>.</li>
+        <li>Una vez cargados los productos, pulsa el botón morado <span class="kw-ui">📊 Reporte</span> en la esquina superior derecha para visualizar el Dashboard con métricas en tiempo real.</li>
+      </ol>
+
+      <div class="alert-box">
+        🛠️ <strong>Checklist rápido de validación:</strong><br>
+        1. <strong>Compilación limpia:</strong> Se reemplazó <code>DisplayAlertAsync</code> por el método oficial <code>DisplayAlertAsync</code> de .NET MAUI.<br>
+        2. <strong>Navegación garantizada:</strong> <code>App.xaml.cs</code> envuelve <code>MainPage</code> en un <code>NavigationPage</code> para evitar excepciones al abrir <code>ReportePage</code>.<br>
+        3. <strong>Conexión SQL:</strong> Confirma que reiniciaste <strong>SQL Server (MSSQLSERVER)</strong> tras habilitar TCP/IP puerto <strong>1433</strong> y abrir las reglas en Firewall.
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         SECCIÓN: BIOGRAFÍA PROFESIONAL, FILOSOFÍA & STACK TÉCNICO (ING. JUANCITO PEÑA)
+         ========================================================================== -->
+    <div class="footer-profile-card">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; align-items: center;">
+        
+        <!-- LATERAL IZQUIERDO: BIOGRAFÍA, FILOSOFÍA Y DOCENCIA -->
+        <div>
+          <!-- Encabezado con Avatar Oficial y Badges -->
+          <div class="author-header-flex">
+            <img 
+              src="https://avatars.githubusercontent.com/u/38921558?v=4" 
+              alt="Ing. Juancito Peña Vizcaíno" 
+              class="author-avatar"
+            >
+            <div>
+              <div class="author-title">Ing. Juancito Peña Vizcaíno</div>
+              <div class="author-badges">
+                <span class="author-badge badge-dark-jpv">Data Analyst</span>
+                <span class="author-badge badge-danger-jpv">Full Stack Dev</span>
+                <span class="author-badge badge-primary-jpv">AI &amp; API Expert</span>
+                <span class="author-badge badge-warning-jpv">Líder I+D+i</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- PÁRRAFO 1: Trayectoria, Formación y Foco en I+D+i -->
+          <p class="author-text">
+            <strong>Ingeniero en Sistemas y Computación</strong> con Postgrado en <strong>Ingeniería de Software</strong> y Maestría en <strong>Sistemas Mención Gerencial</strong> (<em>Universidad Dominicana O&amp;M</em>). Con más de <strong>15 años de trayectoria</strong>, transformo problemas de alta complejidad en soluciones escalables. Durante el último año, he centrado mi trabajo en <strong>I+D+i (Investigación, Desarrollo e Innovación)</strong>, explorando arquitecturas de <strong>IA Generativa (RAG / LLMs)</strong>, integración de agentes autónomos con bases de datos y orquestación de APIs empresariales.
+          </p>
+
+          <!-- PÁRRAFO 2: ADN Técnico, Pasión por los Casos de Uso y Docencia Práctica -->
+          <p class="author-text" style="margin-bottom: 0;">
+            🔬 <strong>Mi motor es el aprendizaje a través de los retos:</strong> me apasionan los <em>casos de uso reales</em>, las <strong>pruebas técnicas rigurosas</strong>, la investigación profunda y el diseño de soluciones directas a problemas de ingeniería. 🎓 Como <strong>docente universitario</strong> y creador del canal educativo <strong>@JuancitoDevV</strong>, comparto este conocimiento práctico mediante ejercicios y proyectos de código abierto para acercar la tecnología a problemas reales. 🚀
+          </p>
+        </div>
+
+        <!-- LATERAL DERECHO: STACK VISUAL AGRUPADO & CANALES OFICIALES -->
+        <div>
+          <div style="margin-bottom: 22px;">
+            <div style="font-weight: 900; font-size: 1.05rem; margin-bottom: 10px; color: #000;">
+              <i class="bi bi-stack text-danger" style="color:#da291c;"></i> Ecosistema de Tecnologías:
+            </div>
+
+            <!-- 1. Frontend & Web -->
+            <div style="margin-bottom: 8px;">
+              <small style="display:block; font-weight:800; font-size:0.82rem; color:#0f172a; margin-bottom:2px;">🖥️ Frontend &amp; Web:</small>
+              <span class="tech-pill-jpv"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5"> HTML5</span>
+              <span class="tech-pill-jpv"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3"> CSS3</span>
+              <span class="tech-pill-jpv"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript"> JavaScript</span>
+              <span class="tech-pill-jpv"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React"> React</span>
+              <span class="tech-pill-jpv"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" alt="Next.js"> Next.js</span>
+            </div>
+
+            <!-- 2. Backend & Multiplataforma -->
+            <div style="margin-bottom: 8px;">
+              <small style="display:block; font-weight:800; font-size:0.82rem; color:#0f172a; margin-bottom:2px;">⚙️ Backend &amp; Multiplataforma:</small>
+              <span class="tech-pill-jpv"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" alt="C#"> C#</span>
+              <span class="tech-pill-jpv"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dot-net/dot-net-original.svg" alt=".NET"> .NET / MAUI</span>
+              <span class="tech-pill-jpv"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python"> Python</span>
+              <span class="tech-pill-jpv"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="PHP"> PHP</span>
+            </div>
+
+            <!-- 3. Datos & Analítica -->
+            <div style="margin-bottom: 8px;">
+              <small style="display:block; font-weight:800; font-size:0.82rem; color:#0f172a; margin-bottom:2px;">📊 Data Analytics &amp; Bases de Datos:</small>
+              <span class="tech-pill-jpv"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-plain.svg" alt="SQL Server"> SQL Server</span>
+              <span class="tech-pill-jpv"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL"> PostgreSQL</span>
+              <span class="tech-pill-jpv"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL"> MySQL</span>
+              <span class="tech-pill-jpv"><i class="bi bi-bar-chart-fill" style="color:#f59e0b;"></i> Power BI / DAX</span>
+            </div>
+
+            <!-- 4. IA, APIs & Cloud -->
+            <div>
+              <small style="display:block; font-weight:800; font-size:0.82rem; color:#0f172a; margin-bottom:2px;">🤖 IA + APIs &amp; Despliegue (I+D+i):</small>
+              <span class="tech-pill-jpv"><i class="bi bi-plug-fill" style="color:#0284c7;"></i> APIs REST</span>
+              <span class="tech-pill-jpv"><i class="bi bi-cpu-fill" style="color:#ef4444;"></i> IA + LLMs (RAG)</span>
+              <span class="tech-pill-jpv"><i class="bi bi-robot" style="color:#10b981;"></i> Agentes IA</span>
+              <span class="tech-pill-jpv"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git"> Git</span>
+              <span class="tech-pill-jpv"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub"> GitHub</span>
+              <span class="tech-pill-jpv"><i class="bi bi-triangle-fill"></i> Vercel</span>
+            </div>
+          </div>
+
+          <!-- Redes Sociales Oficiales -->
+          <div>
+            <div style="font-weight: 900; font-size: 1.05rem; margin-bottom: 10px; color: #000;">
+              Canales Oficiales &amp; Redes:
+            </div>
+            
+            <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 16px;">
+              <a href="https://www.linkedin.com/in/juancitope%C3%B1a/" target="_blank" class="social-btn-jpv" title="LinkedIn Oficial" rel="noopener noreferrer">
+                <i class="bi bi-linkedin" style="color:#0a66c2;"></i>
+              </a>
+
+              <a href="https://www.youtube.com/@JuancitoDevV" target="_blank" class="social-btn-jpv" title="YouTube @JuancitoDevV" rel="noopener noreferrer">
+                <i class="bi bi-youtube" style="color:#dc2626;"></i>
+              </a>
+
+              <a href="https://github.com/JUANCITOPENA" target="_blank" class="social-btn-jpv" title="GitHub @JUANCITOPENA" rel="noopener noreferrer">
+                <i class="bi bi-github" style="color:#000000;"></i>
+              </a>
+
+              <a href="https://twitter.com/JuancitoPenaV" target="_blank" class="social-btn-jpv" title="X (Twitter) @JuancitoPenaV" rel="noopener noreferrer">
+                <i class="bi bi-twitter-x" style="color:#000000;"></i>
+              </a>
+
+              <a href="mailto:juancito.pena@gmail.com" class="social-btn-jpv" title="Correo Electrónico">
+                <i class="bi bi-envelope-at-fill" style="color:#dc2626;"></i>
+              </a>
+            </div>
+
+            <!-- Tarjeta Promocional de YouTube -->
+            <div style="padding: 12px 16px; background: #ffffff; border: 2.5px solid #000000; border-radius: 8px; box-shadow: 4px 4px 0px #000000;">
+              <div style="display: flex; align-items: center; gap: 12px;">
+                <i class="bi bi-play-circle-fill" style="color:#dc2626; font-size: 2rem;"></i>
+                <div>
+                  <small style="display:block; font-weight:800; color:#dc2626; font-size: 0.85rem;">Canal Educativo de YouTube:</small>
+                  <a href="https://www.youtube.com/@JuancitoDevV" target="_blank" style="font-weight: 900; color: #000000; text-decoration: none; font-size: 0.98rem;" rel="noopener noreferrer">
+                    @JuancitoDevV · Algoritmos, SQL, IA &amp; .NET <i class="bi bi-box-arrow-up-right" style="font-size:0.8rem;"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
 
   </div>
 
-  <!-- TOAST DE ALERTA FLOTANTE -->
+  <!-- TOAST FLOTANTE -->
+  
+
+  <!-- =========================================================================
+       FOOTER OFICIAL INSTITUCIONAL NEO-BRUTALIST (ING. JUANCITO PEÑA)
+       ========================================================================== -->
+  <footer class="footer-official-jpv">
+    <div style="width: 80%; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
+      <div style="max-width: 700px;">
+        <span style="background: var(--yellow); color: #000000; font-weight: 900; font-family: 'Courier New', monospace; padding: 4px 10px; border: 2px solid #000000; border-radius: 4px; font-size: 0.85rem; margin-right: 8px;">PROYECTO OFICIAL JPV</span>
+        <strong style="color: #ffffff; font-size: 1.1rem;">Sistemas, Datos &amp; Arquitectura de Software</strong>
+        <p style="font-size: 0.92rem; color: #94a3b8; margin: 8px 0 4px 0; line-height: 1.5;">
+          Plataforma de grado industrial desarrollada bajo estándares de alto rendimiento, accesibilidad universal y diseño limpio.
+        </p>
+        <p style="font-size: 0.82rem; color: #cbd5e1; margin: 0; line-height: 1.4;">
+          <strong>Aviso Académico &amp; Autoría:</strong> Diseñado, desarrollado y certificado por el <strong>Ing. Juancito Peña Vizcaíno</strong>. Todos los derechos reservados.
+        </p>
+      </div>
+      <div>
+        <a href="#top" style="color: var(--yellow); font-weight: 900; text-decoration: none; font-size: 1.05rem; display: inline-flex; align-items: center; gap: 8px; background: #222; border: 2px solid #fff; padding: 8px 16px; border-radius: 6px; box-shadow: 3px 3px 0 var(--yellow); font-family: 'Courier New', monospace;">
+          <i class="bi bi-arrow-up-circle-fill"></i> Volver al Inicio
+        </a>
+      </div>
+    </div>
+  </footer>
+
+
   <div id="sim-alert"></div>
 
   <!-- Scripts de Prism.js -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+  <script src="libs/prism.min.js"></script>
+  <script src="libs/prism-csharp.min.js"></script>
+  <script src="libs/prism-sql.min.js"></script>
+  <script src="libs/prism-bash.min.js"></script>
+  <script src="libs/prism-powershell.min.js"></script>
 
-  <!-- LÓGICA DE INTERACCIÓN (COPIADO + EMULADOR) -->
-  <script>
-    // 1. COPIADO AL PORTAPAPELES
-    function copiarCodigo(id) {
-      const codeElement = document.getElementById(id);
-      const text = codeElement.innerText;
-      navigator.clipboard.writeText(text).then(() => {
-        mostrarToast("📋 ¡CÓDIGO COPIADO AL PORTAPAPELES!");
-      });
-    }
-
-    function mostrarToast(msg) {
-      const alertBox = document.getElementById('sim-alert');
-      alertBox.innerText = msg;
-      alertBox.style.display = 'block';
-      setTimeout(() => {
-        alertBox.style.display = 'none';
-      }, 2500);
-    }
-
-    function simularAlerta(titulo, msg) {
-      mostrarToast(`${titulo}: ${msg}`);
-    }
-
-    // 2. MOTOR DEL EMULADOR
-    const categoriasDB = {
-      1: "Bebidas",
-      2: "Snacks",
-      3: "Lácteos",
-      4: "Limpieza",
-      5: "Panadería",
-      6: "Enlatados"
-    };
-
-    let productosDB = [
-      { id: 1, catId: 1, codigo: "746001001", nombre: "Cerveza Extra 355ml", precio: 150.00, stock: 48 },
-      { id: 2, catId: 1, codigo: "746001002", nombre: "Malta 200ml", precio: 45.00, stock: 100 },
-      { id: 3, catId: 2, codigo: "746002001", nombre: "Platanitos Salados", precio: 35.00, stock: 60 },
-      { id: 4, catId: 4, codigo: "746004001", nombre: "Detergente Líquido 1L", precio: 185.00, stock: 40 },
-      { id: 5, catId: 4, codigo: "746004002", nombre: "Cloro Galón", precio: 120.00, stock: 30 }
-    ];
-
-    let editandoId = 0;
-
-    function renderizarLista(items) {
-      const contenedor = document.getElementById('sim-lista');
-      contenedor.innerHTML = "";
-
-      if (items.length === 0) {
-        contenedor.innerHTML = `<div style="text-align:center; padding:18px; color:#64748b; font-size:13px;">No se encontraron productos coincidentes.</div>`;
-        return;
-      }
-
-      items.forEach(prod => {
-        const catNombre = categoriasDB[prod.catId] || "Desconocida";
-        const div = document.createElement('div');
-        div.className = "sim-item";
-        div.innerHTML = `
-          <div class="sim-item-info">
-            <strong>${prod.nombre}</strong>
-            <span>Categoría: ${catNombre} (ID: ${prod.catId})</span>
-            <span>Código: ${prod.codigo}</span>
-            <div style="margin-top:4px;">
-              <span class="sim-item-price" style="display:inline;">RD$ ${prod.precio.toFixed(2)}</span>
-              <span class="sim-item-stock" style="display:inline;">Stock: ${prod.stock}</span>
-            </div>
-          </div>
-          <div class="sim-actions">
-            <button class="sim-act-btn sim-act-edit" onclick="simEditar(${prod.id})">✏️</button>
-            <button class="sim-act-btn sim-act-del" onclick="simEliminar(${prod.id})">🗑️</button>
-          </div>
-        `;
-        contenedor.appendChild(div);
-      });
-    }
-
-    function simFiltrar() {
-      const q = document.getElementById('sim-buscar').value.trim().toLowerCase();
-      if (!q) {
-        renderizarLista(productosDB);
-        return;
-      }
-
-      const filtrados = productosDB.filter(p => {
-        const catNombre = (categoriasDB[p.catId] || "").toLowerCase();
-        return p.nombre.toLowerCase().includes(q) ||
-               p.codigo.toLowerCase().includes(q) ||
-               catNombre.includes(q) ||
-               p.catId.toString() === q;
-      });
-
-      renderizarLista(filtrados);
-    }
-
-    function simGuardar() {
-      const picker = document.getElementById('sim-picker');
-      const catId = parseInt(picker.value);
-      const codigo = document.getElementById('sim-barras').value.trim();
-      const nombre = document.getElementById('sim-nombre').value.trim();
-      const precio = parseFloat(document.getElementById('sim-precio').value);
-      const stock = parseInt(document.getElementById('sim-stock').value);
-
-      if (!catId) {
-        simularAlerta("⚠️ Validación", "Debe seleccionar una categoría.");
-        return;
-      }
-      if (!codigo) {
-        simularAlerta("⚠️ Campo Requerido", "El código de barras no puede estar vacío.");
-        return;
-      }
-      if (!nombre) {
-        simularAlerta("⚠️ Campo Requerido", "El nombre del producto es obligatorio.");
-        return;
-      }
-      if (isNaN(precio) || precio < 0) {
-        simularAlerta("⚠️ Valor Inválido", "Ingrese un precio válido mayor o igual a 0.");
-        return;
-      }
-      if (isNaN(stock) || stock < 0) {
-        simularAlerta("⚠️ Valor Inválido", "Ingrese un stock entero y positivo.");
-        return;
-      }
-
-      // Validar duplicado de código de barras
-      const duplicado = productosDB.find(p => p.codigo === codigo && p.id !== editandoId);
-      if (duplicado) {
-        simularAlerta("⚠️ Código Duplicado", `El código '${codigo}' ya pertenece a otro producto.`);
-        return;
-      }
-
-      if (editandoId === 0) {
-        const nuevoId = productosDB.length > 0 ? Math.max(...productosDB.map(p => p.id)) + 1 : 1;
-        productosDB.unshift({ id: nuevoId, catId, codigo, nombre, precio, stock });
-        simularAlerta("✅ Inserción Exitosa", `El producto '${nombre}' se registró correctamente.`);
-      } else {
-        const index = productosDB.findIndex(p => p.id === editandoId);
-        if (index !== -1) {
-          productosDB[index] = { id: editandoId, catId, codigo, nombre, precio, stock };
-          simularAlerta("✅ Actualización Exitosa", `El producto #${editandoId} fue actualizado.`);
-        }
-      }
-
-      simLimpiar();
-      simFiltrar();
-    }
-
-    function simEditar(id) {
-      const prod = productosDB.find(p => p.id === id);
-      if (!prod) return;
-
-      editandoId = prod.id;
-      document.getElementById('sim-picker').value = prod.catId;
-      document.getElementById('sim-barras').value = prod.codigo;
-      document.getElementById('sim-nombre').value = prod.nombre;
-      document.getElementById('sim-precio').value = prod.precio;
-      document.getElementById('sim-stock').value = prod.stock;
-
-      const lblModo = document.getElementById('sim-lbl-modo');
-      lblModo.innerText = `✏️ Editando Producto #${prod.id}`;
-      lblModo.style.color = "#f59e0b";
-
-      const btnGuardar = document.getElementById('sim-btn-guardar');
-      btnGuardar.innerText = "Actualizar Cambios";
-      btnGuardar.style.background = "#f59e0b";
-    }
-
-    function simEliminar(id) {
-      const prod = productosDB.find(p => p.id === id);
-      if (!prod) return;
-
-      if (confirm(`🗑️ ¿Seguro que deseas eliminar '${prod.nombre}' del inventario?`)) {
-        productosDB = productosDB.filter(p => p.id !== id);
-        simularAlerta("✅ Eliminado", `El producto '${prod.nombre}' ha sido removido.`);
-        if (editandoId === id) simLimpiar();
-        simFiltrar();
-      }
-    }
-
-    function simLimpiar() {
-      editandoId = 0;
-      document.getElementById('sim-picker').value = "";
-      document.getElementById('sim-barras').value = "";
-      document.getElementById('sim-nombre').value = "";
-      document.getElementById('sim-precio').value = "";
-      document.getElementById('sim-stock').value = "";
-
-      const lblModo = document.getElementById('sim-lbl-modo');
-      lblModo.innerText = "Nuevo Producto";
-      lblModo.style.color = "#94a3b8";
-
-      const btnGuardar = document.getElementById('sim-btn-guardar');
-      btnGuardar.innerText = "Guardar";
-      btnGuardar.style.background = "#10b981";
-    }
-
-    // Inicialización del simulador
-    renderizarLista(productosDB);
-  </script>
-    <script type="module" src="script.js"></script>
-  </body>
+    <!-- Motor Interactivo del Manual y Simulador -->
+  <script src="script.js"></script>
+    </body>
 </html>
+
