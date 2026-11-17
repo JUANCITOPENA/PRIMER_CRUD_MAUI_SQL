@@ -18,6 +18,10 @@
         link.classList.remove('active');
         if (link.getAttribute('href') === `#${currentId}`) {
           link.classList.add('active');
+          const navContainer = document.getElementById('nav-links');
+          if (navContainer && window.innerWidth <= 1150) {
+            link.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+          }
         }
       });
     }

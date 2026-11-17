@@ -17,29 +17,46 @@
 <body>
 
   <!-- =========================================================
-       MENÚ FIJO SUPERIOR (FIXED) ANCLADO A TODAS LAS SECCIONES
+       MENÚ FIJO SUPERIOR (FULL WIDTH + RESPONSIVE + ICONOS REALES)
        ========================================================= -->
   <nav class="fixed-nav" aria-label="Navegación principal del manual">
     <div class="nav-brand">
-      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-        <rect x="2" y="2" width="20" height="20" rx="4" fill="#512BD4" stroke="#FFDE59" stroke-width="2"/>
-        <path d="M7 16V8L12 13L17 8V16" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-      <span>MAUI + SQL</span>
+      <a href="#top" class="brand-link" title="Ir al Inicio del Manual">
+        <span class="brand-badge-group">
+          <!-- Icono Real .NET / .NET MAUI -->
+          <svg class="brand-icon icon-maui" width="24" height="24" viewBox="0 0 128 128" fill="none" aria-hidden="true">
+            <rect width="128" height="128" rx="26" fill="#512BD4"/>
+            <path d="M26 84V44l17 22 17-22v40" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="82" cy="80" r="6" fill="#38BDF8"/>
+            <path d="M82 44h28M96 44v40" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="brand-plus">+</span>
+          <!-- Icono Real Microsoft SQL Server -->
+          <svg class="brand-icon icon-sql" width="24" height="24" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+            <rect width="32" height="32" rx="7" fill="#CC2927"/>
+            <ellipse cx="16" cy="9" rx="8.5" ry="3" fill="#FFFFFF"/>
+            <path d="M7.5 9v4.5c0 1.66 3.8 3 8.5 3s8.5-1.34 8.5-3V9" stroke="#FFFFFF" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+            <path d="M7.5 13.5V18c0 1.66 3.8 3 8.5 3s8.5-1.34 8.5-3v-4.5" stroke="#FFFFFF" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+            <path d="M7.5 18v4.5c0 1.66 3.8 3 8.5 3s8.5-1.34 8.5-3V18" stroke="#FFFFFF" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <span class="brand-title">MAUI <span style="color:#ffffff;">+</span> SQL</span>
+      </a>
     </div>
     <div class="nav-links" id="nav-links">
-      <a href="#sec-01">01. Proyecto</a>
-      <a href="#sec-02">02. SQL Server</a>
-      <a href="#sec-03">03. Conectividad MAUI</a>
-      <a href="#sec-04">04. MainPage.xaml</a>
-      <a href="#sec-05">05. MainPage.cs</a>
-      <a href="#sec-06">06. ReportePage.xaml</a>
-      <a href="#sec-07">07. ReportePage.cs</a>
-      <a href="#sec-08">08. Reporte PDF</a>
-      <a href="#sec-09">09. Simulador</a>
-      <a href="#sec-10">10. Ejecución</a>
-      <a href="#top" class="btn-top">⬆ Inicio</a>
-    </div></nav>
+      <a href="#sec-01"><i class="bi bi-folder2-open"></i> Proyecto</a>
+      <a href="#sec-02"><i class="bi bi-database-fill"></i> SQL Server</a>
+      <a href="#sec-03"><i class="bi bi-router"></i> Conectividad</a>
+      <a href="#sec-04"><i class="bi bi-filetype-xml"></i> MainPage XAML</a>
+      <a href="#sec-05"><i class="bi bi-file-code"></i> MainPage C#</a>
+      <a href="#sec-06"><i class="bi bi-bar-chart-fill"></i> Reporte XAML</a>
+      <a href="#sec-07"><i class="bi bi-pie-chart-fill"></i> Reporte C#</a>
+      <a href="#sec-08"><i class="bi bi-printer-fill"></i> Reporte PDF</a>
+      <a href="#sec-09"><i class="bi bi-phone"></i> Simulador</a>
+      <a href="#sec-10"><i class="bi bi-play-circle-fill"></i> Ejecución</a>
+      <a href="#top" class="btn-top"><i class="bi bi-arrow-up-circle-fill"></i> Inicio</a>
+    </div>
+  </nav>
 
   <div id="top" class="cascade-container">
 
