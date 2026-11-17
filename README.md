@@ -12,6 +12,7 @@
 [![Windows](https://img.shields.io/badge/Windows-WinUI%203-0078D4?style=for-the-badge&logo=windows&logoColor=white)](https://learn.microsoft.com/es-es/windows/apps/winui/winui3/)
 [![Android](https://img.shields.io/badge/Android-API%2035%2B-00E676?style=for-the-badge&logo=android&logoColor=black)](https://developer.android.com/)
 [![Licencia](https://img.shields.io/badge/Autor-Ing.%20Juancito%20Peña-FFDE59?style=for-the-badge&logo=github&logoColor=black)](https://github.com/JUANCITOPENA)
+[![QuestPDF](https://img.shields.io/badge/QuestPDF-2026.9.2-059669?style=for-the-badge&logo=adobeacrobatreader&logoColor=white)](https://www.questpdf.com/)
 
 </div>
 
@@ -46,6 +47,7 @@
 7. [Pantallas y Lógica de Negocio](#-7-pantallas-y-lógica-de-negocio)
    - 7.1. [MainPage: Gestión Operativa CRUD](#71-mainpage-gestión-operativa-crud)
    - 7.2. [ReportePage: Dashboard Analítico con Semáforo](#72-reportepage-dashboard-analítico-con-semáforo)
+   - 7.3. [Reporte Ejecutivo en PDF y Auditoría de Stock (QuestPDF)](#73-reporte-ejecutivo-en-pdf-y-auditoría-de-stock-questpdf)
 8. [Compilación, Pruebas y Despliegue](#-8-compilación-pruebas-y-despliegue)
 9. [Presentación del Autor & Footer Oficial](#-9-presentación-del-autor--footer-oficial)
 
@@ -360,6 +362,17 @@ En `Platforms/Android/AndroidManifest.xml`:
   1. **Cuadrícula de KPIs 2x2:** Valor Total (`LblValorTotal`), Stock Físico (`LblTotalUnidades`), SKUs (`LblTotalProductos`) y Alertas Semáforo (`LblStockBajo`).
   2. **Gráfico de Barras Nativo:** Distribución porcentual por familia de productos mediante `ProgressBar`.
   3. **Ranking de Inventario de Mayor a Menor:** Tarjetas individuales con borde reactivo (`Stroke="{Binding ColorEstadoBorde}"`) y badges semafóricos (🟢 `ÓPTIMO`, 🟡 `STOCK BAJO`, 🔴 `AGOTADO`).
+
+### 7.3. Reporte Ejecutivo en PDF y Auditoría de Stock (QuestPDF)
+* **Generador Vectorial A4:** Maquetación con **QuestPDF (Community Edition)** que dibuja en C# puro:
+  1. **Encabezado Institucional:** Metadatos con servidor, base de datos activa (`InventarioDB4`), vista origen `vw_ReporteInventario`, fecha y hora.
+  2. **4 KPIs de Almacén:** Valor Total en Almacén, Stock Físico (uds), Variedad de SKUs y Alertas Críticas (Agotados o ≤ 5 uds).
+  3. **Resumen de Categorías:** Participación porcentual y desglose de artículos por familia.
+  4. **Tabla de Auditoría:** Ranking ordenado de mayor a menor con formato condicional y badges semafóricos (🟢 `ÓPTIMO`, 🟡 `BAJO`, 🔴 `AGOTADO`).
+  5. **Pie de Página con Paginación Dinámica:** Paginación formal "Página X de Y".
+* **Arquitectura Limpia & Services:** Desacoplado en `Services/ReportePdfService.cs`.
+* **Compatibilidad Windows Unpackaged:** Uso de `Path.GetTempPath()` para garantizar guardado seguro sin identidad de paquete MSIX y apertura automática en el visor predeterminado (o Microsoft Edge) para impresión directa (<kbd>Ctrl + P</kbd>).
+* **Blindaje de Concurrencia:** Extracción de snapshots desconectados con `.ToList()` (`productosSnapshot` y `categoriasSnapshot`) en `ReportePage.xaml.cs` antes de invocar la generación en segundo plano, erradicando el error `Collection was modified`.
 
 ---
 

@@ -35,8 +35,9 @@
       <a href="#sec-05">05. MainPage.cs</a>
       <a href="#sec-06">06. ReportePage.xaml</a>
       <a href="#sec-07">07. ReportePage.cs</a>
-      <a href="#sec-08">08. Simulador</a>
-      <a href="#sec-09">09. Ejecución</a>
+      <a href="#sec-08">08. Reporte PDF</a>
+      <a href="#sec-09">09. Simulador</a>
+      <a href="#sec-10">10. Ejecución</a>
       <a href="#top" class="btn-top">⬆ Inicio</a>
     </div></nav>
 
@@ -148,6 +149,43 @@
           </div>
           <div style="padding: 12px 16px; background: #f8fafc; font-size: 0.92rem; font-weight: 600; color: #1e293b; border-top: 2px solid #e2e8f0;">
             KPIs de capital, barras porcentuales por categoría y ranking ordenado de mayor a menor con semáforo 🟢 🟡 🔴.
+          </div>
+        </div>
+
+        <!-- Captura 4: Reporte PDF Oficial e Impresión Directa -->
+        <div style="border: var(--border); box-shadow: var(--shadow-sm); background: #ffffff; border-radius: 8px; overflow: hidden; display: flex; flex-direction: column;">
+          <div style="background: #059669; color: #ffffff; padding: 10px 14px; font-weight: 900; font-size: 0.95rem; font-family: 'Courier New', monospace; display: flex; justify-content: space-between;">
+            <span>🖨️ 04. REPORTE PDF &amp; AUDITORÍA FÍSICA</span>
+            <span style="background: #ffffff; color: #059669; padding: 1px 6px; border-radius: 3px; font-size: 0.78rem;">QUESTPDF A4</span>
+          </div>
+          <div style="background: #0f172a; padding: 12px; text-align: center; flex: 1; display: flex; align-items: center; justify-content: center;">
+            <div style="background:#fff; border-radius:4px; padding:12px; text-align:left; width:100%; max-width:280px; box-shadow:0 4px 14px rgba(0,0,0,0.5); font-family:sans-serif;">
+              <div style="font-size:11px; font-weight:900; color:#0284c7; text-transform:uppercase;">SISTEMA DE GESTIÓN DE INVENTARIO</div>
+              <div style="font-size:9px; font-weight:700; color:#0f172a;">REPORTE EJECUTIVO Y AUDITORÍA</div>
+              <div style="font-size:8px; color:#64748b; margin-top:2px;">InventarioMauiApp2 &bull; InventarioDB1</div>
+              <div style="height:2px; background:#0284c7; margin:6px 0;"></div>
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:4px; margin-bottom:6px;">
+                <div style="background:#f0fdf4; border:1px solid #86efac; border-radius:3px; padding:4px;">
+                  <div style="font-size:7px; font-weight:800; color:#15803d;">VALOR</div>
+                  <div style="font-size:9px; font-weight:900; color:#166534;">RD$ 19,775</div>
+                </div>
+                <div style="background:#f0f9ff; border:1px solid #7dd3fc; border-radius:3px; padding:4px;">
+                  <div style="font-size:7px; font-weight:800; color:#0369a1;">STOCK</div>
+                  <div style="font-size:9px; font-weight:900; color:#075985;">253 uds</div>
+                </div>
+              </div>
+              <div style="font-size:8px; background:#0f172a; color:#fff; padding:2px 4px; border-radius:2px; font-weight:bold; margin-bottom:2px;">RANKING EXISTENCIAS (MAYOR A MENOR)</div>
+              <div style="font-size:7.5px; color:#334155; line-height:1.3;">
+                &bull; Malta 200ml: 100 uds <span style="color:#15803d; font-weight:800;">[🟢 Óptimo]</span><br>
+                &bull; Platanitos: 60 uds <span style="color:#15803d; font-weight:800;">[🟢 Óptimo]</span><br>
+                &bull; Cerveza 355ml: 48 uds <span style="color:#15803d; font-weight:800;">[🟢 Óptimo]</span><br>
+                &bull; Pan Integral: 5 uds <span style="color:#b45309; font-weight:800;">[🟡 Bajo]</span><br>
+                &bull; Habichuelas: 0 uds <span style="color:#b91c1c; font-weight:800;">[🔴 Agotado]</span>
+              </div>
+            </div>
+          </div>
+          <div style="padding: 12px 16px; background: #f8fafc; font-size: 0.92rem; font-weight: 600; color: #1e293b; border-top: 2px solid #e2e8f0;">
+            Documento A4 vectorial con KPIs, tablas de participación y códigos de barra listo para impresión física directa (<a href="#sec-08" style="color:#059669; font-weight:800;">Ver Sección 08</a>).
           </div>
         </div>
 
@@ -1926,13 +1964,1204 @@ public class ReporteProductoItem
       </div>
     </section>
 
-<section id="sec-08" class="brutalist-card card-sim">
+    <!-- =========================================================
+         SECCIÓN 08: MOTOR DE REPORTES PDF Y AUDITORÍA DE STOCK (QUESTPDF)
+         ========================================================= -->
+    <section id="sec-08" class="brutalist-card card-dash" style="border-top: 12px solid #059669;">
       <div class="section-header">
-        <span class="section-title t-maui">📱 08. EMULADOR INTERACTIVO EN VIVO (CRUD + DASHBOARD)</span>
+        <span class="section-title" style="color: #059669;">🖨️ 08. REPORTE EJECUTIVO EN PDF Y AUDITORÍA DE STOCK (QUESTPDF + IMPRESIÓN DIRECTA)</span>
       </div>
 
       <div class="intro-text">
-        🧪 <strong>Prueba ambas pantallas en vivo:</strong> Crea, edita o elimina productos en <code>MainPage</code> y luego haz clic en el botón morado <span class="kw-ui">📊 Reporte</span> para ver cómo se recalculan automáticamente los KPIs, las barras por categoría y el ranking con formato condicional.
+        📄 <strong>De qué trata este Módulo:</strong> Permite a la aplicación <span class="kw-val">InventarioMauiApp5</span> generar de forma instantánea un <strong>Documento PDF formal y vectorial en formato A4</strong> con la auditoría de existencias físicas, resumen porcentual por categoría, los 4 KPIs de capital y el ranking detallado ordenado de mayor a menor con semáforo cromático (🟢 Óptimo, 🟡 Bajo, 🔴 Agotado). El reporte se abre automáticamente en el visor predeterminado del sistema operativo (o Microsoft Edge) listo para imprimir con <span class="kw-val">Ctrl + P</span> o enviar a impresoras físicas/térmicas de almacén.
+      </div>
+
+      <!-- GUÍA PRÁCTICA DE INSTALACIÓN NUGET CLIC A CLIC -->
+      <div style="background: #f8fafc; border: 3px solid #000000; border-radius: 8px; padding: 22px; box-shadow: var(--shadow-sm); margin: 18px 0;">
+        <h3 style="color: #0f172a; font-size: 1.18rem; font-weight: 900; margin-bottom: 12px; text-transform: uppercase; display: flex; align-items: center; gap: 8px;">
+          📦 PASO PREVIO: INSTALAR QUESTPDF (CLIC A CLIC EN VISUAL STUDIO)
+        </h3>
+        <p style="margin-bottom: 14px; font-size: 1.02rem; line-height: 1.6;">
+          Para que tu proyecto pueda diseñar y emitir reportes en PDF, solo necesitas agregar el paquete oficial <strong>QuestPDF</strong> siguiendo estos sencillos clics en Visual Studio:
+        </p>
+
+        <ol class="num-list" style="margin-bottom: 14px;">
+          <li>
+            <strong>1. Abrir el Administrador de Paquetes:</strong> En el panel derecho de <em>Explorador de soluciones</em>, haz <strong>clic derecho</strong> sobre tu proyecto (<code>InventarioMauiApp5</code>) y selecciona <strong>"Administrar paquetes NuGet..." (Manage NuGet Packages...)</strong>.
+          </li>
+          <li>
+            <strong>2. Buscar QuestPDF:</strong> En la parte superior de la ventana que se abre, haz clic en la pestaña <strong>"Examinar" (Browse)</strong> y escribe <code>QuestPDF</code> en la barra de búsqueda.
+          </li>
+          <li>
+            <strong>3. Instalar la versión oficial:</strong> Haz clic sobre <strong>QuestPDF</strong> en la lista de resultados, verifica que esté seleccionada la versión <code>2026.9.2</code> (o superior compatible) y presiona el botón <strong>"Instalar" (Install)</strong>.
+          </li>
+          <li>
+            <strong>4. Aceptar licencia comunitaria:</strong> Acepta la ventana de confirmación y licencias. Visual Studio descargará e integrará automáticamente la librería sin reiniciar.
+          </li>
+        </ol>
+
+        <div style="background: #e0f2fe; border-left: 5px solid #0284c7; padding: 12px 16px; border-radius: 4px; font-size: 0.95rem; color: #0369a1;">
+          💡 <strong>Alternativa por Consola:</strong> Si prefieres usar la consola de comandos, abre <em>Herramientas ➔ Administrador de paquetes NuGet ➔ Consola del Administrador de paquetes</em> y ejecuta:
+          <div style="margin-top: 6px;"><code style="background: #0f172a; color: #38bdf8; padding: 4px 10px; border-radius: 4px; font-weight: bold;">Install-Package QuestPDF -Version 2026.9.2</code></div>
+        </div>
+      </div>
+
+      <!-- CAPTURA VISUAL / PREVIEW VECTORIAL DEL REPORTE PDF GENERADO -->
+      <div style="margin: 28px 0;">
+        <div style="background: #111111; color: var(--yellow); padding: 12px 20px; font-weight: 900; font-family: 'Courier New', monospace; font-size: 1.05rem; display: flex; justify-content: space-between; align-items: center; border: 3px solid #000; border-bottom: none; border-radius: 8px 8px 0 0; flex-wrap: wrap; gap: 8px;">
+          <span>📸 PREVISUALIZACIÓN DE LA HOJA A4 IMPRESA (DOCUMENTO VECTORIAL GENERADO)</span>
+          <span style="background: #059669; color: #fff; padding: 3px 10px; border-radius: 4px; font-size: 0.82rem;">A4 STANDALONE</span>
+        </div>
+
+        <div class="pdf-sheet-wrapper">
+          <div class="pdf-sheet-card">
+            
+            <!-- ENCABEZADO OFICIAL PDF -->
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px;">
+              <div>
+                <div class="pdf-hdr-title">SISTEMA DE GESTIÓN DE INVENTARIO</div>
+                <div class="pdf-hdr-sub">REPORTE EJECUTIVO Y AUDITORÍA DE STOCK FÍSICO</div>
+                <div class="pdf-hdr-meta">Base de Datos: <strong>InventarioDB4</strong> &bull; Servidor: <strong>192.168.2.68 (o IP activa)</strong> &bull; Proyecto: <strong>InventarioMauiApp5</strong></div>
+              </div>
+              <div style="text-align: right;">
+                <div style="font-weight: 800; font-size: 0.85rem; color: #0f172a;">Fecha: 17/11/2026</div>
+                <div style="font-size: 0.78rem; color: #64748b;">Hora: 12:45:00 PM</div>
+                <div style="font-size: 0.78rem; color: #7c3aed; font-weight: 800;">Vista: vw_ReporteInventario</div>
+              </div>
+            </div>
+
+            <hr class="pdf-divider">
+
+            <!-- CUADRÍCULA DE 4 KPIS EJECUTIVOS EN PDF -->
+            <div class="pdf-kpi-grid">
+              <!-- KPI 1 -->
+              <div class="pdf-kpi-box" style="background: #f0fdf4; border-color: #86efac;">
+                <span class="pdf-kpi-lbl" style="color: #15803d;">VALOR EN ALMACÉN</span>
+                <span class="pdf-kpi-val" style="color: #166534;">RD$ 19,775.00</span>
+                <span class="pdf-kpi-sub">Capital inventariado</span>
+              </div>
+              <!-- KPI 2 -->
+              <div class="pdf-kpi-box" style="background: #f0f9ff; border-color: #7dd3fc;">
+                <span class="pdf-kpi-lbl" style="color: #0369a1;">STOCK FÍSICO</span>
+                <span class="pdf-kpi-val" style="color: #075985;">253 uds</span>
+                <span class="pdf-kpi-sub">Unidades disponibles</span>
+              </div>
+              <!-- KPI 3 -->
+              <div class="pdf-kpi-box" style="background: #faf5ff; border-color: #d8b4fe;">
+                <span class="pdf-kpi-lbl" style="color: #7e22ce;">VARIEDAD SKUs</span>
+                <span class="pdf-kpi-val" style="color: #6b21a8;">6 artículos</span>
+                <span class="pdf-kpi-sub">Productos únicos</span>
+              </div>
+              <!-- KPI 4 -->
+              <div class="pdf-kpi-box" style="background: #fef2f2; border-color: #fca5a5;">
+                <span class="pdf-kpi-lbl" style="color: #b91c1c;">ALERTAS SEMÁFORO</span>
+                <span class="pdf-kpi-val" style="color: #991b1b;">2 críticos</span>
+                <span class="pdf-kpi-sub">Agotados o &le; 5 uds</span>
+              </div>
+            </div>
+
+            <!-- SECCIÓN B: PARTICIPACIÓN POR CATEGORÍA -->
+            <div class="pdf-section-title">📊 PARTICIPACIÓN DE VALOR POR CATEGORÍA</div>
+            <table class="pdf-table">
+              <thead>
+                <tr>
+                  <th style="width: 35%;">Categoría</th>
+                  <th style="width: 30%;">Productos y Stock</th>
+                  <th style="width: 20%;" class="text-right">Valor Total (RD$)</th>
+                  <th style="width: 15%;" class="text-right">% Participación</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Bebidas</strong></td>
+                  <td>2 productos &bull; 148 unidades en stock</td>
+                  <td class="text-right"><strong>RD$ 11,700.00</strong></td>
+                  <td class="text-right" style="color: #0284c7; font-weight: 800;">59.2%</td>
+                </tr>
+                <tr>
+                  <td><strong>Limpieza</strong></td>
+                  <td>1 productos &bull; 40 unidades en stock</td>
+                  <td class="text-right"><strong>RD$ 7,400.00</strong></td>
+                  <td class="text-right" style="color: #0284c7; font-weight: 800;">37.4%</td>
+                </tr>
+                <tr>
+                  <td><strong>Snacks</strong></td>
+                  <td>1 productos &bull; 60 unidades en stock</td>
+                  <td class="text-right"><strong>RD$ 2,100.00</strong></td>
+                  <td class="text-right" style="color: #0284c7; font-weight: 800;">10.6%</td>
+                </tr>
+                <tr>
+                  <td><strong>Panadería</strong></td>
+                  <td>1 productos &bull; 5 unidades en stock</td>
+                  <td class="text-right"><strong>RD$ 375.00</strong></td>
+                  <td class="text-right" style="color: #0284c7; font-weight: 800;">1.9%</td>
+                </tr>
+                <tr>
+                  <td><strong>Enlatados</strong></td>
+                  <td>1 productos &bull; 0 unidades en stock</td>
+                  <td class="text-right"><strong>RD$ 0.00</strong></td>
+                  <td class="text-right" style="color: #b91c1c; font-weight: 800;">0.0%</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <!-- SECCIÓN C: TABLA DE DETALLE GENERAL ORDENADA DE MAYOR A MENOR -->
+            <div class="pdf-section-title">📋 DETALLE DE EXISTENCIAS EN STOCK (ORDENADO DE MAYOR A MENOR EXISTENCIA)</div>
+            <table class="pdf-table">
+              <thead>
+                <tr>
+                  <th style="width: 5%;" class="text-center">#</th>
+                  <th style="width: 15%;">Cód. Barras</th>
+                  <th style="width: 26%;">Producto</th>
+                  <th style="width: 16%;">Categoría</th>
+                  <th style="width: 12%;" class="text-right">Precio</th>
+                  <th style="width: 8%;" class="text-center">Stock</th>
+                  <th style="width: 18%;" class="text-right">Valor Total</th>
+                  <th style="width: 10%;" class="text-center">Estado</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="text-center">1</td>
+                  <td><code style="font-size:0.75rem;">746001002</code></td>
+                  <td><strong>Malta 200ml</strong></td>
+                  <td>Bebidas</td>
+                  <td class="text-right">RD$ 45.00</td>
+                  <td class="text-center"><strong>100</strong></td>
+                  <td class="text-right"><strong>RD$ 4,500.00</strong></td>
+                  <td class="text-center"><span class="pdf-badge pdf-badge-optimo">🟢 ÓPTIMO</span></td>
+                </tr>
+                <tr>
+                  <td class="text-center">2</td>
+                  <td><code style="font-size:0.75rem;">746002001</code></td>
+                  <td><strong>Platanitos Salados</strong></td>
+                  <td>Snacks</td>
+                  <td class="text-right">RD$ 35.00</td>
+                  <td class="text-center"><strong>60</strong></td>
+                  <td class="text-right"><strong>RD$ 2,100.00</strong></td>
+                  <td class="text-center"><span class="pdf-badge pdf-badge-optimo">🟢 ÓPTIMO</span></td>
+                </tr>
+                <tr>
+                  <td class="text-center">3</td>
+                  <td><code style="font-size:0.75rem;">746001001</code></td>
+                  <td><strong>Cerveza Extra 355ml</strong></td>
+                  <td>Bebidas</td>
+                  <td class="text-right">RD$ 150.00</td>
+                  <td class="text-center"><strong>48</strong></td>
+                  <td class="text-right"><strong>RD$ 7,200.00</strong></td>
+                  <td class="text-center"><span class="pdf-badge pdf-badge-optimo">🟢 ÓPTIMO</span></td>
+                </tr>
+                <tr>
+                  <td class="text-center">4</td>
+                  <td><code style="font-size:0.75rem;">746004001</code></td>
+                  <td><strong>Detergente Líquido 1L</strong></td>
+                  <td>Limpieza</td>
+                  <td class="text-right">RD$ 185.00</td>
+                  <td class="text-center"><strong>40</strong></td>
+                  <td class="text-right"><strong>RD$ 7,400.00</strong></td>
+                  <td class="text-center"><span class="pdf-badge pdf-badge-optimo">🟢 ÓPTIMO</span></td>
+                </tr>
+                <tr>
+                  <td class="text-center">5</td>
+                  <td><code style="font-size:0.75rem;">746005001</code></td>
+                  <td><strong>Pan Integral</strong></td>
+                  <td>Panadería</td>
+                  <td class="text-right">RD$ 75.00</td>
+                  <td class="text-center"><strong>5</strong></td>
+                  <td class="text-right"><strong>RD$ 375.00</strong></td>
+                  <td class="text-center"><span class="pdf-badge pdf-badge-bajo">🟡 BAJO</span></td>
+                </tr>
+                <tr>
+                  <td class="text-center">6</td>
+                  <td><code style="font-size:0.75rem;">746006002</code></td>
+                  <td><strong>Habichuelas Rojas Enlatadas</strong></td>
+                  <td>Enlatados</td>
+                  <td class="text-right">RD$ 85.00</td>
+                  <td class="text-center"><strong>0</strong></td>
+                  <td class="text-right"><strong>RD$ 0.00</strong></td>
+                  <td class="text-center"><span class="pdf-badge pdf-badge-agotado">🔴 AGOTADO</span></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <!-- PIE DE PÁGINA DEL PDF -->
+            <div class="pdf-footer">
+              <span>InventarioMauiApp2 &bull; Reporte emitido desde la vista vw_ReporteInventario (SQL Server)</span>
+              <span><strong>Página 1 de 1</strong></span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- =========================================================================
+           MÓDULO 1: INICIALIZACIÓN GLOBAL EN MAUIPROGRAM.CS
+           ========================================================================= -->
+      <div style="background: #ffffff; border: 3px solid #000000; border-radius: 8px; padding: 20px; box-shadow: var(--shadow-sm); margin: 24px 0 12px 0;">
+        <h4 style="color: #0f172a; font-size: 1.15rem; font-weight: 900; margin-bottom: 8px; text-transform: uppercase; display: flex; align-items: center; gap: 8px;">
+          ⚙️ 1. ACTIVACIÓN DE LICENCIA Y POLÍTICA DE FUENTES EN MAUIPROGRAM.CS
+        </h4>
+        <div style="font-size: 0.98rem; line-height: 1.6; color: #334155; margin-bottom: 12px;">
+          <strong>¿Para qué sirve y por qué se modifica?</strong><br>
+          <code>MauiProgram.cs</code> es el punto de inicio donde se construye la aplicación .NET MAUI. A partir de QuestPDF versión 2026, la librería exige que declares explícitamente el uso de su licencia comunitaria gratuita (<code>LicenseType.Community</code>). Además, para blindar la app contra excepciones si la PC o dispositivo no cuenta con alguna fuente específica, habilitamos <code>UseSystemFonts = true</code> y <code>ThrowOnMissingFontFamilies = false</code> antes de compilar la app con <code>builder.Build()</code>.
+        </div>
+        <div style="background: #f1f5f9; border-left: 4px solid #512BD4; padding: 10px 14px; border-radius: 4px; font-size: 0.93rem; color: #1e293b;">
+          👉 <strong>Cómo aplicarlo:</strong> En el <em>Explorador de soluciones</em>, haz doble clic sobre <strong><code>MauiProgram.cs</code></strong>, selecciona todo su contenido (<kbd>Ctrl + A</kbd>), bórralo y pega este código completo listo para producción:
+        </div>
+      </div>
+
+      <div class="code-container">
+        <div class="code-header hdr-cs">
+          <span>1. MauiProgram.cs (Inicialización Completa de Licencia y Fuentes QuestPDF)</span>
+          <button class="copy-btn" onclick="copiarCodigo('code-maui-prog')">📋 Copiar C#</button>
+        </div>
+        <pre><code id="code-maui-prog" class="language-csharp">using Microsoft.Extensions.Logging;
+using QuestPDF.Infrastructure;
+
+namespace InventarioMauiApp5
+{
+    public static class MauiProgram
+    {
+        public static MauiApp CreateMauiApp()
+        {
+            // Inicialización de licencia Comunitaria y fuentes de QuestPDF
+            QuestPDF.Settings.License = LicenseType.Community;
+            QuestPDF.Settings.UseSystemFonts = true;
+            QuestPDF.Settings.ThrowOnMissingFontFamilies = false;
+
+            var builder = MauiApp.CreateBuilder();
+            builder
+                .UseMauiApp&lt;App&gt;()
+                .ConfigureFonts(fonts =&gt;
+                {
+                    fonts.AddFont(&quot;OpenSans-Regular.ttf&quot;, &quot;OpenSansRegular&quot;);
+                    fonts.AddFont(&quot;OpenSans-Semibold.ttf&quot;, &quot;OpenSansSemibold&quot;);
+                });
+
+#if DEBUG
+    		builder.Logging.AddDebug();
+#endif
+
+            return builder.Build();
+        }
+    }
+}
+</code></pre>
+      </div>
+
+      <!-- =========================================================================
+           MÓDULO 2: CARPETA SERVICES Y SERVICIO REPORTEPDFSERVICE.CS
+           ========================================================================= -->
+      <div style="background: #ffffff; border: 3px solid #000000; border-radius: 8px; padding: 20px; box-shadow: var(--shadow-sm); margin: 30px 0 12px 0;">
+        <h4 style="color: #0f172a; font-size: 1.15rem; font-weight: 900; margin-bottom: 8px; text-transform: uppercase; display: flex; align-items: center; gap: 8px;">
+          📁 2. CARPETA SERVICES Y SERVICIO MAESTRO (REPORTEPDFSERVICE.CS)
+        </h4>
+        <div style="font-size: 0.98rem; line-height: 1.6; color: #334155; margin-bottom: 12px;">
+          <strong>¿Para qué sirve la carpeta Services y esta clase?</strong><br>
+          Siguiendo las mejores prácticas de arquitectura limpia, desacoplamos la lógica de dibujo y formateo del PDF de la pantalla visual. Esta clase estática <code>ReportePdfService</code> se encarga de:
+          <ul style="margin: 6px 0 10px 20px;">
+            <li>Diseñar en C# puro la hoja en formato A4 con encabezado institucional, fecha, hora, servidor y base de datos activa.</li>
+            <li>Construir la cuadrícula de los 4 KPIs ejecutivos (Valor Total, Stock Físico, Variedad SKUs y Alertas Semáforo).</li>
+            <li>Renderizar la tabla de participación de valor por categoría con su porcentaje correspondiente.</li>
+            <li>Maquetar la tabla detallada de productos ordenada de mayor a menor con formato condicional y badges semafóricos (🟢 Óptimo, 🟡 Bajo, 🔴 Agotado).</li>
+            <li><strong>Compatibilidad Windows Unpackaged:</strong> Utiliza <code>Path.GetTempPath()</code> para evitar el fallo de <em>"package identity"</em> y lanza la apertura automática en el visor predeterminado (o Microsoft Edge) listo para imprimir con <kbd>Ctrl + P</kbd>.</li>
+          </ul>
+        </div>
+        <div style="background: #f1f5f9; border-left: 4px solid #059669; padding: 10px 14px; border-radius: 4px; font-size: 0.93rem; color: #1e293b;">
+          👉 <strong>Cómo crearlo paso a paso:</strong>
+          <ol style="margin: 4px 0 0 18px; padding: 0;">
+            <li>En el <em>Explorador de soluciones</em>, haz clic derecho sobre el proyecto <code>InventarioMauiApp5</code> ➔ <strong>Agregar</strong> ➔ <strong>Nueva carpeta</strong> y nómbrala <strong><code>Services</code></strong>.</li>
+            <li>Haz clic derecho sobre la carpeta <code>Services</code> ➔ <strong>Agregar</strong> ➔ <strong>Clase...</strong></li>
+            <li>Nómbrala <strong><code>ReportePdfService.cs</code></strong> y presiona <strong>Agregar</strong>.</li>
+            <li>Borra todo lo que traiga la plantilla y pega este código completo:</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="code-container">
+        <div class="code-header hdr-dash">
+          <span>2. Services/ReportePdfService.cs (Servicio Completo de Generación e Impresión Directa)</span>
+          <button class="copy-btn" onclick="copiarCodigo('code-pdf-service')">📋 Copiar C#</button>
+        </div>
+        <pre><code id="code-pdf-service" class="language-csharp">using QuestPDF.Fluent;
+using QuestPDF.Helpers;
+using QuestPDF.Infrastructure;
+using System.Diagnostics;
+using QColors = QuestPDF.Helpers.Colors;
+
+namespace InventarioMauiApp5.Services;
+
+/// &lt;summary&gt;
+/// Servicio profesional de generación de reportes PDF para el Dashboard de Inventario
+/// utilizando QuestPDF (Community Edition).
+/// &lt;/summary&gt;
+public static class ReportePdfService
+{
+    static ReportePdfService()
+    {
+        // Configuración de licencia y habilitación de fuentes del sistema sin excepciones
+        QuestPDF.Settings.License = LicenseType.Community;
+        QuestPDF.Settings.UseSystemFonts = true;
+        QuestPDF.Settings.ThrowOnMissingFontFamilies = false;
+    }
+
+    /// &lt;summary&gt;
+    /// Genera un documento PDF formal con los datos analíticos del Dashboard y lo abre
+    /// inmediatamente en el visor predeterminado del sistema operativo para impresión.
+    /// &lt;/summary&gt;
+    public static async Task&lt;string&gt; GenerarYVisualizarPdfAsync(
+        string serverIp,
+        string baseDatos,
+        decimal valorTotal,
+        int totalUnidades,
+        int totalProductos,
+        int productosCriticos,
+        IEnumerable&lt;CategoriaResumenModel&gt; categorias,
+        IEnumerable&lt;ReporteProductoItem&gt; productos)
+    {
+        // Re-asegurar configuración de licencia y tolerancia de fuentes
+        QuestPDF.Settings.License = LicenseType.Community;
+        QuestPDF.Settings.UseSystemFonts = true;
+        QuestPDF.Settings.ThrowOnMissingFontFamilies = false;
+
+        // Directorio seguro para evitar InvalidOperationException en apps Windows unpackaged (sin identity)
+        string outputDir;
+        try
+        {
+            outputDir = Path.GetTempPath();
+        }
+        catch
+        {
+            outputDir = AppContext.BaseDirectory;
+        }
+
+        string fileName = $&quot;Reporte_Inventario_{DateTime.Now:yyyyMMdd_HHmmssfff}.pdf&quot;;
+        string filePath = Path.Combine(outputDir, fileName);
+
+        var document = Document.Create(container =&gt;
+        {
+            container.Page(page =&gt;
+            {
+                page.Size(PageSizes.A4);
+                page.Margin(25, Unit.Point);
+                page.PageColor(QColors.White);
+                page.DefaultTextStyle(x =&gt; x.FontSize(9).FontFamily(&quot;Lato&quot;).FontColor(&quot;#1E293B&quot;));
+
+                // =============================================================
+                // 1. ENCABEZADO OFICIAL
+                // =============================================================
+                page.Header().Column(col =&gt;
+                {
+                    col.Item().Row(row =&gt;
+                    {
+                        row.RelativeItem().Column(titleCol =&gt;
+                        {
+                            titleCol.Item().Text(&quot;SISTEMA DE GESTIÓN DE INVENTARIO&quot;)
+                                .FontSize(16)
+                                .Bold()
+                                .FontColor(&quot;#0284C7&quot;);
+
+                            titleCol.Item().Text(&quot;REPORTE EJECUTIVO Y AUDITORÍA DE STOCK&quot;)
+                                .FontSize(11)
+                                .Bold()
+                                .FontColor(&quot;#0F172A&quot;);
+
+                            titleCol.Item().Text($&quot;Base de Datos: {baseDatos ?? &quot;InventarioDB4&quot;}  •  Servidor: {serverIp ?? &quot;192.168.2.68&quot;}&quot;)
+                                .FontSize(9)
+                                .FontColor(&quot;#64748B&quot;);
+                        });
+
+                        row.ConstantItem(150).Column(metaCol =&gt;
+                        {
+                            metaCol.Item().AlignRight().Text($&quot;Fecha: {DateTime.Now:dd/MM/yyyy}&quot;)
+                                .FontSize(9)
+                                .Bold();
+                            metaCol.Item().AlignRight().Text($&quot;Hora: {DateTime.Now:hh:mm:ss tt}&quot;)
+                                .FontSize(8)
+                                .FontColor(&quot;#64748B&quot;);
+                            metaCol.Item().AlignRight().Text(&quot;Vista: vw_ReporteInventario&quot;)
+                                .FontSize(8)
+                                .FontColor(&quot;#8B5CF6&quot;)
+                                .Bold();
+                        });
+                    });
+
+                    col.Item().PaddingTop(6).LineHorizontal(1.5f).LineColor(&quot;#0284C7&quot;);
+                });
+
+                // =============================================================
+                // 2. CUERPO DEL REPORTE
+                // =============================================================
+                page.Content().PaddingVertical(10).Column(col =&gt;
+                {
+                    col.Spacing(12);
+
+                    // --- SECCIÓN A: CUADRÍCULA DE 4 KPIS EJECUTIVOS ---
+                    col.Item().Row(row =&gt;
+                    {
+                        row.Spacing(8);
+
+                        // KPI 1: VALOR TOTAL
+                        row.RelativeItem().Border(1).BorderColor(&quot;#CBD5E1&quot;).Background(&quot;#F0FDF4&quot;).Padding(8).Column(kpi =&gt;
+                        {
+                            kpi.Item().Text(&quot;VALOR TOTAL EN ALMACÉN&quot;).FontSize(8).Bold().FontColor(&quot;#15803D&quot;);
+                            kpi.Item().Text($&quot;RD$ {valorTotal:N2}&quot;).FontSize(13).Bold().FontColor(&quot;#166534&quot;);
+                            kpi.Item().Text(&quot;Capital total inventariado&quot;).FontSize(7).FontColor(&quot;#64748B&quot;);
+                        });
+
+                        // KPI 2: STOCK TOTAL
+                        row.RelativeItem().Border(1).BorderColor(&quot;#CBD5E1&quot;).Background(&quot;#F0F9FF&quot;).Padding(8).Column(kpi =&gt;
+                        {
+                            kpi.Item().Text(&quot;STOCK FÍSICO&quot;).FontSize(8).Bold().FontColor(&quot;#0369A1&quot;);
+                            kpi.Item().Text($&quot;{totalUnidades:N0} uds&quot;).FontSize(13).Bold().FontColor(&quot;#075985&quot;);
+                            kpi.Item().Text(&quot;Unidades disponibles&quot;).FontSize(7).FontColor(&quot;#64748B&quot;);
+                        });
+
+                        // KPI 3: SKUs
+                        row.RelativeItem().Border(1).BorderColor(&quot;#CBD5E1&quot;).Background(&quot;#FAF5FF&quot;).Padding(8).Column(kpi =&gt;
+                        {
+                            kpi.Item().Text(&quot;VARIEDAD SKUs&quot;).FontSize(8).Bold().FontColor(&quot;#7E22CE&quot;);
+                            kpi.Item().Text($&quot;{totalProductos} artículos&quot;).FontSize(13).Bold().FontColor(&quot;#6B21A8&quot;);
+                            kpi.Item().Text(&quot;Total productos únicos&quot;).FontSize(7).FontColor(&quot;#64748B&quot;);
+                        });
+
+                        // KPI 4: ALERTAS CRÍTICAS
+                        row.RelativeItem().Border(1).BorderColor(&quot;#CBD5E1&quot;).Background(&quot;#FEF2F2&quot;).Padding(8).Column(kpi =&gt;
+                        {
+                            kpi.Item().Text(&quot;ALERTAS SEMÁFORO&quot;).FontSize(8).Bold().FontColor(&quot;#B91C1C&quot;);
+                            kpi.Item().Text($&quot;{productosCriticos} críticos&quot;).FontSize(13).Bold().FontColor(&quot;#991B1B&quot;);
+                            kpi.Item().Text(&quot;Agotados o ≤ 5 uds&quot;).FontSize(7).FontColor(&quot;#64748B&quot;);
+                        });
+                    });
+
+                    // --- SECCIÓN B: RESUMEN POR CATEGORÍAS ---
+                    col.Item().Column(catCol =&gt;
+                    {
+                        catCol.Item().PaddingBottom(4).Text(&quot;RESUMEN DE PARTICIPACIÓN POR CATEGORÍA&quot;)
+                            .FontSize(10)
+                            .Bold()
+                            .FontColor(&quot;#0F172A&quot;);
+
+                        catCol.Item().Table(table =&gt;
+                        {
+                            table.ColumnsDefinition(columns =&gt;
+                            {
+                                columns.RelativeColumn(3); // Categoría
+                                columns.RelativeColumn(2); // Detalle Items
+                                columns.RelativeColumn(2); // Valor Total
+                                columns.RelativeColumn(1); // % Part.
+                            });
+
+                            table.Header(header =&gt;
+                            {
+                                header.Cell().Background(&quot;#1E293B&quot;).Padding(4).Text(&quot;Categoría&quot;).Bold().FontColor(&quot;#FFFFFF&quot;).FontSize(8);
+                                header.Cell().Background(&quot;#1E293B&quot;).Padding(4).Text(&quot;Productos y Stock&quot;).Bold().FontColor(&quot;#FFFFFF&quot;).FontSize(8);
+                                header.Cell().Background(&quot;#1E293B&quot;).Padding(4).AlignRight().Text(&quot;Valor (RD$)&quot;).Bold().FontColor(&quot;#FFFFFF&quot;).FontSize(8);
+                                header.Cell().Background(&quot;#1E293B&quot;).Padding(4).AlignRight().Text(&quot;% Total&quot;).Bold().FontColor(&quot;#FFFFFF&quot;).FontSize(8);
+                            });
+
+                            int cIdx = 0;
+                            foreach (var cat in categorias)
+                            {
+                                string bg = (cIdx % 2 == 0) ? &quot;#F8FAFC&quot; : &quot;#FFFFFF&quot;;
+                                table.Cell().Background(bg).Padding(4).Text(cat.CategoriaNombre ?? &quot;Sin Categoría&quot;).FontSize(8);
+                                table.Cell().Background(bg).Padding(4).Text(cat.DetalleItems ?? &quot;&quot;).FontSize(8);
+                                table.Cell().Background(bg).Padding(4).AlignRight().Text($&quot;RD$ {cat.ValorTotal:N2}&quot;).FontSize(8).Bold();
+                                table.Cell().Background(bg).Padding(4).AlignRight().Text($&quot;{cat.Porcentaje:P1}&quot;).FontSize(8).Bold().FontColor(&quot;#0284C7&quot;);
+                                cIdx++;
+                            }
+                        });
+                    });
+
+                    // --- SECCIÓN C: TABLA DETALLADA DE PRODUCTOS (ORDENADA DE MAYOR A MENOR) ---
+                    col.Item().Column(prodCol =&gt;
+                    {
+                        prodCol.Item().PaddingBottom(4).Row(r =&gt;
+                        {
+                            r.RelativeItem().Text(&quot;DETALLE GENERAL DE PRODUCTOS EN STOCK (vw_ReporteInventario)&quot;)
+                                .FontSize(10)
+                                .Bold()
+                                .FontColor(&quot;#0F172A&quot;);
+
+                            r.ConstantItem(180).AlignRight().Text(&quot;Ordenado de mayor a menor existencia&quot;)
+                                .FontSize(8)
+                                .FontColor(&quot;#64748B&quot;);
+                        });
+
+                        prodCol.Item().Table(table =&gt;
+                        {
+                            table.ColumnsDefinition(columns =&gt;
+                            {
+                                columns.ConstantColumn(24);  // #
+                                columns.ConstantColumn(70);  // Código Barras
+                                columns.RelativeColumn(3);   // Producto
+                                columns.RelativeColumn(2);   // Categoría
+                                columns.ConstantColumn(58);  // Precio
+                                columns.ConstantColumn(40);  // Stock
+                                columns.ConstantColumn(68);  // Valor Total
+                                columns.ConstantColumn(65);  // Estado
+                            });
+
+                            table.Header(header =&gt;
+                            {
+                                header.Cell().Background(&quot;#0F172A&quot;).Padding(4).AlignCenter().Text(&quot;#&quot;).Bold().FontColor(&quot;#FFFFFF&quot;).FontSize(8);
+                                header.Cell().Background(&quot;#0F172A&quot;).Padding(4).Text(&quot;Cód. Barras&quot;).Bold().FontColor(&quot;#FFFFFF&quot;).FontSize(8);
+                                header.Cell().Background(&quot;#0F172A&quot;).Padding(4).Text(&quot;Producto&quot;).Bold().FontColor(&quot;#FFFFFF&quot;).FontSize(8);
+                                header.Cell().Background(&quot;#0F172A&quot;).Padding(4).Text(&quot;Categoría&quot;).Bold().FontColor(&quot;#FFFFFF&quot;).FontSize(8);
+                                header.Cell().Background(&quot;#0F172A&quot;).Padding(4).AlignRight().Text(&quot;Precio&quot;).Bold().FontColor(&quot;#FFFFFF&quot;).FontSize(8);
+                                header.Cell().Background(&quot;#0F172A&quot;).Padding(4).AlignCenter().Text(&quot;Stock&quot;).Bold().FontColor(&quot;#FFFFFF&quot;).FontSize(8);
+                                header.Cell().Background(&quot;#0F172A&quot;).Padding(4).AlignRight().Text(&quot;Valor (RD$)&quot;).Bold().FontColor(&quot;#FFFFFF&quot;).FontSize(8);
+                                header.Cell().Background(&quot;#0F172A&quot;).Padding(4).AlignCenter().Text(&quot;Estado&quot;).Bold().FontColor(&quot;#FFFFFF&quot;).FontSize(8);
+                            });
+
+                            int pIdx = 1;
+                            foreach (var p in productos)
+                            {
+                                string bg = (pIdx % 2 == 0) ? &quot;#F8FAFC&quot; : &quot;#FFFFFF&quot;;
+
+                                // Color semafórico del badge
+                                string estadoColor = p.Stock == 0 ? &quot;#DC2626&quot; : (p.Stock &lt;= 5 ? &quot;#D97706&quot; : &quot;#16A34A&quot;);
+                                string estadoTexto = p.Stock == 0 ? &quot;AGOTADO&quot; : (p.Stock &lt;= 5 ? &quot;BAJO&quot; : &quot;ÓPTIMO&quot;);
+
+                                table.Cell().Background(bg).Padding(3).AlignCenter().Text(pIdx.ToString()).FontSize(7.5f);
+                                table.Cell().Background(bg).Padding(3).Text(p.CodigoBarras ?? &quot;&quot;).FontSize(7.5f);
+                                table.Cell().Background(bg).Padding(3).Text(p.Nombre ?? &quot;Sin Nombre&quot;).FontSize(7.5f).Bold();
+                                table.Cell().Background(bg).Padding(3).Text(p.CategoriaNombre ?? &quot;General&quot;).FontSize(7.5f);
+                                table.Cell().Background(bg).Padding(3).AlignRight().Text($&quot;RD$ {p.Precio:N2}&quot;).FontSize(7.5f);
+                                table.Cell().Background(bg).Padding(3).AlignCenter().Text(p.Stock.ToString()).FontSize(7.5f).Bold();
+                                table.Cell().Background(bg).Padding(3).AlignRight().Text($&quot;RD$ {p.ValorTotal:N2}&quot;).FontSize(7.5f).Bold();
+                                table.Cell().Background(bg).Padding(3).AlignCenter().Text(estadoTexto).FontSize(7.5f).Bold().FontColor(estadoColor);
+
+                                pIdx++;
+                            }
+                        });
+                    });
+                });
+
+                // =============================================================
+                // 3. PIE DE PÁGINA (PAGINACIÓN &amp; AUTORÍA)
+                // =============================================================
+                page.Footer().Column(fCol =&gt;
+                {
+                    fCol.Item().LineHorizontal(0.5f).LineColor(&quot;#CBD5E1&quot;);
+                    fCol.Item().PaddingTop(4).Row(row =&gt;
+                    {
+                        row.RelativeItem().Text(&quot;InventarioMauiApp5 • Reporte emitido desde la vista vw_ReporteInventario (SQL Server)&quot;)
+                            .FontSize(7.5f)
+                            .FontColor(&quot;#94A3B8&quot;);
+
+                        row.RelativeItem().AlignRight().Text(text =&gt;
+                        {
+                            text.Span(&quot;Página &quot;).FontSize(7.5f).FontColor(&quot;#94A3B8&quot;);
+                            text.CurrentPageNumber().FontSize(7.5f).Bold();
+                            text.Span(&quot; de &quot;).FontSize(7.5f).FontColor(&quot;#94A3B8&quot;);
+                            text.TotalPages().FontSize(7.5f).Bold();
+                        });
+                    });
+                });
+            });
+        });
+
+        // Guardar archivo en disco
+        document.GeneratePdf(filePath);
+
+        // Lanzar el visor predeterminado del sistema (Acrobat, Edge, etc.)
+        await AbrirPdfParaImpresionAsync(filePath);
+
+        return filePath;
+    }
+
+    /// &lt;summary&gt;
+    /// Abre el PDF con el visor predeterminado para que el usuario pueda imprimir directamente
+    /// con Ctrl+P o el botón de impresión del sistema.
+    /// &lt;/summary&gt;
+    private static async Task AbrirPdfParaImpresionAsync(string filePath)
+    {
+        try
+        {
+            if (File.Exists(filePath))
+            {
+#if WINDOWS
+                try
+                {
+                    Process.Start(new ProcessStartInfo
+                    {
+                        FileName = filePath,
+                        UseShellExecute = true
+                    });
+                }
+                catch
+                {
+                    // Fallback directo a Microsoft Edge si falla la asociación de shell
+                    try
+                    {
+                        Process.Start(new ProcessStartInfo
+                        {
+                            FileName = &quot;msedge.exe&quot;,
+                            Arguments = $&quot;\&quot;{filePath}\&quot;&quot;,
+                            UseShellExecute = true
+                        });
+                    }
+                    catch
+                    {
+                        await Launcher.Default.OpenAsync(new OpenFileRequest
+                        {
+                            Title = &quot;Imprimir Reporte de Inventario&quot;,
+                            File = new ReadOnlyFile(filePath)
+                        });
+                    }
+                }
+#else
+                await Launcher.Default.OpenAsync(new OpenFileRequest
+                {
+                    Title = &quot;Imprimir Reporte de Inventario&quot;,
+                    File = new ReadOnlyFile(filePath)
+                });
+#endif
+            }
+        }
+        catch
+        {
+            // Silenciar fallback para no bloquear el retorno exitoso de la ruta
+        }
+    }
+}
+</code></pre>
+      </div>
+
+      <!-- =========================================================================
+           MÓDULO 3: VISTA XAML ACTUALIZADA (REPORTEPAGE.XAML)
+           ========================================================================= -->
+      <div style="background: #ffffff; border: 3px solid #000000; border-radius: 8px; padding: 20px; box-shadow: var(--shadow-sm); margin: 30px 0 12px 0;">
+        <h4 style="color: #0f172a; font-size: 1.15rem; font-weight: 900; margin-bottom: 8px; text-transform: uppercase; display: flex; align-items: center; gap: 8px;">
+          🎨 3. VISTA XAML ACTUALIZADA: REPORTEPAGE.XAML (NUEVO BOTÓN DE IMPRIMIR)
+        </h4>
+        <div style="font-size: 0.98rem; line-height: 1.6; color: #334155; margin-bottom: 12px;">
+          <strong>🔍 ¿Qué cambió respecto a la versión anterior de la Sección 06?</strong>
+          <ul style="margin: 6px 0 10px 20px;">
+            <li><strong>Ampliación de Columnas del Encabezado:</strong> En la sección 06, el <code>Grid</code> superior tenía solo 2 columnas (<code>ColumnDefinitions="*, Auto"</code>) para el título y el botón "Actualizar". Ahora se amplía a 3 columnas: <code>ColumnDefinitions="*, Auto, Auto"</code>.</li>
+            <li><strong>Nuevo Botón "🖨️ Imprimir PDF":</strong> Se añade en la Columna 2 un botón verde esmeralda con <code>Clicked="OnImprimirPdfClicked"</code>, <code>BackgroundColor="#059669"</code> y texto en blanco para lanzar la impresión.</li>
+            <li><strong>Estructura Visual Conservada al 100%:</strong> Se mantiene exactamente igual todo el Dashboard que construimos en la sección 06: las 4 tarjetas KPI (Valor Total, Stock Físico, SKUs, Alertas), las barras de progreso nativas por categoría y el ranking analítico de productos con bordes semafóricos.</li>
+          </ul>
+        </div>
+        <div style="background: #f1f5f9; border-left: 4px solid #0284c7; padding: 10px 14px; border-radius: 4px; font-size: 0.93rem; color: #1e293b;">
+          👉 <strong>Cómo actualizarlo:</strong> Abre tu archivo existente <strong><code>ReportePage.xaml</code></strong>, selecciona todo su contenido (<kbd>Ctrl + A</kbd>), bórralo y pega esta nueva versión completa con el botón integrado:
+        </div>
+      </div>
+
+      <div class="code-container">
+        <div class="code-header hdr-xaml">
+          <span>3. ReportePage.xaml (Versión Completa Actualizada con Botón "🖨️ Imprimir PDF")</span>
+          <button class="copy-btn" onclick="copiarCodigo('code-rep-xaml-pdf')">📋 Copiar XAML</button>
+        </div>
+        <pre><code id="code-rep-xaml-pdf" class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
+&lt;ContentPage xmlns=&quot;http://schemas.microsoft.com/dotnet/2021/maui&quot;
+             xmlns:x=&quot;http://schemas.microsoft.com/winfx/2009/xaml&quot;
+             x:Class=&quot;InventarioMauiApp5.ReportePage&quot;
+             Title=&quot;Dashboard de Inventario&quot;
+             BackgroundColor=&quot;#0F172A&quot;&gt;
+
+    &lt;Grid RowDefinitions=&quot;Auto, *&quot;&gt;
+
+        &lt;!-- ENCABEZADO DEL DASHBOARD: 3 COLUMNAS (TÍTULO + ACTUALIZAR + IMPRIMIR PDF) --&gt;
+        &lt;Border Grid.Row=&quot;0&quot; BackgroundColor=&quot;#1E293B&quot; StrokeThickness=&quot;0&quot; Margin=&quot;12,10,12,6&quot; Padding=&quot;14&quot;&gt;
+            &lt;Border.StrokeShape&gt;
+                &lt;RoundRectangle CornerRadius=&quot;12&quot; /&gt;
+            &lt;/Border.StrokeShape&gt;
+            &lt;Grid ColumnDefinitions=&quot;*, Auto, Auto&quot; ColumnSpacing=&quot;8&quot;&gt;
+                &lt;VerticalStackLayout Grid.Column=&quot;0&quot; Spacing=&quot;2&quot; VerticalOptions=&quot;Center&quot;&gt;
+                    &lt;Label Text=&quot;📊 DASHBOARD DE INVENTARIO&quot;
+                           TextColor=&quot;#38BDF8&quot;
+                           FontSize=&quot;17&quot;
+                           FontAttributes=&quot;Bold&quot; /&gt;
+                    &lt;Label x:Name=&quot;LblServidorActivo&quot;
+                           Text=&quot;Servidor: 192.168.2.68&quot;
+                           TextColor=&quot;#94A3B8&quot;
+                           FontSize=&quot;12&quot; /&gt;
+                &lt;/VerticalStackLayout&gt;
+
+                &lt;Button Grid.Column=&quot;1&quot;
+                        Text=&quot;🔄 Actualizar&quot;
+                        Clicked=&quot;OnActualizarReporteClicked&quot;
+                        BackgroundColor=&quot;#0284C7&quot;
+                        TextColor=&quot;White&quot;
+                        FontAttributes=&quot;Bold&quot;
+                        FontSize=&quot;12&quot;
+                        CornerRadius=&quot;8&quot;
+                        HeightRequest=&quot;38&quot;
+                        Padding=&quot;12,0&quot; /&gt;
+
+                &lt;Button Grid.Column=&quot;2&quot;
+                        Text=&quot;🖨️ Imprimir PDF&quot;
+                        Clicked=&quot;OnImprimirPdfClicked&quot;
+                        BackgroundColor=&quot;#059669&quot;
+                        TextColor=&quot;White&quot;
+                        FontAttributes=&quot;Bold&quot;
+                        FontSize=&quot;12&quot;
+                        CornerRadius=&quot;8&quot;
+                        HeightRequest=&quot;38&quot;
+                        Padding=&quot;12,0&quot; /&gt;
+            &lt;/Grid&gt;
+        &lt;/Border&gt;
+
+        &lt;!-- CONTENIDO DESPLAZABLE --&gt;
+        &lt;ScrollView Grid.Row=&quot;1&quot; Padding=&quot;12,0,12,16&quot;&gt;
+            &lt;VerticalStackLayout Spacing=&quot;12&quot;&gt;
+
+                &lt;!-- 1. TARJETAS DE KPIs (CUADRÍCULA 2x2) --&gt;
+                &lt;Grid ColumnDefinitions=&quot;*, *&quot; RowDefinitions=&quot;Auto, Auto&quot; ColumnSpacing=&quot;10&quot; RowSpacing=&quot;10&quot;&gt;
+
+                    &lt;!-- KPI 1: Valor Total --&gt;
+                    &lt;Border Grid.Row=&quot;0&quot; Grid.Column=&quot;0&quot; BackgroundColor=&quot;#1E293B&quot; Stroke=&quot;#334155&quot; StrokeThickness=&quot;1&quot; Padding=&quot;12&quot;&gt;
+                        &lt;Border.StrokeShape&gt;
+                            &lt;RoundRectangle CornerRadius=&quot;12&quot; /&gt;
+                        &lt;/Border.StrokeShape&gt;
+                        &lt;VerticalStackLayout Spacing=&quot;4&quot;&gt;
+                            &lt;Label Text=&quot;VALOR TOTAL&quot; TextColor=&quot;#94A3B8&quot; FontSize=&quot;11&quot; FontAttributes=&quot;Bold&quot; /&gt;
+                            &lt;Label x:Name=&quot;LblValorTotal&quot; Text=&quot;RD$ 0.00&quot; TextColor=&quot;#34D399&quot; FontSize=&quot;18&quot; FontAttributes=&quot;Bold&quot; /&gt;
+                            &lt;Label Text=&quot;Capital en almacén&quot; TextColor=&quot;#64748B&quot; FontSize=&quot;10&quot; /&gt;
+                        &lt;/VerticalStackLayout&gt;
+                    &lt;/Border&gt;
+
+                    &lt;!-- KPI 2: Unidades Totales --&gt;
+                    &lt;Border Grid.Row=&quot;0&quot; Grid.Column=&quot;1&quot; BackgroundColor=&quot;#1E293B&quot; Stroke=&quot;#334155&quot; StrokeThickness=&quot;1&quot; Padding=&quot;12&quot;&gt;
+                        &lt;Border.StrokeShape&gt;
+                            &lt;RoundRectangle CornerRadius=&quot;12&quot; /&gt;
+                        &lt;/Border.StrokeShape&gt;
+                        &lt;VerticalStackLayout Spacing=&quot;4&quot;&gt;
+                            &lt;Label Text=&quot;STOCK FÍSICO&quot; TextColor=&quot;#94A3B8&quot; FontSize=&quot;11&quot; FontAttributes=&quot;Bold&quot; /&gt;
+                            &lt;Label x:Name=&quot;LblTotalUnidades&quot; Text=&quot;0 uds&quot; TextColor=&quot;#38BDF8&quot; FontSize=&quot;18&quot; FontAttributes=&quot;Bold&quot; /&gt;
+                            &lt;Label Text=&quot;Total artículos&quot; TextColor=&quot;#64748B&quot; FontSize=&quot;10&quot; /&gt;
+                        &lt;/VerticalStackLayout&gt;
+                    &lt;/Border&gt;
+
+                    &lt;!-- KPI 3: Total Productos (SKUs) --&gt;
+                    &lt;Border Grid.Row=&quot;1&quot; Grid.Column=&quot;0&quot; BackgroundColor=&quot;#1E293B&quot; Stroke=&quot;#334155&quot; StrokeThickness=&quot;1&quot; Padding=&quot;12&quot;&gt;
+                        &lt;Border.StrokeShape&gt;
+                            &lt;RoundRectangle CornerRadius=&quot;12&quot; /&gt;
+                        &lt;/Border.StrokeShape&gt;
+                        &lt;VerticalStackLayout Spacing=&quot;4&quot;&gt;
+                            &lt;Label Text=&quot;VARIEDAD SKUs&quot; TextColor=&quot;#94A3B8&quot; FontSize=&quot;11&quot; FontAttributes=&quot;Bold&quot; /&gt;
+                            &lt;Label x:Name=&quot;LblTotalProductos&quot; Text=&quot;0&quot; TextColor=&quot;#F8FAFC&quot; FontSize=&quot;18&quot; FontAttributes=&quot;Bold&quot; /&gt;
+                            &lt;Label Text=&quot;Productos registrados&quot; TextColor=&quot;#64748B&quot; FontSize=&quot;10&quot; /&gt;
+                        &lt;/VerticalStackLayout&gt;
+                    &lt;/Border&gt;
+
+                    &lt;!-- KPI 4: Stock Crítico / Agotado --&gt;
+                    &lt;Border Grid.Row=&quot;1&quot; Grid.Column=&quot;1&quot; BackgroundColor=&quot;#1E293B&quot; Stroke=&quot;#334155&quot; StrokeThickness=&quot;1&quot; Padding=&quot;12&quot;&gt;
+                        &lt;Border.StrokeShape&gt;
+                            &lt;RoundRectangle CornerRadius=&quot;12&quot; /&gt;
+                        &lt;/Border.StrokeShape&gt;
+                        &lt;VerticalStackLayout Spacing=&quot;4&quot;&gt;
+                            &lt;Label Text=&quot;ALERTAS SEMÁFORO&quot; TextColor=&quot;#94A3B8&quot; FontSize=&quot;11&quot; FontAttributes=&quot;Bold&quot; /&gt;
+                            &lt;Label x:Name=&quot;LblStockBajo&quot; Text=&quot;0 críticos&quot; TextColor=&quot;#F87171&quot; FontSize=&quot;18&quot; FontAttributes=&quot;Bold&quot; /&gt;
+                            &lt;Label Text=&quot;Agotados o ≤ 5 uds&quot; TextColor=&quot;#64748B&quot; FontSize=&quot;10&quot; /&gt;
+                        &lt;/VerticalStackLayout&gt;
+                    &lt;/Border&gt;
+                &lt;/Grid&gt;
+
+                &lt;!-- 2. GRÁFICO DE BARRAS NATIVO: VALOR POR CATEGORÍA --&gt;
+                &lt;Border BackgroundColor=&quot;#1E293B&quot; StrokeThickness=&quot;0&quot; Padding=&quot;14&quot;&gt;
+                    &lt;Border.StrokeShape&gt;
+                        &lt;RoundRectangle CornerRadius=&quot;12&quot; /&gt;
+                    &lt;/Border.StrokeShape&gt;
+                    &lt;VerticalStackLayout Spacing=&quot;10&quot;&gt;
+                        &lt;Label Text=&quot;📈 DISTRIBUCIÓN DE VALOR POR CATEGORÍA&quot;
+                               TextColor=&quot;#38BDF8&quot;
+                               FontSize=&quot;13&quot;
+                               FontAttributes=&quot;Bold&quot; /&gt;
+
+                        &lt;CollectionView x:Name=&quot;CvCategoriasResumen&quot; SelectionMode=&quot;None&quot;&gt;
+                            &lt;CollectionView.ItemTemplate&gt;
+                                &lt;DataTemplate&gt;
+                                    &lt;VerticalStackLayout Spacing=&quot;4&quot; Margin=&quot;0,4&quot;&gt;
+                                        &lt;Grid ColumnDefinitions=&quot;*, Auto&quot;&gt;
+                                            &lt;Label Grid.Column=&quot;0&quot;
+                                                   Text=&quot;{Binding CategoriaNombre}&quot;
+                                                   TextColor=&quot;#F8FAFC&quot;
+                                                   FontSize=&quot;13&quot;
+                                                   FontAttributes=&quot;Bold&quot; /&gt;
+                                            &lt;Label Grid.Column=&quot;1&quot;
+                                                   Text=&quot;{Binding ValorFormateado}&quot;
+                                                   TextColor=&quot;#34D399&quot;
+                                                   FontSize=&quot;12&quot;
+                                                   FontAttributes=&quot;Bold&quot; /&gt;
+                                        &lt;/Grid&gt;
+
+                                        &lt;!-- Barra de progreso nativa representando el % del valor total --&gt;
+                                        &lt;ProgressBar Progress=&quot;{Binding Porcentaje}&quot;
+                                                     ProgressColor=&quot;#38BDF8&quot;
+                                                     BackgroundColor=&quot;#0F172A&quot;
+                                                     HeightRequest=&quot;8&quot; /&gt;
+
+                                        &lt;Label Text=&quot;{Binding DetalleItems}&quot;
+                                               TextColor=&quot;#64748B&quot;
+                                               FontSize=&quot;11&quot; /&gt;
+                                    &lt;/VerticalStackLayout&gt;
+                                &lt;/DataTemplate&gt;
+                            &lt;/CollectionView.ItemTemplate&gt;
+                        &lt;/CollectionView&gt;
+                    &lt;/VerticalStackLayout&gt;
+                &lt;/Border&gt;
+
+                &lt;!-- 3. TABLA ANALÍTICA: RANKING DE INVENTARIO (MAYOR A MENOR CON SEMÁFORO) --&gt;
+                &lt;Grid ColumnDefinitions=&quot;*, Auto&quot; Margin=&quot;4,6,4,0&quot;&gt;
+                    &lt;Label Grid.Column=&quot;0&quot;
+                           Text=&quot;📋 RANKING DE INVENTARIO (DE MAYOR A MENOR)&quot;
+                           TextColor=&quot;#38BDF8&quot;
+                           FontSize=&quot;13&quot;
+                           FontAttributes=&quot;Bold&quot;
+                           VerticalOptions=&quot;Center&quot; /&gt;
+                    &lt;Label Grid.Column=&quot;1&quot;
+                           Text=&quot;🟢 Óptimo  🟡 Bajo  🔴 Agotado&quot;
+                           TextColor=&quot;#94A3B8&quot;
+                           FontSize=&quot;11&quot;
+                           VerticalOptions=&quot;Center&quot; /&gt;
+                &lt;/Grid&gt;
+
+                &lt;CollectionView x:Name=&quot;CvReporteProductos&quot; SelectionMode=&quot;None&quot;&gt;
+                    &lt;CollectionView.EmptyView&gt;
+                        &lt;Label Text=&quot;Presiona Actualizar para consultar la vista vw_ReporteInventario.&quot;
+                               TextColor=&quot;#64748B&quot;
+                               HorizontalOptions=&quot;Center&quot;
+                               Margin=&quot;0,20&quot; /&gt;
+                    &lt;/CollectionView.EmptyView&gt;
+
+                    &lt;CollectionView.ItemTemplate&gt;
+                        &lt;DataTemplate&gt;
+                            &lt;!-- Tarjeta con borde semafórico dinámico según nivel de stock --&gt;
+                            &lt;Border BackgroundColor=&quot;#1E293B&quot; 
+                                    Stroke=&quot;{Binding ColorEstadoBorde}&quot; 
+                                    StrokeThickness=&quot;1.5&quot; 
+                                    Margin=&quot;0,5&quot; 
+                                    Padding=&quot;12&quot;&gt;
+                                &lt;Border.StrokeShape&gt;
+                                    &lt;RoundRectangle CornerRadius=&quot;10&quot; /&gt;
+                                &lt;/Border.StrokeShape&gt;
+
+                                &lt;Grid ColumnDefinitions=&quot;*, Auto&quot; RowDefinitions=&quot;Auto, Auto&quot; RowSpacing=&quot;6&quot;&gt;
+                                    &lt;VerticalStackLayout Grid.Row=&quot;0&quot; Grid.Column=&quot;0&quot; Spacing=&quot;2&quot;&gt;
+                                        &lt;Label Text=&quot;{Binding Nombre}&quot;
+                                               TextColor=&quot;#F8FAFC&quot;
+                                               FontSize=&quot;14&quot;
+                                               FontAttributes=&quot;Bold&quot; /&gt;
+                                        &lt;Label Text=&quot;{Binding CategoriaNombre}&quot;
+                                               TextColor=&quot;#94A3B8&quot;
+                                               FontSize=&quot;12&quot; /&gt;
+                                    &lt;/VerticalStackLayout&gt;
+
+                                    &lt;!-- Badge Semafórico: Verde 🟢, Amarillo 🟡, Rojo 🔴 --&gt;
+                                    &lt;Border Grid.Row=&quot;0&quot; Grid.Column=&quot;1&quot;
+                                            BackgroundColor=&quot;{Binding ColorEstadoFondo}&quot;
+                                            Stroke=&quot;{Binding ColorEstadoBorde}&quot;
+                                            StrokeThickness=&quot;1&quot;
+                                            Padding=&quot;10,4&quot;
+                                            VerticalOptions=&quot;Start&quot;&gt;
+                                        &lt;Border.StrokeShape&gt;
+                                            &lt;RoundRectangle CornerRadius=&quot;6&quot; /&gt;
+                                        &lt;/Border.StrokeShape&gt;
+                                        &lt;Label Text=&quot;{Binding TextoEstado}&quot;
+                                               TextColor=&quot;{Binding ColorEstadoTexto}&quot;
+                                               FontSize=&quot;11&quot;
+                                               FontAttributes=&quot;Bold&quot; /&gt;
+                                    &lt;/Border&gt;
+
+                                    &lt;!-- Detalle de unidades y valor total calculado --&gt;
+                                    &lt;Label Grid.Row=&quot;1&quot; Grid.Column=&quot;0&quot;
+                                           Text=&quot;{Binding CalculoDetalle}&quot;
+                                           TextColor=&quot;#94A3B8&quot;
+                                           FontSize=&quot;12&quot; /&gt;
+
+                                    &lt;Label Grid.Row=&quot;1&quot; Grid.Column=&quot;1&quot;
+                                           Text=&quot;{Binding ValorTotalFormateado}&quot;
+                                           TextColor=&quot;#34D399&quot;
+                                           FontSize=&quot;13&quot;
+                                           FontAttributes=&quot;Bold&quot;
+                                           HorizontalOptions=&quot;End&quot; /&gt;
+                                &lt;/Grid&gt;
+                            &lt;/Border&gt;
+                        &lt;/DataTemplate&gt;
+                    &lt;/CollectionView.ItemTemplate&gt;
+                &lt;/CollectionView&gt;
+
+            &lt;/VerticalStackLayout&gt;
+        &lt;/ScrollView&gt;
+    &lt;/Grid&gt;
+&lt;/ContentPage&gt;
+</code></pre>
+      </div>
+
+      <!-- =========================================================================
+           MÓDULO 4: CODE-BEHIND ACTUALIZADO (REPORTEPAGE.XAML.CS)
+           ========================================================================= -->
+      <div style="background: #ffffff; border: 3px solid #000000; border-radius: 8px; padding: 20px; box-shadow: var(--shadow-sm); margin: 30px 0 12px 0;">
+        <h4 style="color: #0f172a; font-size: 1.15rem; font-weight: 900; margin-bottom: 8px; text-transform: uppercase; display: flex; align-items: center; gap: 8px;">
+          🧠 4. CODE-BEHIND ACTUALIZADO: REPORTEPAGE.XAML.CS (MÉTODO ONIMPRIMIRPDFCLICKED Y SNAPSHOTS SEGUROS)
+        </h4>
+        <div style="font-size: 0.98rem; line-height: 1.6; color: #334155; margin-bottom: 12px;">
+          <strong>🔍 ¿Qué cambió respecto a la versión anterior de la Sección 07?</strong>
+          <ul style="margin: 6px 0 10px 20px;">
+            <li><strong>Inclusión del Namespace del Servicio:</strong> Se añade <code>using InventarioMauiApp5.Services;</code> en la cabecera.</li>
+            <li><strong>Nuevo Método Manejador <code>OnImprimirPdfClicked</code>:</strong> Responde al clic del botón de impresión y coordina la generación del reporte.</li>
+            <li><strong>Blindaje contra Excepciones de Concurrencia (Thread-Safety con Snapshots):</strong> Si QuestPDF itera las colecciones en segundo plano mientras la interfaz gráfica intenta actualizarlas, el motor de .NET lanza el error fatal <code>Collection was modified; enumeration operation may not execute</code>. Para evitar esto, se extraen copias estáticas desconectadas con <code>.ToList()</code> (<code>productosSnapshot</code> y <code>categoriasSnapshot</code>).</li>
+            <li><strong>Llamada al Generador e Impresión Directa:</strong> Invoca <code>ReportePdfService.GenerarYVisualizarPdfAsync(...)</code> enviándole la IP activa, la base de datos <code>InventarioDB4</code> y los totales calculados, mostrando un aviso con <code>DisplayAlertAsync</code> con el nombre del PDF creado.</li>
+            <li><strong>Lógica SQL Intacta:</strong> Mantiene la consulta optimizada a la vista <code>vw_ReporteInventario</code> con ordenamiento de mayor a menor (<code>ORDER BY Stock DESC, ValorInventario DESC</code>), el cálculo de KPIs globales y los modelos analíticos.</li>
+          </ul>
+        </div>
+        <div style="background: #f1f5f9; border-left: 4px solid #da291c; padding: 10px 14px; border-radius: 4px; font-size: 0.93rem; color: #1e293b;">
+          👉 <strong>Cómo actualizarlo:</strong> Despliega la flechita a la izquierda de <code>ReportePage.xaml</code>, haz doble clic en <strong><code>ReportePage.xaml.cs</code></strong>, selecciona todo (<kbd>Ctrl + A</kbd>), bórralo y pega esta versión completa y protegida contra hilos:
+        </div>
+      </div>
+
+      <div class="code-container">
+        <div class="code-header hdr-dash">
+          <span>4. ReportePage.xaml.cs (Code-Behind Completo con Manejador de Impresión PDF y Modelos)</span>
+          <button class="copy-btn" onclick="copiarCodigo('code-rep-cs-pdf')">📋 Copiar C#</button>
+        </div>
+        <pre><code id="code-rep-cs-pdf" class="language-csharp">using Microsoft.Data.SqlClient;
+using System.Collections.ObjectModel;
+using InventarioMauiApp5.Services;
+
+namespace InventarioMauiApp5;
+
+/// &lt;summary&gt;
+/// Página de Dashboard Analítico que consulta la vista oficial &#39;vw_ReporteInventario&#39;
+/// en SQL Server, ordenando los productos de MAYOR a MENOR existencia con semáforo
+/// de colores (Verde = Óptimo, Amarillo = Stock Bajo, Rojo = Agotado).
+/// &lt;/summary&gt;
+public partial class ReportePage : ContentPage
+{
+    private const string SqlUser = &quot;JUANCITO&quot;;
+    private const string SqlPass = &quot;123456&quot;;
+    private const string SqlDb = &quot;InventarioDB4&quot;;
+    private const int SqlPort = 1433;
+    private readonly string _serverIp;
+
+    public ObservableCollection&lt;CategoriaResumenModel&gt; ResumenCategorias { get; set; } = new();
+    public ObservableCollection&lt;ReporteProductoItem&gt; ProductosReporte { get; set; } = new();
+
+    public ReportePage(string serverIp)
+    {
+        InitializeComponent();
+        _serverIp = string.IsNullOrWhiteSpace(serverIp) ? &quot;192.168.2.68&quot; : serverIp;
+        LblServidorActivo.Text = $&quot;Servidor: {_serverIp}&quot;;
+
+        CvCategoriasResumen.ItemsSource = ResumenCategorias;
+        CvReporteProductos.ItemsSource = ProductosReporte;
+    }
+
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        await CargarDashboardAsync();
+    }
+
+    private string ObtenerCadenaConexion()
+    {
+        return $&quot;Server={_serverIp},{SqlPort};Database={SqlDb};User Id={SqlUser};Password={SqlPass};TrustServerCertificate=True;Encrypt=False;Connect Timeout=15;&quot;;
+    }
+
+    private async void OnActualizarReporteClicked(object? sender, EventArgs e)
+    {
+        await CargarDashboardAsync();
+    }
+
+    private async void OnImprimirPdfClicked(object? sender, EventArgs e)
+    {
+        try
+        {
+            if (ProductosReporte.Count == 0)
+            {
+                await CargarDashboardAsync();
+            }
+
+            var productosSnapshot = ProductosReporte.ToList();
+            var categoriasSnapshot = ResumenCategorias.ToList();
+
+            if (productosSnapshot.Count == 0)
+            {
+                await DisplayAlertAsync(&quot;Aviso&quot;, &quot;No hay datos en el inventario para generar el reporte.&quot;, &quot;OK&quot;);
+                return;
+            }
+
+            decimal valorTotal = productosSnapshot.Sum(x =&gt; x.ValorTotal);
+            int totalUnidades = productosSnapshot.Sum(x =&gt; x.Stock);
+            int totalProductos = productosSnapshot.Count;
+            int productosCriticos = productosSnapshot.Count(x =&gt; x.Stock &lt;= 5);
+
+            string rutaPdf = await ReportePdfService.GenerarYVisualizarPdfAsync(
+                _serverIp,
+                SqlDb,
+                valorTotal,
+                totalUnidades,
+                totalProductos,
+                productosCriticos,
+                categoriasSnapshot,
+                productosSnapshot
+            );
+
+            await DisplayAlertAsync(&quot;✅ PDF Generado&quot;, $&quot;El reporte ejecutivo se ha creado y abierto para impresión:\n\n{Path.GetFileName(rutaPdf)}&quot;, &quot;OK&quot;);
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlertAsync(&quot;❌ Error al generar PDF&quot;, ex.Message, &quot;OK&quot;);
+        }
+    }
+
+    private async Task CargarDashboardAsync()
+    {
+        try
+        {
+            var listaTemporal = new List&lt;ReporteProductoItem&gt;();
+
+            using SqlConnection conn = new(ObtenerCadenaConexion());
+            await conn.OpenAsync();
+
+            // Consulta directa sobre la vista analítica &#39;vw_ReporteInventario&#39;
+            // ORDENADA ESTRICTAMENTE DE MAYOR A MENOR EXISTENCIA (Stock DESC)
+            string query = @&quot;
+                SELECT ProductoID, CodigoBarras, Producto, CategoriaID, Categoria, 
+                       Precio, Stock, ValorInventario, EstadoStock
+                FROM vw_ReporteInventario
+                ORDER BY Stock DESC, ValorInventario DESC;&quot;;
+
+            using SqlCommand cmd = new(query, conn);
+            using SqlDataReader reader = await cmd.ExecuteReaderAsync();
+
+            while (await reader.ReadAsync())
+            {
+                listaTemporal.Add(new ReporteProductoItem
+                {
+                    ProductoID = reader.GetInt32(0),
+                    CodigoBarras = reader.IsDBNull(1) ? &quot;&quot; : reader.GetString(1),
+                    Nombre = reader.IsDBNull(2) ? &quot;&quot; : reader.GetString(2),
+                    CategoriaID = reader.GetInt32(3),
+                    CategoriaNombre = reader.IsDBNull(4) ? &quot;&quot; : reader.GetString(4),
+                    Precio = reader.IsDBNull(5) ? 0m : reader.GetDecimal(5),
+                    Stock = reader.IsDBNull(6) ? 0 : reader.GetInt32(6),
+                    ValorTotal = reader.IsDBNull(7) ? 0m : reader.GetDecimal(7),
+                    EstadoStock = reader.IsDBNull(8) ? &quot;&quot; : reader.GetString(8)
+                });
+            }
+
+            // 1. Cálculo de KPIs globales
+            decimal valorTotalInventario = listaTemporal.Sum(x =&gt; x.ValorTotal);
+            int totalUnidades = listaTemporal.Sum(x =&gt; x.Stock);
+            int totalProductos = listaTemporal.Count;
+            int productosCriticos = listaTemporal.Count(x =&gt; x.Stock &lt;= 5);
+
+            // 2. Agrupación para el gráfico de barras por Categoría
+            var listaCategoriasResumen = new List&lt;CategoriaResumenModel&gt;();
+            var grupos = listaTemporal
+                .GroupBy(p =&gt; p.CategoriaNombre)
+                .Select(g =&gt; new
+                {
+                    Categoria = g.Key,
+                    Valor = g.Sum(x =&gt; x.ValorTotal),
+                    Unidades = g.Sum(x =&gt; x.Stock),
+                    CantidadProductos = g.Count()
+                })
+                .OrderByDescending(x =&gt; x.Valor)
+                .ToList();
+
+            foreach (var g in grupos)
+            {
+                double pct = valorTotalInventario &gt; 0 ? (double)(g.Valor / valorTotalInventario) : 0;
+                listaCategoriasResumen.Add(new CategoriaResumenModel
+                {
+                    CategoriaNombre = g.Categoria,
+                    ValorTotal = g.Valor,
+                    Porcentaje = pct,
+                    ValorFormateado = $&quot;RD$ {g.Valor:N2} ({pct:P0})&quot;,
+                    DetalleItems = $&quot;{g.CantidadProductos} productos • {g.Unidades} unidades en stock&quot;
+                });
+            }
+
+            // Despachar sincrónicamente al hilo principal para asegurar que las listas queden listas
+            await MainThread.InvokeOnMainThreadAsync(() =&gt;
+            {
+                LblValorTotal.Text = $&quot;RD$ {valorTotalInventario:N2}&quot;;
+                LblTotalUnidades.Text = $&quot;{totalUnidades:N0} uds&quot;;
+                LblTotalProductos.Text = totalProductos.ToString();
+                LblStockBajo.Text = $&quot;{productosCriticos} críticos&quot;;
+
+                ResumenCategorias.Clear();
+                foreach (var cat in listaCategoriasResumen)
+                {
+                    ResumenCategorias.Add(cat);
+                }
+
+                ProductosReporte.Clear();
+                foreach (var item in listaTemporal)
+                {
+                    ProductosReporte.Add(item);
+                }
+            });
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlertAsync(&quot;❌ Error al generar reporte&quot;, @$&quot;Verifica la conexión con {_serverIp}: &quot; + ex.Message, &quot;OK&quot;);
+        }
+    }
+}
+
+// =============================================================================
+// MODELOS ANALÍTICOS PARA EL DASHBOARD
+// =============================================================================
+
+public class CategoriaResumenModel
+{
+    public string CategoriaNombre { get; set; } = string.Empty;
+    public decimal ValorTotal { get; set; }
+    public double Porcentaje { get; set; }
+    public string ValorFormateado { get; set; } = string.Empty;
+    public string DetalleItems { get; set; } = string.Empty;
+}
+
+public class ReporteProductoItem
+{
+    public int ProductoID { get; set; }
+    public string CodigoBarras { get; set; } = string.Empty;
+    public string Nombre { get; set; } = string.Empty;
+    public int CategoriaID { get; set; }
+    public string CategoriaNombre { get; set; } = string.Empty;
+    public decimal Precio { get; set; }
+    public int Stock { get; set; }
+    public decimal ValorTotal { get; set; }
+    public string EstadoStock { get; set; } = string.Empty;
+
+    public string CalculoDetalle =&gt; $&quot;{Stock} uds × RD$ {Precio:N2}&quot;;
+    public string ValorTotalFormateado =&gt; $&quot;RD$ {ValorTotal:N2}&quot;;
+
+    // Semáforo condicional: Verde (Óptimo &gt; 5), Amarillo (Bajo 1-5), Rojo (Agotado = 0)
+    public string SemaforoIcono =&gt; Stock == 0 ? &quot;🔴&quot; : (Stock &lt;= 5 ? &quot;🟡&quot; : &quot;🟢&quot;);
+    public string TextoEstado =&gt; $&quot;{SemaforoIcono} {(Stock == 0 ? &quot;AGOTADO&quot; : (Stock &lt;= 5 ? &quot;STOCK BAJO&quot; : &quot;ÓPTIMO&quot;))}&quot;;
+
+    // Colores Semáforo de Fondo (Dark Background con tinte temático)
+    public Color ColorEstadoFondo =&gt; Stock == 0
+        ? Color.FromArgb(&quot;#450A0A&quot;)   // Rojo oscuro
+        : (Stock &lt;= 5 ? Color.FromArgb(&quot;#451A03&quot;) : Color.FromArgb(&quot;#064E3B&quot;)); // Ámbar / Verde oscuro
+
+    // Colores Semáforo de Texto y Bordes (Alto Contraste)
+    public Color ColorEstadoTexto =&gt; Stock == 0
+        ? Color.FromArgb(&quot;#EF4444&quot;)   // Rojo vivo
+        : (Stock &lt;= 5 ? Color.FromArgb(&quot;#F59E0B&quot;) : Color.FromArgb(&quot;#10B981&quot;)); // Amarillo / Verde vivo
+
+    public Color ColorEstadoBorde =&gt; Stock == 0
+        ? Color.FromArgb(&quot;#EF4444&quot;)
+        : (Stock &lt;= 5 ? Color.FromArgb(&quot;#F59E0B&quot;) : Color.FromArgb(&quot;#10B981&quot;));
+}
+</code></pre>
+      </div>
+    </section>
+
+<section id="sec-09" class="brutalist-card card-sim">
+      <div class="section-header">
+        <span class="section-title t-maui">📱 09. EMULADOR INTERACTIVO EN VIVO (CRUD + DASHBOARD)</span>
+      </div>
+
+      <div class="intro-text">
+        🧪 <strong>Prueba ambas pantallas en vivo:</strong> Crea, edita o elimina productos en <code>MainPage</code> y luego haz clic en el botón morado <span class="kw-ui">📊 Reporte</span> para ver cómo se recalculan automáticamente los KPIs, las barras por categoría y el ranking con formato condicional. También puedes pulsar <span class="kw-ui" style="background:#d1fae5; color:#065f46; border-color:#059669;">🖨️ PDF</span> para probar la generación del reporte.
       </div>
 
       <div class="sim-phone">
@@ -1991,6 +3220,7 @@ public class ReporteProductoItem
               </div>
               <div style="display: flex; gap: 8px;">
                 <button class="sim-btn-cyan" style="padding: 8px 14px; font-size: 13px;" onclick="simActualizarReporte()">🔄 Actualizar</button>
+                <button class="sim-btn-green" style="padding: 8px 14px; font-size: 13px; background: #059669; color: white;" onclick="simImprimirPdf()">🖨️ PDF</button>
                 <button class="sim-btn-slate" style="padding: 8px 14px; font-size: 13px;" onclick="simVolverMain()">⬅ Volver</button>
               </div>
             </div>
@@ -2036,23 +3266,25 @@ public class ReporteProductoItem
     <!-- =========================================================
          SECCIÓN 10: CÓMO EJECUTAR Y VERIFICACIÓN FINAL
          ========================================================= -->
-    <section id="sec-09" class="brutalist-card">
+    <section id="sec-10" class="brutalist-card">
       <div class="section-header">
-        <span class="section-title t-green">🚀 09. EJECUCIÓN FINAL Y SOLUCIÓN DE PROBLEMAS</span>
+        <span class="section-title t-green">🚀 10. EJECUCIÓN FINAL Y SOLUCIÓN DE PROBLEMAS</span>
       </div>
 
       <ol class="num-list">
-        <li>Verifica que los 5 archivos de la app compartan el mismo espacio de nombres <code>InventarioMauiApp2</code>: <code>App.xaml.cs</code>, <code>MainPage.xaml</code>, <code>MainPage.xaml.cs</code>, <code>ReportePage.xaml</code> y <code>ReportePage.xaml.cs</code>.</li>
+        <li>Verifica que los 6 archivos de la app compartan el mismo espacio de nombres <code>InventarioMauiApp2</code>: <code>App.xaml.cs</code>, <code>MainPage.xaml</code>, <code>MainPage.xaml.cs</code>, <code>ReportePage.xaml</code>, <code>ReportePage.xaml.cs</code> y <code>Services/ReportePdfService.cs</code>.</li>
         <li>En Visual Studio, selecciona <strong>Windows Machine</strong> o tu <strong>Emulador de Android</strong> y pulsa <span class="kw-val">F5</span> (<span class="kw-ui">▶</span>).</li>
         <li>Escribe la IPv4 de tu equipo (ej. <span class="kw-val">10.0.0.15</span>) y pulsa <span class="kw-ui">Conectar</span>.</li>
         <li>Una vez cargados los productos, pulsa el botón morado <span class="kw-ui">📊 Reporte</span> en la esquina superior derecha para visualizar el Dashboard con métricas en tiempo real.</li>
+        <li>En el Dashboard, pulsa el botón verde <span class="kw-ui" style="background:#059669; color:#fff;">🖨️ Imprimir PDF</span> para generar y abrir automáticamente el reporte ejecutivo en A4 listo para imprimir.</li>
       </ol>
 
       <div class="alert-box">
         🛠️ <strong>Checklist rápido de validación:</strong><br>
         1. <strong>Compilación limpia:</strong> Se reemplazó <code>DisplayAlertAsync</code> por el método oficial <code>DisplayAlertAsync</code> de .NET MAUI.<br>
         2. <strong>Navegación garantizada:</strong> <code>App.xaml.cs</code> envuelve <code>MainPage</code> en un <code>NavigationPage</code> para evitar excepciones al abrir <code>ReportePage</code>.<br>
-        3. <strong>Conexión SQL:</strong> Confirma que reiniciaste <strong>SQL Server (MSSQLSERVER)</strong> tras habilitar TCP/IP puerto <strong>1433</strong> y abrir las reglas en Firewall.
+        3. <strong>Conexión SQL:</strong> Confirma que reiniciaste <strong>SQL Server (MSSQLSERVER)</strong> tras habilitar TCP/IP puerto <strong>1433</strong> y abrir las reglas en Firewall.<br>
+        4. <strong>Motor de PDF QuestPDF:</strong> Licencia comunitaria y políticas de fuentes registradas en <code>MauiProgram.cs</code>, sin bloqueos de hilos ni fallos por fuentes ausentes.
       </div>
     </section>
 

@@ -238,6 +238,11 @@
       document.getElementById('sim-view-main').style.display = "block";
     }
 
+    function simImprimirPdf() {
+      const serverIp = document.getElementById('sim-ip').value.trim() || "10.0.0.15";
+      simularAlerta("🖨️ PDF Generado con QuestPDF", `Documento 'Reporte_Inventario_20261117.pdf' emitido desde vw_ReporteInventario (${serverIp}) y abierto para impresión.`);
+    }
+
     function simActualizarReporte(notificar = true) {
       // 1. Mapear productos con valor y ORDENAR ESTRICTAMENTE DE MAYOR A MENOR EXISTENCIA (Stock DESC)
       const itemsConValor = productosDB.map(p => ({
