@@ -1,7 +1,7 @@
 # 🧠 PROMPT MAESTRO DE INGENIERÍA: SISTEMA DE INVENTARIO .NET MAUI + SQL SERVER + DASHBOARD BI + QUESTPDF
 
 > **Instrucciones para el usuario:**  
-> Copia y pega el bloque completo a continuación en cualquier Inteligencia Artificial avanzada (Claude 3.5 Sonnet, GPT-4o, Gemini 1.5 Pro o DeepSeek R1). Este prompt contiene todas las especificaciones de arquitectura, base de datos, código C#/XAML, prevención de errores en tiempo de ejecución y diseño industrial para que la IA genere el proyecto completo, funcional y listo para producción sin omitir nada.
+> Copia y pega el bloque completo a continuación en cualquier Inteligencia Artificial de frontera (Gemini 3.8 Flash, Gemini 4 Argon, Gemini 4 Hydrogen, Claude Sonnet 5.5, Claude Opus 5.5 o GPT-OSS). Este prompt contiene todas las especificaciones de arquitectura, base de datos, código C#/XAML, prevención de errores en tiempo de ejecución y diseño industrial para que la IA genere el proyecto completo, funcional y listo para producción sin omitir nada.
 
 ---
 
